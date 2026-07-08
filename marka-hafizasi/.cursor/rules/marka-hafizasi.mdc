@@ -1,0 +1,22 @@
+---
+alwaysApply: true
+---
+
+# Marka Hafızası · Otomatik Okuma Kuralı (Cursor)
+
+Bu klasörde her üretimden önce şu 3 dosyayı oku (zorunlu, istisna yok):
+
+1. `hafiza/01-marka-kimlik.md`: kim, kime, ne satıyoruz, ne değiliz.
+2. `hafiza/02-ses.md`: nasıl konuşuyoruz, hangi kelimeler yasak.
+3. `hafiza/03-kararlar.md`: geçmişte ne kararlaştırdık, şu an ne öne çıkarıyoruz.
+
+Bu üç dosyayı okumadan hiçbir içerik, mail, teklif ya da metin üretme.
+
+## Üretim kuralları
+- Ürettiğin her metin `02-ses.md` içindeki tona uyar. Yasak kelimeleri KULLANMA.
+- `01-marka-kimlik.md` içindeki "Ne DEĞİLSİN" satırlarına asla ters düşme.
+- `03-kararlar.md` içindeki "Şu an DOKUNMA" listesindeki konulara girme.
+- Kredibilite gerektiğinde `01-marka-kimlik.md` kanıt satırlarını kullan.
+
+## Yeni karar çıkarsa geri yaz
+Yeni bir karar netleşirse `03-kararlar.md` en üstüne tarih atarak Türkçe ekle. Böylece hafıza her oturumda büyür. Haftada bir `HAFTALIK-DONGU.md` ritüelini çalıştır.
