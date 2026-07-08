@@ -1,0 +1,29 @@
+[
+  {
+    "ad": "Rakip A (blog)",
+    "rss": "https://ornek-rakip-a.test/feed.xml",
+    "not": "temsili ornek. kendi rakibinin blog RSS adresini buraya yaz."
+  },
+  {
+    "ad": "Rakip B (youtube)",
+    "rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UC_ORNEK_KANAL_ID",
+    "not": "youtube kanal RSS'i: youtube.com/feeds/videos.xml?channel_id=KANAL_ID"
+  },
+  {
+    "ad": "Rakip C (haber/blog)",
+    "rss": "https://ornek-rakip-c.test/rss",
+    "not": "temsili ornek."
+  },
+  {
+    "ad": "Rakip D (instagram)",
+    "tur": "instagram",
+    "handle": "rakipmarka",
+    "not": "instagram iki katmanli: APIFY_TOKEN yoksa (varsayilan) raporda 'Instagram · manuel kontrol' bolumune duser ve patlamaz; token verirsen otomatik cekilir. sadece @handle yaz (basindaki @ opsiyonel)."
+  },
+  {
+    "ad": "Rakip E (instagram)",
+    "tur": "instagram",
+    "handle": "baska_rakip",
+    "not": "temsili ornek. kendi rakibinin instagram kullanici adini yaz."
+  }
+]

@@ -1,0 +1,107 @@
+{
+  "_aciklama": "Temsili örnek veri. Gerçek müşteri/temsilci değildir. İlk açılışta sistem bunu yükler; kendi verini girince silebilirsin (Ayarlar > Örnek veriyi temizle).",
+  "temsilciler": ["Elif Y.", "Burak T.", "Deniz K."],
+  "musteriler": [
+    {
+      "id": "ornek-1",
+      "ad": "Kaya Mobilya",
+      "firma": "Kaya Mobilya Ltd.",
+      "telefon": "0555 000 00 01",
+      "temsilci": "Elif Y.",
+      "asama": "Teklif",
+      "sonrakiAdim": "Teklifi onayladı mı diye ara",
+      "sonKonusulan": "teklifi yönetime iletti, cuma dönüş sözü verdi",
+      "sonGorusme": "2026-07-06",
+      "takipTarihi": "2026-07-08",
+      "olusturma": "2026-07-01",
+      "notlar": [
+        { "tarih": "2026-07-01", "metin": "web sitesinden ulaştı, 40 kişilik ofis için sandalye istiyor", "sonuc": "gorusuldu", "temsilci": "Elif Y." },
+        { "tarih": "2026-07-06", "metin": "teklifi gönderdim, yönetime iletecek, cuma dönecek", "sonuc": "gorusuldu", "temsilci": "Elif Y." }
+      ]
+    },
+    {
+      "id": "ornek-2",
+      "ad": "Aydın Petrol",
+      "firma": "Aydın Akaryakıt",
+      "telefon": "0555 000 00 02",
+      "temsilci": "Burak T.",
+      "asama": "Takipte",
+      "sonrakiAdim": "Bütçe onayını sor",
+      "sonKonusulan": "fiyatı beğendi, ay sonu bütçesi açılınca alacak",
+      "sonGorusme": "2026-07-07",
+      "takipTarihi": "2026-07-08",
+      "olusturma": "2026-06-28",
+      "notlar": [
+        { "tarih": "2026-06-28", "metin": "referansla geldi, filo takip sistemi arıyor", "sonuc": "gorusuldu", "temsilci": "Burak T." },
+        { "tarih": "2026-07-02", "metin": "aradım, açmadı", "sonuc": "ulasilamadi", "temsilci": "Burak T." },
+        { "tarih": "2026-07-07", "metin": "fiyatı beğendi, ay sonu bütçe açılınca alacak dedi", "sonuc": "gorusuldu", "temsilci": "Burak T." }
+      ]
+    },
+    {
+      "id": "ornek-3",
+      "ad": "Selin Kozmetik",
+      "firma": "Selin Güzellik",
+      "telefon": "0555 000 00 03",
+      "temsilci": "Elif Y.",
+      "asama": "Kazanıldı",
+      "sonrakiAdim": "Kurulum randevusu ver",
+      "sonKonusulan": "sözleşmeyi imzaladı, satış tamam",
+      "sonGorusme": "2026-07-04",
+      "takipTarihi": null,
+      "olusturma": "2026-06-20",
+      "notlar": [
+        { "tarih": "2026-06-20", "metin": "instagram'dan yazdı, randevu sistemi istiyor", "sonuc": "gorusuldu", "temsilci": "Elif Y." },
+        { "tarih": "2026-06-30", "metin": "demoyu beğendi, teklif istedi", "sonuc": "gorusuldu", "temsilci": "Elif Y." },
+        { "tarih": "2026-07-04", "metin": "sözleşmeyi imzaladı, satış kapandı", "sonuc": "satis", "temsilci": "Elif Y." }
+      ]
+    },
+    {
+      "id": "ornek-4",
+      "ad": "Murat İnşaat",
+      "firma": "Murat Yapı",
+      "telefon": "0555 000 00 04",
+      "temsilci": "Deniz K.",
+      "asama": "Aramada",
+      "sonrakiAdim": "Yarın tekrar dene, sabah müsaitmiş",
+      "sonKonusulan": "öğlen aradım açmadı, sabah ara dedi asistanı",
+      "sonGorusme": "2026-07-07",
+      "takipTarihi": "2026-07-09",
+      "olusturma": "2026-07-05",
+      "notlar": [
+        { "tarih": "2026-07-05", "metin": "fuardan kartını aldım, şantiye takibi konuştuk", "sonuc": "gorusuldu", "temsilci": "Deniz K." },
+        { "tarih": "2026-07-07", "metin": "asistanı açtı, sabah ara dedi", "sonuc": "ulasilamadi", "temsilci": "Deniz K." }
+      ]
+    },
+    {
+      "id": "ornek-5",
+      "ad": "Ece Tekstil",
+      "firma": "Ece Konfeksiyon",
+      "telefon": "0555 000 00 05",
+      "temsilci": "Burak T.",
+      "asama": "Kazanıldı",
+      "sonrakiAdim": "Fatura kesildi, kapandı",
+      "sonKonusulan": "peşin ödedi, satış tamam",
+      "sonGorusme": "2026-07-03",
+      "takipTarihi": null,
+      "olusturma": "2026-06-25",
+      "notlar": [
+        { "tarih": "2026-06-25", "metin": "eski müşteri, ikinci şube için arıyor", "sonuc": "gorusuldu", "temsilci": "Burak T." },
+        { "tarih": "2026-07-03", "metin": "peşin ödedi, satış kapandı", "sonuc": "satis", "temsilci": "Burak T." }
+      ]
+    },
+    {
+      "id": "ornek-6",
+      "ad": "Tuna Lojistik",
+      "firma": "Tuna Nakliyat",
+      "telefon": "0555 000 00 06",
+      "temsilci": "Deniz K.",
+      "asama": "Yeni",
+      "sonrakiAdim": "İlk arama",
+      "sonKonusulan": "",
+      "sonGorusme": null,
+      "takipTarihi": "2026-07-08",
+      "olusturma": "2026-07-08",
+      "notlar": []
+    }
+  ]
+}

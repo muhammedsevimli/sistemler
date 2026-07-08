@@ -7,6 +7,8 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | Sistem | Ne işe yarar | Klasör |
 |---|---|---|
 | Marka Hafızası | Markanı bir kere yaz, AI bir daha unutmasın. Claude Code, Cursor, Codex ve 20+ araçta çalışan üç dosyalık marka hafızası. | [marka-hafizasi/](marka-hafizasi/) |
+| Satış CRM | Satış / çağrı merkezi ekipleri için tek dosyalık CRM. Her müşteri tek kartta, sabah aranacaklar listesi, ay sonu satış paneli. Ekip için Google Sheets ile ortak mod. | [satis-crm/](satis-crm/) |
+| Haftalık Rakip Takipçisi | Rakiplerini (site, haber, youtube, instagram) haftada bir tarayıp pazartesi tek rapora indiren sistem: her yeni içeriğin özeti + markana hangi açıyla uyarlanacağı. | [rakip-takip/](rakip-takip/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 
@@ -22,7 +24,7 @@ Ya da tüm repoyu klonla, veya yeşil **Code → Download ZIP** ile indirip iste
 
 ## Desteklenen araçlar
 
-Her sistem şu araçların hepsinde aynı kuralla çalışır. Sen bir şey yapmıyorsun; hangi aracı kullanırsan o kendi dosyasını okuyor.
+Dosya-tabanlı sistemler (ör. marka hafızası) şu araçların hepsinde aynı kuralla çalışır; hangi aracı kullanırsan o kendi dosyasını okuyor. Kendi başına çalışan araçlar (satış CRM tarayıcıda, rakip takipçisi Node ile) için kurulum ilgili sistemin README'sindedir.
 
 | Araç | Okuduğu dosya |
 |---|---|

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Satış CRM</title>
+<!--
+  Satış / çağrı merkezi ekipleri için basit CRM.
+  Tek dosya + crm-cekirdek.js. Kurulum, üyelik gerekmez.
+  İKİ MOD:
+   1) Yerel (varsayılan): veriler bu bilgisayarda tarayıcının hafızasında (localStorage) durur. İnternet gerekmez.
+   2) Ortak (ekip): Ayarlar > "Ortak veri" ile bir Google Sheet bağlarsın; ekip aynı veriyi görür,
+      müdür herkesin işini tek panoda izler. Token/üyelik yok, kurulum bir kere ~10 dk (rehberde).
+  Test/demo için tarihi zorlamak: satis-crm.html?bugun=2026-07-08
+-->
+<style>
+  :root{
+    --bg:#f4f2ee; --panel:#ffffff; --ink:#1c1a17; --soft:#6b655c;
+    --line:#e4e0d8; --accent:#d9642c; --accent-soft:#fbede4;
+    --sage:#4f7a4a; --sage-soft:#eaf2e8; --red:#b23b2e; --red-soft:#fbe9e6;
+    --gold:#b8892b; --shadow:0 1px 2px rgba(28,26,23,.06),0 6px 18px rgba(28,26,23,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.45}
+  header{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);
+    padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  header h1{font-size:18px;margin:0;letter-spacing:-.01em}
+  header h1 span{color:var(--accent)}
+  .grow{flex:1}
+  select,input,textarea,button{font-family:inherit;font-size:14px}
+  select,input{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  button{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 12px;font-weight:600}
+  button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  button.ghost{background:transparent}
+  button:hover{filter:brightness(.98)}
+  main{max-width:1120px;margin:0 auto;padding:20px}
+  .tabs{display:flex;gap:6px;margin-bottom:18px}
+  .tabs button{border-radius:999px;padding:7px 16px}
+  .tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  section.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+    padding:18px;margin-bottom:18px}
+  .sec-title{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:15px;letter-spacing-.01em}
+  .count{background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 10px;font-weight:700;font-size:13px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+  .cust{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;transition:.12s}
+  .cust:hover{border-color:var(--accent);box-shadow:var(--shadow)}
+  .cust .top{display:flex;justify-content:space-between;align-items:start;gap:8px}
+  .cust .name{font-weight:700}
+  .cust .firma{color:var(--soft);font-size:13px}
+  .cust .last{color:var(--soft);font-size:13px;margin:8px 0 6px;min-height:18px}
+  .cust .next{font-size:13px}
+  .cust .next b{color:var(--ink)}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+  .st-Yeni{background:#eef1f5;color:#465063}
+  .st-Aramada{background:var(--gold);background:#f6efd9;color:var(--gold)}
+  .st-Teklif{background:var(--accent-soft);color:var(--accent)}
+  .st-Takipte{background:#e9eefb;color:#3a5bbf}
+  .st-Kazanıldı{background:var(--sage-soft);color:var(--sage)}
+  .st-Kaybedildi{background:#eee;color:#8a8378}
+  .due{background:var(--red-soft);color:var(--red)}
+  .today{background:var(--sage-soft);color:var(--sage)}
+  .empty{color:var(--soft);padding:14px 2px}
+  table{width:100%;border-collapse:collapse}
+  th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--soft)}
+  td.num{font-variant-numeric:tabular-nums;font-weight:700}
+  .bar{height:6px;background:var(--line);border-radius:4px;overflow:hidden;min-width:80px}
+  .bar > i{display:block;height:100%;background:var(--sage)}
+  /* modal */
+  .modal-bg{position:fixed;inset:0;background:rgba(28,26,23,.45);display:none;z-index:40;align-items:flex-start;justify-content:center;padding:30px 16px;overflow:auto}
+  .modal-bg.on{display:flex}
+  .modal{background:#fff;border-radius:16px;max-width:560px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .modal .head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:start}
+  .modal .body{padding:18px 20px}
+  .modal .name{font-size:19px;font-weight:800}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .row > *{flex:1;min-width:130px}
+  label{display:block;font-size:12px;color:var(--soft);font-weight:600;margin-bottom:4px}
+  textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;min-height:56px;resize:vertical}
+  .timeline{margin:6px 0 0;padding:0;list-style:none;max-height:210px;overflow:auto}
+  .timeline li{padding:9px 0;border-bottom:1px dashed var(--line)}
+  .timeline .meta{font-size:12px;color:var(--soft);display:flex;gap:8px;align-items:center;margin-bottom:2px}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .dot.gorusuldu{background:var(--sage)} .dot.satis{background:var(--accent)} .dot.ulasilamadi{background:var(--soft)}
+  .noteform{background:var(--bg);border-radius:12px;padding:14px;margin-top:14px}
+  .hint{font-size:12px;color:var(--soft);margin-top:6px}
+  .x{border:none;background:none;font-size:22px;cursor:pointer;color:var(--soft);line-height:1}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;opacity:0;transition:.2s;z-index:60}
+  .toast.on{opacity:1}
+  .sync{font-size:12px;color:var(--soft);display:inline-flex;align-items:center;gap:6px}
+  .sync b{width:8px;height:8px;border-radius:50%;background:var(--soft);display:inline-block}
+  .sync.ok b{background:var(--sage)} .sync.off b{background:var(--gold)} .sync.err b{background:var(--red)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Satış <span>CRM</span></h1>
+  <select id="repFilter" title="Temsilciye göre süz"><option value="">Tüm temsilciler</option></select>
+  <div class="grow"></div>
+  <span class="sync off" id="syncBadge"><b></b><span id="syncStatus">yerel</span></span>
+  <span id="todayLabel" style="color:var(--soft);font-size:13px"></span>
+  <button class="primary" id="btnNew">+ Müşteri</button>
+  <button class="ghost" id="btnSettings" title="Ayarlar">Ayarlar</button>
+</header>
+
+<main>
+  <div class="tabs">
+    <button class="on" data-tab="pano">Pano</button>
+    <button data-tab="panel">Ay Sonu Paneli</button>
+  </div>
+
+  <div id="tab-pano">
+    <section class="card" id="morningBox">
+      <div class="sec-title">Bugün Aranacaklar <span class="count" id="morningCount">0</span></div>
+      <div class="grid" id="morningGrid"></div>
+    </section>
+
+    <section class="card">
+      <div class="sec-title">Tüm Müşteriler <span class="count" id="allCount">0</span></div>
+      <div class="filters">
+        <input id="search" placeholder="ara: isim / firma / not" style="min-width:220px" />
+        <select id="stageFilter"><option value="">Tüm aşamalar</option></select>
+      </div>
+      <div class="grid" id="allGrid"></div>
+    </section>
+  </div>
+
+  <div id="tab-panel" style="display:none">
+    <section class="card">
+      <div class="sec-title">Ay Sonu Paneli
+        <select id="monthPick" style="margin-left:auto"></select>
+      </div>
+      <table>
+        <thead><tr><th>Temsilci</th><th class="num">Görüşme</th><th class="num">Satış</th><th class="num">Ulaşılamadı</th><th>Dönüşüm</th></tr></thead>
+        <tbody id="panelBody"></tbody>
+      </table>
+      <div class="hint">Görüşme = o ay yazılmış görüşüldü/satış notu sayısı. Satış = satış sonuçlu not. Dönüşüm = satış / görüşme.</div>
+    </section>
+  </div>
+</main>
+
+<!-- Müşteri / not modalı -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modal"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="crm-cekirdek.js"></script>
+<script>
+/* ---- İlk açılışta yüklenecek temsili örnek veri (crm-cekirdek ayrı) ---- */
+var ORNEK = {
+  temsilciler:["Elif Y.","Burak T.","Deniz K."],
+  musteriler:[
+    {id:"ornek-1",ad:"Kaya Mobilya",firma:"Kaya Mobilya Ltd.",telefon:"0555 000 00 01",temsilci:"Elif Y.",asama:"Teklif",sonrakiAdim:"Teklifi onayladı mı diye ara",sonKonusulan:"teklifi yönetime iletti, cuma dönüş sözü verdi",sonGorusme:"2026-07-06",takipTarihi:"2026-07-08",olusturma:"2026-07-01",notlar:[
+      {tarih:"2026-07-01",metin:"web sitesinden ulaştı, 40 kişilik ofis için sandalye istiyor",sonuc:"gorusuldu",temsilci:"Elif Y."},
+      {tarih:"2026-07-06",metin:"teklifi gönderdim, yönetime iletecek, cuma dönecek",sonuc:"gorusuldu",temsilci:"Elif Y."}]},
+    {id:"ornek-2",ad:"Aydın Petrol",firma:"Aydın Akaryakıt",telefon:"0555 000 00 02",temsilci:"Burak T.",asama:"Takipte",sonrakiAdim:"Bütçe onayını sor",sonKonusulan:"fiyatı beğendi, ay sonu bütçesi açılınca alacak",sonGorusme:"2026-07-07",takipTarihi:"2026-07-08",olusturma:"2026-06-28",notlar:[
+      {tarih:"2026-06-28",metin:"referansla geldi, filo takip sistemi arıyor",sonuc:"gorusuldu",temsilci:"Burak T."},
+      {tarih:"2026-07-02",metin:"aradım, açmadı",sonuc:"ulasilamadi",temsilci:"Burak T."},
+      {tarih:"2026-07-07",metin:"fiyatı beğendi, ay sonu bütçe açılınca alacak dedi",sonuc:"gorusuldu",temsilci:"Burak T."}]},
+    {id:"ornek-3",ad:"Selin Kozmetik",firma:"Selin Güzellik",telefon:"0555 000 00 03",temsilci:"Elif Y.",asama:"Kazanıldı",sonrakiAdim:"Kurulum randevusu ver",sonKonusulan:"sözleşmeyi imzaladı, satış tamam",sonGorusme:"2026-07-04",takipTarihi:null,olusturma:"2026-06-20",notlar:[
+      {tarih:"2026-06-20",metin:"instagram'dan yazdı, randevu sistemi istiyor",sonuc:"gorusuldu",temsilci:"Elif Y."},
+      {tarih:"2026-06-30",metin:"demoyu beğendi, teklif istedi",sonuc:"gorusuldu",temsilci:"Elif Y."},
+      {tarih:"2026-07-04",metin:"sözleşmeyi imzaladı, satış kapandı",sonuc:"satis",temsilci:"Elif Y."}]},
+    {id:"ornek-4",ad:"Murat İnşaat",firma:"Murat Yapı",telefon:"0555 000 00 04",temsilci:"Deniz K.",asama:"Aramada",sonrakiAdim:"Yarın sabah tekrar dene",sonKonusulan:"öğlen aradım açmadı, sabah ara dedi asistanı",sonGorusme:"2026-07-07",takipTarihi:"2026-07-09",olusturma:"2026-07-05",notlar:[
+      {tarih:"2026-07-05",metin:"fuardan kartını aldım, şantiye takibi konuştuk",sonuc:"gorusuldu",temsilci:"Deniz K."},
+      {tarih:"2026-07-07",metin:"asistanı açtı, sabah ara dedi",sonuc:"ulasilamadi",temsilci:"Deniz K."}]},
+    {id:"ornek-5",ad:"Ece Tekstil",firma:"Ece Konfeksiyon",telefon:"0555 000 00 05",temsilci:"Burak T.",asama:"Kazanıldı",sonrakiAdim:"Fatura kesildi, kapandı",sonKonusulan:"peşin ödedi, satış tamam",sonGorusme:"2026-07-03",takipTarihi:null,olusturma:"2026-06-25",notlar:[
+      {tarih:"2026-06-25",metin:"eski müşteri, ikinci şube için arıyor",sonuc:"gorusuldu",temsilci:"Burak T."},
+      {tarih:"2026-07-03",metin:"peşin ödedi, satış kapandı",sonuc:"satis",temsilci:"Burak T."}]},
+    {id:"ornek-6",ad:"Tuna Lojistik",firma:"Tuna Nakliyat",telefon:"0555 000 00 06",temsilci:"Deniz K.",asama:"Yeni",sonrakiAdim:"İlk arama",sonKonusulan:"",sonGorusme:null,takipTarihi:"2026-07-08",olusturma:"2026-07-08",notlar:[]}
+  ]
+};
+
+var KEY="satisCRM_v1";
+var SYNC_KEY="satisCRM_syncUrl_v1";
+var qp=new URLSearchParams(location.search);
+var BUGUN=qp.get("bugun")||null;         // test/demo: ?bugun=YYYY-MM-DD
+function now(){ return BUGUN? BUGUN+"T09:00:00" : Date.now(); }
+
+var el=function(id){return document.getElementById(id)};
+var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+function toast(m){var t=el("toast");t.textContent=m;t.classList.add("on");setTimeout(function(){t.classList.remove("on")},1800)}
+
+// ---------------------------------------------------------------------
+// VERİ KATMANI · iki mod
+//  - Yerel: localStorage (varsayılan, internet gerekmez).
+//  - Ortak: Google Apps Script web app (ekip aynı veriyi görür).
+//    Ortak modda her kayıt "oku-birleştir-yaz": önce güncel veriyi çeker,
+//    sadece değişen müşteriyi günceller, geri yazar. Böylece iki temsilci
+//    farklı müşterilerde çalışırken birbirinin kaydını EZMEZ.
+// ---------------------------------------------------------------------
+var syncUrl=""; try{ syncUrl=localStorage.getItem(SYNC_KEY)||""; }catch(e){}
+function isShared(){ return !!syncUrl; }
+var db={temsilciler:[],musteriler:[]};
+
+function normalize(d){
+  if(!d||typeof d!=="object")d={};
+  if(!Array.isArray(d.musteriler))d.musteriler=[];
+  if(!Array.isArray(d.temsilciler))d.temsilciler=[];
+  return d;
+}
+function localLoad(){ try{var r=localStorage.getItem(KEY);if(r)return JSON.parse(r);}catch(e){} return JSON.parse(JSON.stringify(ORNEK)); }
+function localSave(){ try{localStorage.setItem(KEY,JSON.stringify(db));}catch(e){} }
+
+// POST'ta text/plain: tarayıcı CORS preflight (OPTIONS) ATMASIN diye. Apps Script gövdeyi
+// içerik-tipinden bağımsız e.postData.contents'ten okur. "Çalışmıyor"un en sık sebebi budur.
+async function apiGet(){ var r=await fetch(syncUrl,{method:"GET"}); if(!r.ok)throw new Error("GET "+r.status); return await r.json(); }
+// Değişikliği sunucuya İŞLEM olarak yollarız; birleştirme + kilit SUNUCUDA (Apps Script) olur,
+// iki temsilci aynı anda kaydetse bile veri kaybolmaz. Sunucu güncel TAM veriyi geri döner.
+async function apiOp(op,payload){
+  var r=await fetch(syncUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(Object.assign({op:op},payload||{}))});
+  if(!r.ok)throw new Error("POST "+r.status);
+  var res=await r.json();
+  if(res&&res.ok&&res.veri)return normalize(res.veri);
+  throw new Error(res&&res.hata?res.hata:"sunucu hatası");
+}
+
+function setSync(state,txt){ var b=el("syncBadge"); if(b){b.className="sync "+(state||"");} var s=el("syncStatus"); if(s)s.textContent=txt; }
+
+async function boot(){
+  if(isShared()){
+    setSync("","bağlanıyor…");
+    try{
+      var remote=normalize(await apiGet());
+      if(remote.musteriler.length===0 && remote.temsilciler.length===0){
+        db=await apiOp("replaceAll",{veri:normalize(localLoad())});  // boş ortak veri → yereldekiyle tohumla
+      } else { db=remote; }
+      localSave();
+      setSync("ok","ortak · bağlı");
+    }catch(e){
+      db=normalize(localLoad());
+      setSync("err","ortak · çevrimdışı");
+      toast("Ortak veriye ulaşılamadı, önbellek gösteriliyor");
+    }
+  } else {
+    db=normalize(localLoad());
+    setSync("off","yerel");
+  }
+  render();
+  startPoll();
+}
+
+// commit: yerelde localStorage; ortakta oku-birleştir-yaz (müşteri bazında son-yazan-kazanır)
+async function commitMusteri(m){
+  if(isShared()){
+    try{ setSync("","kaydediliyor…"); db=await apiOp("upsert",{musteri:m}); localSave(); setSync("ok","ortak · bağlı"); return true; }
+    catch(e){ setSync("err","ortak · kaydedilemedi"); toast("Kaydedilemedi, bağlantıyı kontrol et"); return false; }
+  }
+  var j=db.musteriler.findIndex(function(x){return x.id===m.id});
+  if(j===-1)db.musteriler.push(m); else db.musteriler[j]=m;
+  localSave(); return true;
+}
+async function commitDelete(id){
+  if(isShared()){
+    try{ setSync("","kaydediliyor…"); db=await apiOp("delete",{id:id}); localSave(); setSync("ok","ortak · bağlı"); return true; }
+    catch(e){ setSync("err","ortak · kaydedilemedi"); toast("Silinemedi, bağlantıyı kontrol et"); return false; }
+  }
+  db.musteriler=db.musteriler.filter(function(x){return x.id!==id}); localSave(); return true;
+}
+async function commitTemsilciler(list){
+  if(isShared()){
+    try{ setSync("","kaydediliyor…"); db=await apiOp("temsilciler",{temsilciler:list}); localSave(); setSync("ok","ortak · bağlı"); return true; }
+    catch(e){ setSync("err","ortak · kaydedilemedi"); toast("Kaydedilemedi"); return false; }
+  }
+  db.temsilciler=list; localSave(); return true;
+}
+async function commitReplaceAll(newDb){
+  newDb=normalize(newDb);
+  if(isShared()){
+    try{ setSync("","kaydediliyor…"); db=await apiOp("replaceAll",{veri:newDb}); localSave(); setSync("ok","ortak · bağlı"); return true; }
+    catch(e){ setSync("err","ortak · kaydedilemedi"); toast("Yüklenemedi"); return false; }
+  }
+  db=newDb; localSave(); return true;
+}
+
+var pollTimer=null;
+function startPoll(){
+  if(pollTimer)clearInterval(pollTimer);
+  if(!isShared())return;
+  pollTimer=setInterval(async function(){
+    if(el("modalBg").classList.contains("on"))return; // açık kartı bozma
+    try{ db=normalize(await apiGet()); localSave(); render(); setSync("ok","ortak · bağlı"); }catch(e){}
+  },20000);
+}
+
+function fillSelectors(){
+  var reps=db.temsilciler||[];
+  var rf=el("repFilter"); var cur=rf.value;
+  rf.innerHTML='<option value="">Tüm temsilciler</option>'+reps.map(function(r){return '<option>'+esc(r)+'</option>'}).join("");
+  rf.value=cur;
+  var sf=el("stageFilter"); var cs=sf.value;
+  sf.innerHTML='<option value="">Tüm aşamalar</option>'+CRM.ASAMALAR.map(function(a){return '<option>'+esc(a)+'</option>'}).join("");
+  sf.value=cs;
+  el("todayLabel").textContent="Bugün: "+CRM.bugunISO(now());
+}
+
+function custCard(m){
+  var due=CRM.gecikmisMi(m,now());
+  var isToday=m.takipTarihi===CRM.bugunISO(now());
+  var badge=m.takipTarihi&&CRM.KAPALI_ASAMALAR.indexOf(m.asama)===-1
+    ? '<span class="pill '+(due?"due":isToday?"today":"")+'">'+(due?"gecikti ":"takip ")+m.takipTarihi+'</span>' : '';
+  return '<div class="cust" data-id="'+m.id+'">'+
+    '<div class="top"><div><div class="name">'+esc(m.ad)+'</div><div class="firma">'+esc(m.firma||"")+' · '+esc(m.telefon||"")+'</div></div>'+
+    '<span class="pill st-'+esc(m.asama)+'">'+esc(m.asama)+'</span></div>'+
+    '<div class="last">'+ (m.sonKonusulan? "son: "+esc(m.sonKonusulan) : '<i style="opacity:.5">henüz görüşme yok</i>') +'</div>'+
+    '<div class="next"><b>sıradaki:</b> '+esc(m.sonrakiAdim||"-")+'</div>'+
+    '<div style="margin-top:8px">'+badge+' <span class="firma">'+esc(m.temsilci||"")+'</span></div>'+
+    '</div>';
+}
+
+function render(){
+  fillSelectors();
+  var rep=el("repFilter").value;
+  var filtByRep=function(list){return rep? list.filter(function(m){return m.temsilci===rep}):list};
+
+  var mor=filtByRep(CRM.bugunAranacaklar(db.musteriler,now()));
+  el("morningCount").textContent=mor.length;
+  el("morningGrid").innerHTML=mor.length? mor.map(custCard).join("")
+    : '<div class="empty">Bugün aranacak kimse yok. Temiz masa.</div>';
+
+  var q=(el("search").value||"").toLowerCase();
+  var st=el("stageFilter").value;
+  var all=filtByRep(db.musteriler.slice()).filter(function(m){
+    if(st&&m.asama!==st) return false;
+    if(q){var hay=(m.ad+" "+m.firma+" "+m.sonKonusulan+" "+(m.notlar||[]).map(function(n){return n.metin}).join(" ")).toLowerCase();if(hay.indexOf(q)===-1)return false;}
+    return true;
+  }).sort(function(a,b){return (a.takipTarihi||"9999")<(b.takipTarihi||"9999")?-1:1});
+  el("allCount").textContent=all.length;
+  el("allGrid").innerHTML=all.length? all.map(custCard).join("") : '<div class="empty">Müşteri yok. Sağ üstten "+ Müşteri" ile ekle.</div>';
+
+  document.querySelectorAll(".cust").forEach(function(c){c.onclick=function(){openCust(c.getAttribute("data-id"))}});
+  renderPanel();
+}
+
+function renderPanel(){
+  var mp=el("monthPick");
+  var months={};
+  db.musteriler.forEach(function(m){(m.notlar||[]).forEach(function(n){months[CRM.yilAy(n.tarih)]=1})});
+  var list=Object.keys(months).sort().reverse(); if(!list.length)list=[CRM.yilAy(CRM.bugunISO(now()))];
+  var cur=mp.value||CRM.yilAy(CRM.bugunISO(now())); if(list.indexOf(cur)===-1)cur=list[0];
+  mp.innerHTML=list.map(function(a){return '<option'+(a===cur?" selected":"")+'>'+a+'</option>'}).join("");
+  var rows=CRM.aylikPanel(db.musteriler,mp.value||cur,now());
+  el("panelBody").innerHTML=rows.length? rows.map(function(r){
+    return '<tr><td><b>'+esc(r.temsilci)+'</b></td><td class="num">'+r.gorusme+'</td><td class="num" style="color:var(--accent)">'+r.satis+'</td>'+
+      '<td class="num" style="color:var(--soft)">'+r.ulasilamadi+'</td>'+
+      '<td><div class="bar"><i style="width:'+(r.donusum)+'%"></i></div><span class="firma">%'+r.donusum+'</span></td></tr>';
+  }).join("") : '<tr><td colspan="5" class="empty">Bu ay not yok.</td></tr>';
+}
+
+function findCust(id){return db.musteriler.filter(function(m){return m.id===id})[0]}
+
+function openCust(id){
+  var m=findCust(id); if(!m)return;
+  var reps=db.temsilciler||[];
+  var tl=(m.notlar||[]).slice().reverse().map(function(n){
+    return '<li><div class="meta"><span class="dot '+n.sonuc+'"></span>'+n.tarih+' · '+ (CRM.SONUCLAR[n.sonuc]||n.sonuc) +' · '+esc(n.temsilci||"")+'</div>'+esc(n.metin)+'</li>';
+  }).join("")||'<li class="empty">Henüz görüşme notu yok.</li>';
+  el("modal").innerHTML=
+    '<div class="head"><div><div class="name">'+esc(m.ad)+'</div><div class="firma">'+esc(m.firma||"")+' · '+esc(m.telefon||"")+'</div></div>'+
+    '<button class="x" onclick="closeModal()">&times;</button></div>'+
+    '<div class="body">'+
+      '<div class="row">'+
+        '<div><label>Aşama</label><select id="mAsama">'+CRM.ASAMALAR.map(function(a){return '<option'+(a===m.asama?" selected":"")+'>'+a+'</option>'}).join("")+'</select></div>'+
+        '<div><label>Temsilci</label><select id="mRep">'+reps.map(function(r){return '<option'+(r===m.temsilci?" selected":"")+'>'+esc(r)+'</option>'}).join("")+'</select></div>'+
+      '</div>'+
+      '<div><label>Bir sonraki adım</label><input id="mNext" value="'+esc(m.sonrakiAdim||"")+'" style="width:100%"/></div>'+
+      '<div style="margin-top:14px"><label>Görüşme geçmişi</label><ul class="timeline">'+tl+'</ul></div>'+
+      '<div class="noteform">'+
+        '<label>Görüşme notu (2 satır yeter, tarihi sistem koyar)</label>'+
+        '<textarea id="nMetin" placeholder="ör: teklifi beğendi, patronuna soracak, çarşamba dönecek"></textarea>'+
+        '<div class="row" style="margin-top:10px">'+
+          '<div><label>Sonuç</label><select id="nSonuc"><option value="gorusuldu">Görüşüldü</option><option value="ulasilamadi">Ulaşılamadı</option><option value="satis">Satış</option></select></div>'+
+          '<div><label>Ne zaman tekrar aranacak</label><select id="nGun"><option value="0">Bugün tekrar</option><option value="1">Yarın</option><option value="2">2 gün sonra</option><option value="3" selected>3 gün sonra</option><option value="7">1 hafta sonra</option><option value="14">2 hafta sonra</option><option value="">Takip gerekmez</option></select></div>'+
+        '</div>'+
+        '<div style="display:flex;gap:8px;margin-top:12px">'+
+          '<button class="primary" onclick="saveNote(\''+m.id+'\')">Notu kaydet</button>'+
+          '<button class="ghost" onclick="closeModal()">Kapat</button>'+
+          '<div class="grow" style="flex:1"></div>'+
+          '<button class="ghost" style="color:var(--red)" onclick="delCust(\''+m.id+'\')">Sil</button>'+
+        '</div>'+
+        '<div class="hint">Not kaydedilince: tarih bugüne düşer, seçtiğin güne göre takip tarihi kurulur, o gün gelince müşteri sabah listesine çıkar.</div>'+
+      '</div>'+
+    '</div>';
+  el("modalBg").classList.add("on");
+}
+
+async function saveNote(id){
+  var m=findCust(id); if(!m)return;
+  var metin=el("nMetin").value.trim();
+  var asama=el("mAsama").value, rep=el("mRep").value, next=el("mNext").value;
+  m.temsilci=rep;
+  if(!metin){ // sadece aşama/sonraki adım güncellemesi
+    m.asama=asama; m.sonrakiAdim=next.trim();
+    if(CRM.KAPALI_ASAMALAR.indexOf(asama)!==-1)m.takipTarihi=null;
+    await commitMusteri(m); render(); closeModal(); toast("Kart güncellendi"); return;
+  }
+  var g=el("nGun").value;
+  CRM.notEkle(m,{metin:metin,sonuc:el("nSonuc").value,temsilci:rep,
+    gunSonra:(g===""?null:Number(g)),sonrakiAdim:next,asama:asama},now());
+  await commitMusteri(m); render(); closeModal();
+  toast(m.takipTarihi? "Not eklendi · takip "+m.takipTarihi : "Not eklendi");
+}
+
+async function delCust(id){ if(!confirm("Bu müşteri kartı silinsin mi?"))return;
+  await commitDelete(id); render(); closeModal(); toast("Silindi"); }
+
+function closeModal(){ el("modalBg").classList.remove("on"); }
+
+function newCust(){
+  var reps=db.temsilciler||[];
+  el("modal").innerHTML='<div class="head"><div class="name">Yeni müşteri</div><button class="x" onclick="closeModal()">&times;</button></div>'+
+    '<div class="body">'+
+    '<div><label>İsim / müşteri adı</label><input id="cAd" style="width:100%" placeholder="ör: Kaya Mobilya"/></div>'+
+    '<div class="row" style="margin-top:10px"><div><label>Firma</label><input id="cFirma"/></div><div><label>Telefon</label><input id="cTel"/></div></div>'+
+    '<div class="row"><div><label>Temsilci</label><select id="cRep">'+reps.map(function(r){return '<option>'+esc(r)+'</option>'}).join("")+'</select></div>'+
+    '<div><label>Aşama</label><select id="cAsama">'+CRM.ASAMALAR.map(function(a){return '<option>'+a+'</option>'}).join("")+'</select></div></div>'+
+    '<div><label>Bir sonraki adım</label><input id="cNext" style="width:100%" value="İlk arama"/></div>'+
+    '<div style="margin-top:14px;display:flex;gap:8px"><button class="primary" onclick="createCust()">Ekle</button><button class="ghost" onclick="closeModal()">Vazgeç</button></div>'+
+    '</div>';
+  el("modalBg").classList.add("on");
+}
+async function createCust(){
+  var ad=el("cAd").value.trim(); if(!ad){toast("İsim gir");return;}
+  var m=CRM.yeniMusteri({ad:ad,firma:el("cFirma").value.trim(),telefon:el("cTel").value.trim(),
+    temsilci:el("cRep").value,asama:el("cAsama").value,sonrakiAdim:el("cNext").value.trim()},now());
+  await commitMusteri(m); render(); closeModal(); toast("Müşteri eklendi");
+}
+
+function settings(){
+  el("modal").innerHTML='<div class="head"><div class="name">Ayarlar</div><button class="x" onclick="closeModal()">&times;</button></div>'+
+    '<div class="body">'+
+    '<div><label>Temsilciler (her satıra bir isim)</label><textarea id="sReps" style="min-height:90px">'+esc((db.temsilciler||[]).join("\n"))+'</textarea></div>'+
+    '<div style="margin-top:8px"><button class="primary" onclick="saveReps()">Temsilcileri kaydet</button></div>'+
+    '<hr style="border:none;border-top:1px solid var(--line);margin:16px 0"/>'+
+    '<div><label>Ortak veri · ekip / çok cihaz</label>'+
+      '<div class="hint" style="margin:0 0 8px">Ekipçe aynı veriyi görmek için bir Google Sheet bağla. Kurulum bir kere, ~10 dk, rehberdeki <b>"Ekip / ortak kullanım"</b> adımları. Boş bırakırsan sistem bu bilgisayarda (yerel) çalışır.</div>'+
+      '<input id="sSync" style="width:100%" placeholder="https://script.google.com/macros/s/.../exec" value="'+esc(syncUrl)+'"/>'+
+      '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'+
+        '<button class="primary" onclick="connectSync()">Bağlan</button>'+
+        (isShared()?'<button class="ghost" onclick="disconnectSync()">Bağlantıyı kes (yerele dön)</button>':'')+
+      '</div>'+
+      '<div class="hint">Bağlanınca bu tarayıcı ortak veriyi kullanır; ekipteki herkes aynı linki bağlar. Müdür de aynı linkle tüm ekibi tek panoda görür.</div>'+
+    '</div>'+
+    '<hr style="border:none;border-top:1px solid var(--line);margin:16px 0"/>'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
+      '<button class="ghost" onclick="exportJSON()">Yedek al (JSON indir)</button>'+
+      '<button class="ghost" onclick="el(\'imp\').click()">Yedekten yükle</button>'+
+      '<input type="file" id="imp" accept="application/json" style="display:none" onchange="importJSON(event)"/>'+
+      '<button class="ghost" style="color:var(--red)" onclick="resetAll()">Örnek veriyi temizle</button>'+
+    '</div>'+
+    '<div class="hint">Yedek al/yükle, ortak veri kurmak istemeyen ekiplerin veriyi elle paylaşması için de kullanılabilir.</div>'+
+    '</div>';
+  el("modalBg").classList.add("on");
+}
+async function saveReps(){ var list=el("sReps").value.split("\n").map(function(s){return s.trim()}).filter(Boolean); await commitTemsilciler(list); render(); closeModal(); toast("Temsilciler kaydedildi"); }
+function exportJSON(){ var b=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="satis-crm-yedek.json";a.click(); }
+function importJSON(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=async function(){try{var parsed=JSON.parse(r.result);await commitReplaceAll(parsed);render();closeModal();toast("Yedek yüklendi");}catch(x){toast("Dosya okunamadı")}};r.readAsText(f);}
+async function resetAll(){ if(!confirm(isShared()?"ORTAK veri örnek veriye sıfırlansın mı? (ekipteki herkesi etkiler)":"Tüm veriler silinip örnek veri geri gelsin mi?"))return; await commitReplaceAll(JSON.parse(JSON.stringify(ORNEK))); render(); closeModal(); toast("Sıfırlandı"); }
+
+async function connectSync(){
+  var u=el("sSync").value.trim();
+  if(u && !/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec/.test(u)){ toast("Link '.../exec' ile bitmeli"); return; }
+  syncUrl=u; try{ if(u)localStorage.setItem(SYNC_KEY,u); else localStorage.removeItem(SYNC_KEY); }catch(e){}
+  closeModal(); await boot(); toast(isShared()?"Ortak veriye bağlandı":"Yerel moda dönüldü");
+}
+async function disconnectSync(){ syncUrl=""; try{localStorage.removeItem(SYNC_KEY);}catch(e){} closeModal(); await boot(); toast("Yerel moda dönüldü"); }
+
+// events
+el("btnNew").onclick=newCust;
+el("btnSettings").onclick=settings;
+el("repFilter").onchange=render;
+el("stageFilter").onchange=render;
+el("search").oninput=render;
+el("monthPick").onchange=renderPanel;
+el("modalBg").onclick=function(e){if(e.target===el("modalBg"))closeModal()};
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){
+  document.querySelectorAll(".tabs button").forEach(function(x){x.classList.remove("on")});b.classList.add("on");
+  el("tab-pano").style.display=b.dataset.tab==="pano"?"":"none";
+  el("tab-panel").style.display=b.dataset.tab==="panel"?"":"none";
+}});
+window.addEventListener("focus",function(){ if(isShared()&&!el("modalBg").classList.contains("on")){ apiGet().then(function(d){db=normalize(d);localSave();render();setSync("ok","ortak · bağlı");}).catch(function(){}); } });
+
+boot();
+</script>
+</body>
+</html>
