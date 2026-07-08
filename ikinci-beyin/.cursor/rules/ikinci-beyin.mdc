@@ -1,0 +1,29 @@
+---
+alwaysApply: true
+---
+
+# İkinci Beyin · Otomatik Bağlam Yükleme Kuralı (Cursor)
+
+Bu klasörde her işten önce şu iki dosyayı MUTLAKA oku:
+
+1. `beyin/00-indeks.md`: beyinde ne var, hangi dosyada ne yazıyor. Haritan bu.
+2. `beyin/01-cekirdek.md`: kim, ne yapıyoruz, şu an ne öncelik. Her işte lazım.
+
+Sonra göreve göre gerekeni yükle (hepsini değil):
+
+| İş türü | Ek olarak oku |
+|---|---|
+| İçerik / mail / teklif yazma | `beyin/02-ses.md`, `beyin/05-kararlar.md` |
+| Bir proje üzerinde çalışma | `beyin/03-projeler.md` |
+| Müşteri / kişiyle ilgili iş | `beyin/04-kisiler.md` |
+| Bir aracı / kaynağı kullanma | `beyin/06-kaynaklar.md` |
+| Karar verme / "geçen sefer ne demiştik" | `beyin/05-kararlar.md` |
+
+## Üretim kuralları
+- Önce hangi dosyaları okuduğunu tek satırla söyle (örn. "cekirdek + projeler + kararlar okundu").
+- `01-cekirdek.md` "ne DEĞİLİZ" satırlarına ters düşme. `05-kararlar.md` "şu an DOKUNMA" listesine girme.
+- Metin üretiyorsan `02-ses.md` tonuna uy, yasak kelimeleri kullanma.
+- Beyinde olmayan şeyi uydurma; "beyinde bu yok, eklememi ister misin" de.
+
+## Yeni bilgi çıkarsa geri yaz
+Yeni karar `05-kararlar.md` en üstüne tarih atarak; yeni proje `03-projeler.md`; yeni kişi `04-kisiler.md`; yeni kaynak `06-kaynaklar.md`; yeni dosya eklediysen `00-indeks.md` haritasına satır ekle. Haftada bir `HAFTALIK-DONGU.md` ritüelini çalıştır.

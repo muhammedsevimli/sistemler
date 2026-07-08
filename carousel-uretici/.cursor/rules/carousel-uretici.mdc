@@ -1,0 +1,26 @@
+---
+alwaysApply: true
+---
+
+# Carousel + Hook Üretici · Otomatik Okuma Kuralı (Cursor)
+
+Bu klasörde bir carousel istendiğinde şu 5 dosyayı SIRAYLA oku (zorunlu):
+
+1. `marka/01-marka.md` · kim, kime, ne satıyoruz, ne değiliz, kanıt.
+2. `marka/02-ses.md` · nasıl konuşuyoruz, hitap, yasak kelimeler.
+3. `marka/03-swipe.md` · geçmişte tutan açılar ve hook'lar.
+4. `format/hook-kaliplari.md` · hook formül bankası.
+5. `format/carousel-format.md` · slayt anatomisi ve kaç slayt kuralı.
+
+Bu beş dosyayı okumadan carousel üretme. Konu verilince önce "marka + ses + swipe + format okundu" de.
+
+## Değişmez üretim kuralları
+- `marka/02-ses.md` yasak kelimelerini ASLA kullanma. Yasak kalıp gördüğünde slaytı baştan yaz.
+- `marka/01-marka.md` "ne DEĞİLİZ" satırlarına ters düşme.
+- Her carousel için 3 hook üret (dert, sayı, karşı görüş). Kullanıcı birini seçer.
+- Kapak durdurucu, son slayt tek net CTA, ara slaytlar tek fikir (2-3 kısa cümle).
+- Uydurma sayı YOK. Kanıt `marka/01-marka.md` kanıt satırından; yoksa "[buraya kendi sayını koy]" placeholder.
+- Em dash (uzun tire) çıktının hiçbir yerinde yok. Ayraç gerekiyorsa nokta, virgül, iki nokta ya da orta nokta (·).
+
+## Yeni açı tutarsa geri yaz
+Bir hook ya da açı iyi çalıştıysa `marka/03-swipe.md` en üstüne tarih atarak Türkçe ekle. Böylece swipe-file her carousel'la büyür.
