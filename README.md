@@ -12,6 +12,7 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | İkinci Beyin | İşini bir kere dosyalara yaz, AI her işte geçmişi zaten bilsin: projeler, kararlar, kişiler, kaynaklar. Sistem her işten önce sadece o işe gerekeni yükler. | [ikinci-beyin/](ikinci-beyin/) |
 | Carousel + Hook Üretici | Konuyu ver, sistem markanın sesiyle 3 kapak hook'u ve 7 slaytlık carousel çıkarsın (görsel yönergeleri + LinkedIn çevirisiyle). | [carousel-uretici/](carousel-uretici/) |
 | Ad Spy · Rakip Reklam Çözümleyici | Rakiplerini yaz, sistem Meta Reklam Kütüphanesi linklerini üretsin. Aktif reklamları yapıştır, aylardır dönen reklamların örüntüsünü çıkarıp markana uyarlanmış 10 reklam konsepti yazsın. | [ad-spy/](ad-spy/) |
+| Review Madenci · Müşteri Yorumu Satış Madencisi | Ürününün müşteri yorumlarını yapıştır, sistem tekrar eden temaları çıkarsın, en sık gelen itirazı bulsun ve her tema için satış açısı + itiraz cevabı + reklam kancası yazsın. Her açının kanıtı müşterinin kendi cümlesi. | [review-madenci/](review-madenci/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 

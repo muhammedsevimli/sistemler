@@ -1,0 +1,39 @@
+---
+alwaysApply: true
+---
+
+# Review Madenci · Müşteri Yorumu Satış Madencisi · Otomatik Okuma Kuralı (Cursor)
+
+Bu sistem iki fazda çalışır. Amaç: müşteri yorumlarını `yorumlar/` klasörüne yapıştır, tek komutla tekrar eden temaları çıkar, en sık gelen itirazı bul ve her tema için satış açısı + itiraz cevabı + reklam kancası al.
+
+## FAZ 1 · Girdi hazırlama
+- Kullanıcı yorum METNİ yapıştırdıysa doğrudan FAZ 2'ye geç.
+- Kullanıcı bir LİNK verdiyse o tek sayfayı açıp görünen yorumları okumayı dene; sayfa yorumları giriş/kaydırma/JavaScript arkasındaysa UYDURMA, "kopyalayıp `yorumlar/` içine yapıştır" de (rehber: `yorumlar/OKU-yapistirma-rehberi.md`).
+- Hiç yorum yoksa üretime başlama; en az 8-10 yorum alt sınır, tek yorumdan tema çıkmaz.
+
+## FAZ 2 · Çözümleme + satış cephanesi istendiğinde şu 6 girdiyi SIRAYLA oku (zorunlu)
+1. `marka/01-marka.md` · kim, kime, ne satıyoruz, ne değiliz, kanıt.
+2. `marka/02-ses.md` · nasıl konuşuyoruz, hitap, yasak kelimeler.
+3. `marka/03-itiraz-hafizasi.md` · daha önce çıkmış itirazlar ve tutan cevaplar (kalıcı hafıza).
+4. `format/yorum-ayristirma.md` · her yorumu nasıl etiketleyeceğin, temaları nasıl kümeleyeceğin.
+5. `format/cikti-format.md` · çıktının yapısı.
+6. `yorumlar/` klasöründeki tüm dosyalar · çözümlenecek ham yorumlar (`OKU-` ile başlayan rehber hariç).
+
+Bu girdileri okumadan üretme. İşe başlarken önce "marka + ses + itiraz hafızası + format + ham yorumlar okundu, N yorum bulundu" de.
+
+## Çözümleme adımları
+- Her yorumu etiketle: duygu (olumlu / karışık / eleştiri), ana tema, geçen somut kelime/cümle.
+- Temaları üç gruba kümele ve her temanın kaç yorumda geçtiğini SAY: neden alıyorlar, neye güveniyorlar, neye takılıyorlar.
+- "Neye takılıyorlar" grubunda en sık geçen itirazı işaretle; satış sayfasında ve reklamda BAŞTAN cevaplanacak şey budur.
+- Her ana temayı senin sesinle satış diline çevir: satış açısı + itiraz cevabı + reklam kancası; hepsi müşterinin kendi kelimelerinden beslenir.
+
+## Değişmez üretim kuralları
+- **Yorumda OLMAYAN faydayı, sonucu, süreyi ya da garantiyi İCAT ETME.** Kanıt müşteri cümlesidir; kanıtı olmayan iddia yazılmaz.
+- İtiraz cevabını önce onu çürüten başka gerçek müşteri cümlesinden, yoksa `01-marka.md` içindeki gerçek teklifinden kur; ikisi de yoksa `[buraya bu itiraza kendi dürüst cevabını koy]` placeholder bırak.
+- Uydurma sayı, sahte indirim, olmayan garanti YOK. `marka/01-marka.md` içinde yoksa placeholder.
+- `marka/02-ses.md` YASAK kelimelerini ASLA kullanma. `marka/01-marka.md` "ne DEĞİLSİN" satırlarına ters düşme.
+- Her satış açısının / itiraz cevabının / kancanın altına "hangi yorumlardan geldi" satırını yaz.
+- Em dash (uzun tire) çıktının hiçbir yerinde yok. Ayraç gerekiyorsa nokta, virgül, iki nokta ya da orta nokta (·).
+
+## Çıktı ve write-back
+Çözümlemeyi `ciktilar/YYYY-AA-GG-<urun-ya-da-tema>.md` olarak yaz: tarama özeti + tema kümeleri (üç grup) + en sık itiraz + satış cephanesi (tema başına açı + itiraz cevabı + kanca) + kanıt izi + uydurmama notu + platform notu (IG "sen" / LinkedIn "siz"). Bir itiraz cevabı ya da açı tuttuğunda `marka/03-itiraz-hafizasi.md` dosyasına tarih atarak Türkçe ekle; sistem her ay yeni yorumlarla tekrar çalışır.
