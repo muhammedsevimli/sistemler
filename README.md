@@ -11,6 +11,7 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | Haftalık Rakip Takipçisi | Rakiplerini (site, haber, youtube, instagram) haftada bir tarayıp pazartesi tek rapora indiren sistem: her yeni içeriğin özeti + markana hangi açıyla uyarlanacağı. | [rakip-takip/](rakip-takip/) |
 | İkinci Beyin | İşini bir kere dosyalara yaz, AI her işte geçmişi zaten bilsin: projeler, kararlar, kişiler, kaynaklar. Sistem her işten önce sadece o işe gerekeni yükler. | [ikinci-beyin/](ikinci-beyin/) |
 | Carousel + Hook Üretici | Konuyu ver, sistem markanın sesiyle 3 kapak hook'u ve 7 slaytlık carousel çıkarsın (görsel yönergeleri + LinkedIn çevirisiyle). | [carousel-uretici/](carousel-uretici/) |
+| Ad Spy · Rakip Reklam Çözümleyici | Rakiplerini yaz, sistem Meta Reklam Kütüphanesi linklerini üretsin. Aktif reklamları yapıştır, aylardır dönen reklamların örüntüsünü çıkarıp markana uyarlanmış 10 reklam konsepti yazsın. | [ad-spy/](ad-spy/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 

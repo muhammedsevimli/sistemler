@@ -1,0 +1,38 @@
+---
+alwaysApply: true
+---
+
+# Ad Spy · Rakip Reklam Çözümleyici · Otomatik Okuma Kuralı (Cursor)
+
+Bu sistem iki fazda çalışır. Amaç: rakiplerini bir kere yaz, tek komutla ayrıştırma + markana uyarlanmış 10 reklam konsepti al.
+
+## FAZ 1 · Link istendiğinde
+`marka/03-rakipler.md` dosyasını oku. Her rakip için Meta Ads Library linkini şu şablonla üret ve tek tek yaz:
+
+```text
+https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=TR&q=<RAKIP ADI>&search_type=keyword_unordered&media_type=all
+```
+
+Boşlukları %20 yap. Page id varsa `q=` yerine `view_all_page_id=<NUMARA>`. Linkten sonra: "linke tıkla, aktif reklamları `rakip-reklamlari/<rakip>.md` içine yapıştır, sonra çözümle."
+
+## FAZ 2 · Çözümleme + 10 konsept istendiğinde şu 6 girdiyi SIRAYLA oku (zorunlu)
+1. `marka/01-marka.md` · kim, kime, ne satıyoruz, ne değiliz, kanıt.
+2. `marka/02-ses.md` · nasıl konuşuyoruz, hitap, yasak kelimeler.
+3. `marka/03-rakipler.md` · takip edilen rakipler.
+4. `format/reklam-ayristirma.md` · her reklamı hangi başlıklara ayıracağın.
+5. `format/konsept-format.md` · 10 konseptin yapısı.
+6. `rakip-reklamlari/` klasöründeki tüm dosyalar · çözümlenecek ham reklamlar.
+
+Bu girdileri okumadan üretme. İşe başlarken önce "marka + ses + rakipler + format + ham reklamlar okundu" de.
+
+## Değişmez üretim kuralları
+- `marka/02-ses.md` YASAK kelimelerini ASLA kullanma. Yasak kalıp gördüğünde konsepti baştan yaz.
+- `marka/01-marka.md` "ne DEĞİLİZ" satırlarına ters düşme.
+- Rakibin reklamını KOPYALAMA. Mantığını al (kanca tipi, teklif tipi, kime), kelimesini değil.
+- Aylardır dönen reklamı "kazandıran aday" işaretle, kısa süredir döneni test aşaması say.
+- Uydurma sayı, sahte indirim, olmayan garanti YOK. `marka/01-marka.md` içinde yoksa `[buraya kendi sayını/teklifini koy]` placeholder.
+- Her konseptin altına "hangi rakip mantığından geldi" ve "neden tutabilir" satırı.
+- Em dash (uzun tire) çıktının hiçbir yerinde yok. Ayraç gerekiyorsa nokta, virgül, iki nokta ya da orta nokta (·).
+
+## Çıktı ve write-back
+Çözümlemeyi `ciktilar/YYYY-AA-GG-<tema>.md` olarak yaz: ayrıştırma tablosu + örüntü + 10 konsept + platform notu (IG "sen" / LinkedIn "siz"). Bir konsept tuttuğunda `marka/03-rakipler.md` en altına tarih atarak Türkçe ekle; sistem her ay aynı linklerden tekrar çalışır.
