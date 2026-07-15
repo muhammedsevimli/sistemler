@@ -13,6 +13,7 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | Carousel + Hook Üretici | Konuyu ver, sistem markanın sesiyle 3 kapak hook'u ve 7 slaytlık carousel çıkarsın (görsel yönergeleri + LinkedIn çevirisiyle). | [carousel-uretici/](carousel-uretici/) |
 | Ad Spy · Rakip Reklam Çözümleyici | Rakiplerini yaz, sistem Meta Reklam Kütüphanesi linklerini üretsin. Aktif reklamları yapıştır, aylardır dönen reklamların örüntüsünü çıkarıp markana uyarlanmış 10 reklam konsepti yazsın. | [ad-spy/](ad-spy/) |
 | Review Madenci · Müşteri Yorumu Satış Madencisi | Ürününün müşteri yorumlarını yapıştır, sistem tekrar eden temaları çıkarsın, en sık gelen itirazı bulsun ve her tema için satış açısı + itiraz cevabı + reklam kancası yazsın. Her açının kanıtı müşterinin kendi cümlesi. | [review-madenci/](review-madenci/) |
+| Konsept Fabrikası · 50 Statik Reklam Konsepti | Kendi kazanan reklamlarını ve müşteri yorumlarını yaz, sistem markanın sesiyle 50 çeşitli statik reklam konsepti çıkarsın (her sabah otomatik ya da tek komutla). Kanca tipi x segment x duygu rotasyonu; her konsept kanca + görsel yönergesi + gerekçe. | [konsept-fabrikasi/](konsept-fabrikasi/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 

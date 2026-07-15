@@ -1,0 +1,14 @@
+her sabah üretimi.
+
+girdi klasöründeki kazanan reklamları, müşteri yorumlarını ve en beğenilen yorumları çözümle ve bana 50 statik reklam konsepti çıkar.
+
+kurallar:
+- önce marka + ses + kazanan hafıza + format + girdi dosyalarını okuduğunu tek satırla söyle.
+- kazanan reklamları ayrıştır: kanca, vaat, kime, duygu, format, kanıt. müşteri yorumlarından tekrar eden dert, övgü ve itirazı topla. beğenilen yorumlardan viral açıyı çıkar.
+- çıkan örüntüyü tek paragrafta özetle.
+- bu mantığı benim markama ve sesime giydirip 50 konsept yaz. her konsept üç satır: kanca, görsel yönergesi, tek satır gerekçe.
+- 50 konsept gerçekten çeşitli olsun: konsept-format.md rotasyon ızgarasına uy (kanca tipi + segment + duygu). aynı kancayı kelime değiştirip tekrar yazma.
+- bende olmayan sayıyı/indirimi/garantiyi uydurma, placeholder bırak. yorum uydurma, gerçek girdiden al.
+- 02-ses.md yasak kelimelerini kullanma, em dash kullanma.
+- dosyayı yazmadan hemen önce tüm metni em dash (—) için tara; bir tane bile varsa hepsini orta nokta ( · ) ile değiştir. eleme ve özet notları dahil.
+- çıktıyı ciktilar klasörüne bugünün tarihiyle YYYY-AA-GG-sabah.md olarak yaz. en sonda "sabah eleme" notu (ilk deneyeceğin 5 konsept) ve linkedin için "siz" notu ver.

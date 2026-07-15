@@ -1,0 +1,36 @@
+---
+alwaysApply: true
+---
+
+# Konsept Fabrikası · Otomatik Okuma Kuralı (Cursor)
+
+Bu sistem tek akışta çalışır. Amaç: kendi kazanan reklamlarını ve müşteri sesini bir kere yaz, tek komutla markanın sesinden 50 çeşitli statik reklam konsepti al. (Rakip reklamı değil, senin kendi kanıtın.)
+
+## FAZ · 50 konsept istendiğinde şu 8 girdiyi SIRAYLA oku (zorunlu)
+1. `marka/01-marka.md` · kim, kime, ne satıyoruz, ne değiliz, kanıt.
+2. `marka/02-ses.md` · nasıl konuşuyoruz, hitap, yasak kelimeler.
+3. `marka/03-kazanan-hafiza.md` · önceki turlarda tutan açılar (varsa).
+4. `format/girdi-ayristirma.md` · girdileri hangi başlıklara ayıracağın.
+5. `format/konsept-format.md` · 50 konseptin yapısı ve çeşitlilik kuralı.
+6. `girdi/kazanan-reklamlar.md` · markanın en iyi dönen reklamları.
+7. `girdi/musteri-yorumlari.md` · gerçek müşteri yorumları.
+8. `girdi/begenilen-yorumlar.md` · en beğenilen yorumlar.
+
+Bu girdileri okumadan üretme. İşe başlarken önce "marka + ses + kazanan hafıza + format + kazanan reklamlar + müşteri yorumları + beğenilen yorumlar okundu" de.
+
+## Çözümleme
+1. Kazanan reklamları ayrıştır (kanca, vaat, kime, duygu, format, kanıt). Müşteri yorumlarından tekrar eden dert, övgü, itirazı topla. Beğenilen yorumlardan viral açıyı çıkar.
+2. Örüntüyü oku: hangi kanca tipi tutmuş, ortak vaat, ortak duygu, en sık itiraz. Müşterinin kendi cümlesi en güçlü kancadır, ham malzeme olarak kullan.
+3. Bu mantığı `marka/01-marka.md` ve `marka/02-ses.md` üzerinden senin sesine giydir, 50 konsept üret.
+
+## Değişmez üretim kuralları
+- **50 konsept GERÇEKTEN çeşitli olacak.** `format/konsept-format.md` rotasyon ızgarasına uy (kanca tipi x segment x duygu). Aynı kancayı kelime değiştirip tekrar yazma; aynı kanca tipi peş peşe en fazla 2 kez.
+- `marka/02-ses.md` YASAK kelimelerini ASLA kullanma. Yasak kalıp gördüğünde konsepti baştan yaz.
+- `marka/01-marka.md` "ne DEĞİLİZ" satırlarına ters düşme. Sahte aciliyet, abartı, olmayan garanti girdide geçse bile KOPYALAMA; mantığını al, dilini alma.
+- Uydurma sayı, sahte indirim, olmayan garanti YOK. `marka/01-marka.md` içinde yoksa `[buraya kendi sayını/teklifini koy]` placeholder.
+- Müşteri yorumunu birebir kullanacaksan gerçek girdiden al, yorum uydurma. Girdi boşsa üretme.
+- Her konseptin "gerekçe" satırında hangi kazanan reklamdan ya da müşteri cümlesinden geldiğini yaz.
+- Em dash (uzun tire) çıktının hiçbir yerinde yok. Dosyayı yazmadan önce tüm metni em dash için tara; bulursan orta nokta ( · ) ile değiştir. Eleme ve özet notları dahil.
+
+## Çıktı ve write-back
+Her turu `ciktilar/YYYY-AA-GG-<tema>.md` olarak yaz: (a) girdi özeti + örüntü, (b) 50 konsept (rotasyon gruplarıyla), (c) "sabah eleme" notu (ilk 5 konsept), (d) platform notu (IG "sen" / LinkedIn "siz"). Bir konsept tuttuğunda `marka/03-kazanan-hafiza.md` en altına tarih atarak Türkçe ekle; sonraki turlar bu bölümü de okur.
