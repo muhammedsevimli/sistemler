@@ -1,0 +1,41 @@
+---
+alwaysApply: true
+---
+
+# Müşteri Bulucu · Aday Bulma + İlk Mesaj · Otomatik Okuma Kuralı (Cursor)
+
+Bu sistem iki fazda çalışır. Amaç: nişini bir kere yaz, tek komutla sıralı aday listesi + her adaya özel ilk mesaj al.
+
+## FAZ 1 · Link istendiğinde
+`hedef/01-nis.md` dosyasını oku. Her arama terimi için Meta Reklam Kütüphanesi linkini şu şablonla üret ve tek tek yaz:
+
+```text
+https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=TR&q=<NIS>&search_type=keyword_unordered&media_type=all
+```
+
+Boşlukları %20 yap, Türkçe karakterleri URL kodla. `country=` yerine dosyadaki ülke kodunu kullan (yoksa TR varsay ve söyle). Her arama terimi için AYRI link üret. Linkten sonra: "linke tıkla, gördüğün markaları `adaylar/<niş>.md` içine yapıştır, sonra 2. komutu çalıştır."
+
+## FAZ 2 · Aday listesi + mesaj istendiğinde şu 6 girdiyi SIRAYLA oku (zorunlu)
+1. `marka/01-hizmet.md` · ne satıyorsun, kime, fiyat aralığı, ne DEĞİLSİN.
+2. `marka/02-ses.md` · nasıl yazıyorsun, hitap, yasak kelimeler.
+3. `hedef/01-nis.md` · hangi nişte, hangi ülkede aday arıyorsun.
+4. `format/aday-ayristirma.md` · ayrıştırma başlıkları + sıralama puanı.
+5. `format/mesaj-format.md` · ilk mesajın yapısı.
+6. `adaylar/` klasöründeki tüm dosyalar · ayrıştırılacak ham adaylar.
+
+Bu girdileri okumadan üretme. İşe başlarken önce "hizmet + ses + niş + format + ham adaylar okundu" de.
+
+## Değişmez üretim kuralları
+- `marka/02-ses.md` YASAK kelimelerini ASLA kullanma. Yasak kalıp gördüğünde mesajı baştan yaz.
+- `marka/01-hizmet.md` "ne DEĞİLİM" satırlarına ters düşme. Yapmadığın işi teklif etme.
+- Aylardır reklam vereni "bütçesi var" işaretle, yeni başlamışı test aşaması say.
+- Zayıf noktayı REKLAMDAN GÖSTEREREK yaz (kanca zayıf / teklif belirsiz / tek format / sosyal kanıt yok). Genel geçer laf etme.
+- Puanla ve sırala: bütçe sinyali (0-4) + zayıflığın senin hizmetinle çözülebilirliği (0-4) + fiyat aralığına uygunluk (0-2). Puanı gerekçesiz verme.
+- **Mesaj kişiye özel:** her mesajda o markanın reklamından SOMUT bir detay. Detay yoksa mesajı yazma, "yeterli bilgi yok" de.
+- **Tek soru.** Mesajın sonunda bir net soru. Seçenek yığını yok. İlk mesajda fiyat, paket, takvim linki geçmez.
+- Uydurma sayı, sahte referans, olmayan iş örneği YOK. `marka/01-hizmet.md` içinde yoksa `[buraya kendi örneğini/sayını koy]` placeholder. Adayla ilgili `adaylar/` içinde yazmayan bilgi uydurma.
+- Toplu gönderim dili yasak ("merhaba, hizmetlerimizi tanıtmak istiyorum").
+- Em dash (uzun tire) çıktının hiçbir yerinde yok. Ayraç gerekiyorsa nokta, virgül, iki nokta ya da orta nokta (·).
+
+## Çıktı ve write-back
+Turu `ciktilar/YYYY-AA-GG-<nis>.md` olarak yaz: ayrıştırma tablosu + sıralı aday listesi (puan kırılımıyla) + adaya özel mesajlar + platform notu (DM "sen" / LinkedIn-e-posta "siz"). Bir mesaj cevap aldığında `hedef/01-nis.md` en altındaki "cevap alan açılar" bölümüne tarih atarak Türkçe ekle; sonraki üretimler oradan da beslenir.

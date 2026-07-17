@@ -14,6 +14,7 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | Ad Spy · Rakip Reklam Çözümleyici | Rakiplerini yaz, sistem Meta Reklam Kütüphanesi linklerini üretsin. Aktif reklamları yapıştır, aylardır dönen reklamların örüntüsünü çıkarıp markana uyarlanmış 10 reklam konsepti yazsın. | [ad-spy/](ad-spy/) |
 | Review Madenci · Müşteri Yorumu Satış Madencisi | Ürününün müşteri yorumlarını yapıştır, sistem tekrar eden temaları çıkarsın, en sık gelen itirazı bulsun ve her tema için satış açısı + itiraz cevabı + reklam kancası yazsın. Her açının kanıtı müşterinin kendi cümlesi. | [review-madenci/](review-madenci/) |
 | Konsept Fabrikası · 50 Statik Reklam Konsepti | Kendi kazanan reklamlarını ve müşteri yorumlarını yaz, sistem markanın sesiyle 50 çeşitli statik reklam konsepti çıkarsın (her sabah otomatik ya da tek komutla). Kanca tipi x segment x duygu rotasyonu; her konsept kanca + görsel yönergesi + gerekçe. | [konsept-fabrikasi/](konsept-fabrikasi/) |
+| Müşteri Bulucu · Aday Bulma + İlk Mesaj | Nişini yaz, sistem Meta Reklam Kütüphanesi linklerini üretsin. O nişte reklam veren markaları yapıştır, sistem bütçe sinyaline ve reklamın zayıf noktasına göre adayları sıralasın ve her birine reklamından çıkardığı somut detayla özel bir ilk mesaj yazsın. | [musteri-bulucu/](musteri-bulucu/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 
