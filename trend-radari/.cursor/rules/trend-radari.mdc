@@ -1,0 +1,37 @@
+---
+alwaysApply: true
+---
+
+# Trend Radarı · Nişinde Patlayan İçerik Açıları · Otomatik Okuma Kuralı (Cursor)
+
+Bu sistem iki fazda çalışır. Amaç: nişini bir kere yaz, tek komutla Reddit'ten canlı trend çekimi + markanın sesiyle "bu hafta üret" brief'i al.
+
+## FAZ 1 · Reddit taraması istendiğinde (otomatik çekim · RSS + curl)
+`hedef/01-nis.md` dosyasını oku. Her subreddit için şu adresi `curl` ile çek (açıklayıcı User-Agent ver; fetch araçları Reddit'te bloklanabilir, curl `200` verir):
+
+```text
+https://www.reddit.com/r/<SUBREDDIT>/top/.rss?t=week
+```
+
+`429` (rate-limit) alırsan `curl --retry --retry-delay` ile bekleyip yeniden dene, subreddit'leri arka arkaya çek. Her `<entry>` içinden başlık, link ve tarih al. Feed sırasını KORU (1 = en üst = o hafta en çok tutan). RSS'te oy sayısı YOK, uydurma. Sonucu `veri/reddit-YYYY-AA-GG.md` dosyasına tabloya yaz (subreddit · sıra · başlık · tarih · link). Çekemediğin subreddit olursa "çekilemedi (sebep)" yaz, başlık uydurma. Bitince kaç başlık kaç subreddit çektiğini ve HTTP kodunu tek satırla söyle.
+
+## FAZ 2 · Brief istendiğinde şu 5 girdiyi SIRAYLA oku (zorunlu)
+1. `marka/01-marka.md` · kimsin, ne üretiyorsun, ne DEĞİLSİN, hangi platform.
+2. `marka/02-ses.md` · nasıl yazıyorsun, hitap, yasak kelimeler.
+3. `hedef/01-nis.md` · niş, dil/ülke, subreddit'ler, arama terimleri.
+4. `format/trend-analizi.md` · hook kalıpları + brief yapısı.
+5. `veri/` klasöründeki tüm dosyalar · çekilen Reddit verisi + (varsa) yapıştırılan örnekler.
+
+Bu girdileri okumadan üretme. İşe başlarken önce "marka + ses + niş + format + veri okundu" de.
+
+## Değişmez üretim kuralları
+- Başlıkları hook kalıbına göre grupla. En az 2 başlıkta tekrar edeni "trend" say; tek başlık "tekil sinyal".
+- Sıcaklık = frekans (kaç başlıkta tekrar etti) + feed sırası (feed'in üstünde mi). RSS oy sayısı vermez, UYDURMA.
+- İngilizce başlığı KOPYALAMA; altındaki kalıbı al, senin nişinin diline çevir.
+- `marka/02-ses.md` YASAK kelimelerini ASLA kullanma. Yasak kalıp gördüğünde başlığı baştan yaz.
+- `marka/01-marka.md` "ne DEĞİLSİN" satırına takılan trendi "üret" diye önerme; gördüğünü ama neden atladığını yaz.
+- Uydurma trend YOK. Veri azsa "veri az, subreddit ekle ya da örnek yapıştır" de.
+- Em dash (uzun tire) çıktının hiçbir yerinde yok. Ayraç gerekiyorsa nokta, virgül, iki nokta ya da orta nokta (·).
+
+## Çıktı ve write-back
+Brief'i `ciktilar/YYYY-AA-GG-brief.md` olarak yaz: veri özeti + sıcaktan soğuğa açı listesi (frekans + sıra kanıtıyla) + "bu hafta üret" ilk 3-4 (örnek başlık + format) + atlananlar. Bir açıyı üretip sonucunu görünce `hedef/01-nis.md` en altındaki "tutan açılar" bölümüne tarih atarak yaz; sonraki briefler oradan da beslenir.
