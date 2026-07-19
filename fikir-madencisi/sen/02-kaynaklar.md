@@ -1,11 +1,11 @@
-# 02 · Kaynaklar (talep sinyalini nerede arıyorsun)
+# 02 · Kaynaklar ve Otomatik Arama Sorguları
 
-> Bu, senin sektörünün canlı talep hafızasıdır. Sistem her kaynak için "nereye bak, ne ara" yönü üretir.
-> Aşağısı kurgusal bir örnektir. Kendi alanına göre değiştir, iyi kaynak buldukça ekle.
+> Sistem talebi KENDİSİ tarar. Bu dosya, hangi sorgularla tarayacağını söyler.
+> Aşağısı kurgusal bir örnektir (yerel randevu + küçük e-ticaret alanı). Kendi alanına göre değiştir, iyi sorgu buldukça ekle.
 > İlke: insanların bir çözüm için AÇIKÇA istek/şikayet dilini kullandığı yerlere bak. En değerli sinyal "bunun için para verirdim" cümlesidir.
 
-## Talep dili kalıpları (bunları ara)
-Hangi kaynakta olursa olsun aradığın cümle tipleri:
+## Talep dili kalıpları (sistem bunları arar)
+Hangi kaynakta olursa olsun sistemin aradığı cümle tipleri:
 - "keşke şöyle bir uygulama / araç olsa"
 - "buna bir çözüm arıyorum", "böyle bir şey var mı"
 - "her ay elle yapıyorum, bıktım", "manuel uğraşıyorum"
@@ -13,32 +13,37 @@ Hangi kaynakta olursa olsun aradığın cümle tipleri:
 - "bunun için ayda şu kadar veriyorum", "buna öderdim"
 - "Türkçe olanı yok", "TR'de çalışmıyor"
 
-## X (Twitter) aramaları
-Sistem bunlar için hazır arama linki üretir. Kendi sektör kelimelerini ekle.
+## Hacker News sorguları (tam otomatik · hn.algolia.com)
+Sistem her sorgu için `hn.algolia.com/api/v1/search?query=<SORGU>&tags=comment` çeker. Kendi alan kelimelerini ekle.
+- `appointment scheduling small business`
+- `no-show appointments deposit`
+- `respond to reviews small business`
+- `ecommerce returns refund manual`
+- `someone should build` (genel talep avı)
+- `I would pay for` (para dili avı)
+
+## Reddit sorguları (tasarımda otomatik · reddit.com/search.json)
+Sistem her sorgu için `reddit.com/search.json?q=<SORGU>` (ya da hedef subreddit'te `r/<sub>/search.json`) çeker. Erişilemezse `site:reddit.com <SORGU>` ile WebSearch'e düşer.
+- `r/smallbusiness` · `no show appointments`, `booking software frustration`
+- `r/ecommerce` · `returns manual spreadsheet`
+- genel · `"I wish there was an app" small business`
+
+## Web + forum sorguları (tam otomatik · WebSearch)
+Sistem bunları web aramasıyla tarar (Ekşi, sektör forumları, pazar yeri/uygulama yorumları, "arıyorum" aramaları).
+- `ekşi sözlük <sektör> randevu gelmeyen müşteri`
+- `<sektör> "keşke bir uygulama olsa"`
+- `<iş> "yazılımı arıyorum"`, `<iş> "programı öneri"`
+- Trendyol / Hepsiburada: alanına yakın ürünlerde 1-2 yıldızlı yorumlar.
+- App Store / Google Play: benzer uygulamaların düşük yıldızlı yorumları ("şu özellik yok", "TR'de çalışmıyor").
+
+## X (Twitter) aramaları (yarı otomatik · login ister)
+Sistem bunları otomatik çekmez; her biri için tek tık arama linki üretir, istersen elle bakarsın.
 | Arama kalıbı | Neyi arıyorsun |
 |---|---|
 | `"keşke bir uygulama olsa"` | genel dile gelmiş talep |
 | `"böyle bir araç var mı"` | çözüm arayan kullanıcı |
-| `esnaf "excel'de tutuyorum"` | manuel derdi (senin sektör kelimenle değiştir) |
+| `<sektör kelimen> "elle yapıyorum"` | manuel derdi |
 | `"randevu" "kaçırıyorum"` | randevu alan işletme derdi |
-| `"kargo" "iade" "uğraşmaktan"` | e-ticaret operasyon derdi |
-
-## Forum / topluluk kaynakları
-Nereye bakacağını yaz; sistem "şurada şunu ara" der.
-- Ekşi Sözlük: ilgili başlıklar (ör. "küçük işletme muhasebesi", "randevu uygulaması", sektör başlığı) altındaki dertli girdiler.
-- İlgili Discord / Telegram grupları: senin sektörünün kanalları, "bunu nasıl çözüyorsunuz" soruları.
-- Reddit (varsa ilgili İngilizce sub): TR'ye taşınabilir dert; not: TR'de karşılığını teyit et.
-- Sektör Facebook grupları: "yardım" ve "öneri" postları.
-
-## Pazar yeri / yorum kaynakları
-Düşük yıldızlı yorum = ödenmiş ama tatmin olmamış talep. Altın kaynak.
-- Trendyol / Hepsiburada: senin alanına yakın ürünlerde 1-2 yıldızlı yorumlar (insan neye kızmış).
-- Uygulama mağazaları (App Store / Google Play): benzer uygulamaların düşük yıldızlı yorumları ("şu özellik yok", "TR'de çalışmıyor").
-- Google Haritalar: yerel işletme yorumlarında tekrar eden şikayet (randevu, bekleme, iletişim).
-
-## "Şunu arıyorum" aramaları
-- Google'da `<iş> "yazılımı arıyorum"`, `<iş> "programı öneri"`.
-- Sektör pazar yeri / ilan siteleri: "aranıyor" ilanları.
 
 ## Karar defteri (sistem doldurur / sen doldurursun)
 Bir fikri kurmaya karar verdiğinde ya da vazgeçtiğinde buraya tarih atarak yaz. Sonraki raporlar bunu okur, aynı fikri tekrar önermez.

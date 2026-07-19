@@ -1,93 +1,90 @@
-# Fikir Raporu · 2026-07-20
+# Fikir Raporu · 2026-07-20 · Yerel Randevu + Küçük E-ticaret
 
-> Okunan dosyalar: profil (`sen/01-profil.md`), kaynaklar (`sen/02-kaynaklar.md`), kriterler (`format/kriterler.md`), format (`format/rapor-format.md`), ham sinyaller (`sinyaller/toplanan.md`). Fikir uydurulmadı; yalnız yapıştırılmış sinyaller puanlandı.
+> Bu rapor, otomatik taranan gerçek sinyallerden (`sinyaller/toplanan-2026-07-20.md`) üretildi.
+> profil + kaynaklar + kriterler + format + toplanan sinyaller okundu.
 
 ## A) Tarama özeti
-Beş kaynak tipinden (X aramaları, Ekşi Sözlük, Discord toplulukları, Trendyol yorumu, Google Haritalar) toplam 11 talep sinyali geldi, bunlar 9 ayrı SaaS fikrine indi. En çok tekrar eden dert: randevu/sipariş/aidat gibi işlerin elle, defterde ya da Excel'de takibi ve bundan doğan kayıp. Para dili en net görülen: randevu no-show ("kaporalı randevu sistemi olsa ayda 300 TL veririm"). Diğer para dili sinyalleri: aidat takibi ("makul ücret veririz"), IG sipariş takibi ("memnuniyetle öderim"), diyetisyen danışan takibi ("öderim"), kripto vergi ("para veririm"). En güçlü tekli fikir, iki ayrı kaynakta ve dört artı kişide tekrar eden randevu no-show + kapora sistemidir.
+Hacker News'ten 6, web/forumdan 3 sinyal otomatik çekildi (Reddit bu ortamda WebFetch politikasıyla erişilemedi, dolaylı arama net ek sinyal vermedi; X yarı otomatik, taranmadı). 9 sinyal 5 ayrı fikre indi. En çok tekrar eden dert: randevu no-show (randevu alıp gelmeyen müşteri, kaybedilen ciro). Bu koşuda açık "öderim" cümlesi çıkmadı; para sinyali çoğunlukla dolaylı (kaybedilen ciro, kaçan müşteri) ve mevcut ücretli rakiplerin varlığıyla teyit ediliyor (salonrandevu.app, KolaySiparis, Komşum).
 
 ## B) Puan tablosu (tüm fikirler)
 | # | Fikir (tek cümle) | Pazar | Fizibilite | Rekabet boşluğu | TR uyumu | Toplam | Sinyal |
 |---|---|---|---|---|---|---|---|
-| 1 | Randevulu esnaf için no-show önleyen hatırlatma + kapora sistemi | 5 | 4 | 4 | 5 | 18 | güçlü |
-| 2 | Instagram/DM satıcısı için sipariş alma + durum takip paneli | 4 | 4 | 4 | 5 | 17 | orta |
-| 3 | Apartman/site yöneticisi için aidat takip + otomatik hatırlatma | 4 | 4 | 3 | 5 | 16 | orta |
-| 4 | Yerel işletme için yorumlara hızlı yanıt (AI taslak) aracı | 3 | 3 | 4 | 4 | 14 | orta |
-| 5 | Diyetisyen/koç için danışan + randevu + ödeme takip paneli | 4 | 3 | 3 | 4 | 14 | orta (sınıra yakın) |
-| 6 | TR kripto kazanç vergi hesaplama aracı | 4 | 1 | 4 | 4 | 13 | orta (senin sınırın) |
-| 7 | Küçük e-ticaret için çok kanaldan iade taleplerini tek panelde toplama | 3 | 2 | 4 | 4 | 13 | orta |
-| 8 | Serbest çalışan için teklif/proje (onaylandı/bekliyor) takibi | 2 | 5 | 2 | 3 | 12 | zayıf |
-| 9 | Tüketici için farklı kargoları tek yerde takip | 2 | 2 | 2 | 2 | 8 | zayıf (B2C) |
+| 1 | Randevulu esnaf için no-show azaltan kaporalı randevu + hatırlatma | 5 | 4 | 3 | 5 | 17 | güçlü |
+| 2 | Instagram/DM sipariş takip paneli (mikro butik) | 4 | 4 | 3 | 5 | 16 | orta |
+| 3 | Yerel işletme yorum yanıt aracı (AI taslak) | 4 | 4 | 4 | 4 | 16 | orta |
+| 4 | Apartman/site aidat takip + hatırlatma | 4 | 4 | 2 | 5 | 15 | orta |
+| 5 | Mikro e-ticaret çok kanallı iade tek panel | 4 | 3 | 3 | 4 | 14 | orta |
 
 ## C) En iyi 5 fikir · detay kartı
 
-### Fikir 1 · Randevu no-show + kapora · toplam 18/20 · sinyal güçlü · BU HAFTA BURADAN BAŞLA
-- **fikir:** Kuaför, güzellik merkezi ve benzeri randevu alan esnaf için, randevuyu otomatik hatırlatan ve gelmeyeni önlemek üzere kapora tutabilen basit bir sistem.
-- **nereden çıktı:** Sinyal 1 (X, kuaför) + Sinyal 2 (Ekşi, güzellik merkezi). İki bağımsız kaynak, dört artı kişi. Para dili net: "kaporalı randevu sistemi olsa ayda 300 TL veririm".
-- **puanlar:** pazar 5 · fizibilite 4 · rekabet boşluğu 4 · TR uyumu 5
-  - pazar 5: çok sayıda esnaf sürekli yaşıyor, gelmeyen randevu doğrudan ciro kaybı, açık aylık ödeme dili var.
-  - fizibilite 4: hatırlatma (SMS/WhatsApp) ve panel senin rahat bölgende, tek zor parça kapora tahsilatı ama iyzico ile çözülebilir.
-  - rekabet boşluğu 4: TR'de genel randevu uygulamaları var, boşluk no-show odaklı kapora/depozito mekaniğinde, çoğu araç bunu yapmıyor.
-  - TR uyumu 5: yerel esnaf derdi, Türkçe, iyzico ile tahsilat kolay, WhatsApp kültürü oturmuş, kitle senin elinde.
-- **ilk MVP (bu hafta kurulacak en küçük sürüm):** Esnafın randevuları girdiği basit bir panel; randevudan önce otomatik SMS/WhatsApp hatırlatma; opsiyonel kapora için iyzico ödeme linki.
-- **risk / boşluk:** WhatsApp resmi API onayı zaman alabilir; ilk sürümde SMS ya da manuel WhatsApp linkiyle başla, kapora akışını sonra ekle.
-- **para modeli fikri:** İşletme başına aylık abonelik (300-500 TL bandı, sinyaldeki ödeme diline oturuyor); tahsilat iyzico ile TR'de kolay.
+### Fikir 1 · Kaporalı randevu + no-show hatırlatma · toplam 17/20 · sinyal güçlü
+- **fikir:** randevu alan yerel esnaf (kuaför, berber, güzellik, klinik) için, gelmeyen müşteri kaynaklı ciro kaybını azaltan; küçük kapora alan ve otomatik hatırlatma gönderen basit randevu aracı.
+- **nereden çıktı:** Hacker News (Sinyal 1 "scheduling is a big pain point ... no one addresses it in a humane way", Sinyal 2 "wants to avoid no-shows") + Ekşi/web (Sinyal 4: randevu saatleri tutmuyor, no-show maddi kayıp). Üç ayrı kaynak, tekrar eden dert.
+- **puanlar:** pazar 5 · fizibilite 4 · rekabet boşluğu 3 · TR uyumu 5
+  - pazar 5: randevulu işletme sayısı çok, no-show sürekli ve ölçülebilir ciro kaybı, konu etrafında zaten ödenen ürünler var.
+  - fizibilite 4: randevu sayfası + WhatsApp/SMS hatırlatma AI ile kurulabilir; tek zor parça kapora tahsilatı (iyzico), o da öğrenilebilir.
+  - rekabet boşluğu 3: salonrandevu.app ve Google Play uygulamaları var; boşluk, kapora-öncelikli ve WhatsApp-yerel, mikro salona ucuz gelen sade sürüm.
+  - TR uyumu 5: WhatsApp kültürü, iyzico ile kapora, yerel esnaf kitlesi net.
+- **ilk MVP (bu hafta kurulacak en küçük sürüm):** tek işletme için randevu formu + randevudan önce otomatik WhatsApp hatırlatma + opsiyonel küçük kapora linki.
+- **risk / boşluk:** kapora tahsilatı ve müşterinin kaporaya alışması; mevcut oyunculardan ayrışma net anlatılmalı.
+- **para modeli fikri:** işletme başı aylık abonelik (ör. düşük sabit ücret); tahsilat iyzico ile.
 
-### Fikir 2 · Instagram/DM sipariş takip paneli · toplam 17/20 · sinyal orta
-- **fikir:** Instagram DM'den satış yapan butik ve küçük satıcı için siparişi kaydeden, ödendi/kargolandı durumunu tek panelde tutan araç.
-- **nereden çıktı:** Sinyal 4 (Discord, butik: "excel'e geçiriyorum, elle işaretliyorum") + Sinyal 11 (Discord, evden yemek: "keşke sipariş alan basit bir sayfam olsa"). Para dili var: "buna çözüm olsa memnuniyetle öderim".
-- **puanlar:** pazar 4 · fizibilite 4 · rekabet boşluğu 4 · TR uyumu 5
-  - pazar 4: IG'den satan geniş bir kitle, düzenli günlük dert, ödeme niyeti belirtilmiş.
-  - fizibilite 4: sipariş tablosu, form ve durum işaretleme senin rahat yapıların; IG DM otomatik çekimi zor ama MVP elle/form girişiyle çıkar.
-  - rekabet boşluğu 4: TR'de İkas/Ticimax gibi ağır e-ticaret var, boşluk "kart açmadan, tek tablo" isteyen mikro satıcıda.
-  - TR uyumu 5: IG'den satış TR'de çok yaygın, Türkçe, iyzico tahsilat oturur.
-- **ilk MVP (bu hafta kurulacak en küçük sürüm):** Satıcının siparişi elle eklediği, ödendi/hazırlanıyor/kargolandı olarak işaretlediği basit web paneli.
-- **risk / boşluk:** Gerçek değer IG DM'yi otomatik çekmekte; o entegrasyon olmadan da işe yarar ama ayrışmak için sonradan gerekebilir. Sinyal 11 tek kişi ve belirsiz, ana talep Sinyal 4'ten geliyor.
-- **para modeli fikri:** Aylık abonelik (düşük bant, 250-400 TL); sipariş hacmine göre kademe eklenebilir.
-
-### Fikir 3 · Aidat takip + hatırlatma · toplam 16/20 · sinyal orta
-- **fikir:** Apartman/site yöneticisi için kim ödedi/ödemedi takibini tutan ve ay sonu otomatik hatırlatan basit sistem.
-- **nereden çıktı:** Sinyal 5 (X, apartman yöneticisi: "defterde tutuyorum, tek tek konuşuyorum"). Para dili var: "site yönetimi için ayda makul bir ücret veririz". Sinyal "yöneticiler sık yazıyor" diyor.
+### Fikir 2 · Instagram/DM sipariş takip paneli · toplam 16/20 · sinyal orta
+- **fikir:** Instagram DM'den sipariş alan mikro butik ve el yapımı satıcı için, siparişi Excel karmaşasından çıkarıp tek tabloda durumuyla (alındı/ödendi/kargolandı) gösteren sade panel.
+- **nereden çıktı:** web/forum (Sinyal 6: "elle girilen siparişlerde hata kaçınılmaz ... müşteri kaybına neden oluyor", Excel anlık durum gösteremiyor). Birden çok kaynak.
 - **puanlar:** pazar 4 · fizibilite 4 · rekabet boşluğu 3 · TR uyumu 5
-  - pazar 4: çok sayıda apartman/site, aylık tekrar eden dert, ödeme niyeti belirtilmiş.
-  - fizibilite 4: ödeme durumu tablosu + SMS/WhatsApp hatırlatma rahat bölgende; para toplamayı (üçüncü kişinin parası) MVP dışında bırakırsan daha da kolay.
-  - rekabet boşluğu 3: Apsiyon gibi yerleşik apartman yazılımı var, boşluk onları pahalı/karışık bulan küçük sitelerde; ayrışma nokta: sadece aidat takibi, kurulumsuz, ucuz.
-  - TR uyumu 5: aidat tamamen TR-yerel dert, Türkçe, yerel operasyon.
-- **ilk MVP (bu hafta kurulacak en küçük sürüm):** Daire listesi + aylık ödeme işaretleme tablosu + ödemeyenlere otomatik hatırlatma; para toplama sonraki adım.
-- **risk / boşluk:** Aidatı sistem üzerinden toplamak başkasının parasını tutmak demek, güven ve muhasebe yükü getirir; ilk sürüm sadece takip + hatırlatma olsun, tahsilatı sonra değerlendir.
-- **para modeli fikri:** Site/bina başına aylık abonelik (daire sayısına göre kademe); tahsilat iyzico ile yöneticiden.
+  - pazar 4: çok sayıda IG mikro satıcı, düzenli dert, dolaylı ciro kaybı.
+  - fizibilite 4: elle giriş + durum panelinden MVP hızlı çıkar; IG DM otomatik entegrasyonu daha ağır, ilk sürümde şart değil.
+  - rekabet boşluğu 3: KolaySiparis var; boşluk, tam paneli ağır bulan mikro satıcıya en sade tek tablo.
+  - TR uyumu 5: IG ticareti TR'de çok yaygın, yerel kitle net.
+- **ilk MVP:** siparişi elle ekleyen + durum sütunlu + gün sonu "bekleyen/kargolanacak" listesi veren panel.
+- **risk / boşluk:** IG'den otomatik veri çekme sınırları; ilk sürüm elle giriş kalırsa değer yeterli mi test edilmeli.
+- **para modeli fikri:** aylık abonelik; başlangıçta ücretsiz küçük katman + ödenen üst katman.
 
-### Fikir 4 · Yorumlara hızlı yanıt aracı · toplam 14/20 · sinyal orta
-- **fikir:** Yerel restoran ve işletme için Google ve yemek sitesi yorumlarına AI ile Türkçe yanıt taslağı üreten, tek yerden yanıtlatan araç.
-- **nereden çıktı:** Sinyal 10 (Google Haritalar + X, restoran: "tek tek cevap yazmak vakit alıyor, çoğuna cevap veremiyorum"). Para dili yok, dert "vakit alıyor". Yerel işletmeler sık dile getiriyor.
-- **puanlar:** pazar 3 · fizibilite 3 · rekabet boşluğu 4 · TR uyumu 4
-  - pazar 3: geniş yerel işletme kitlesi var ama açık para dili yok, dert "keşke kolay olsa" seviyesinde.
-  - fizibilite 3: AI ile Türkçe yanıt taslağı üretmek senin güçlü tarafın, ama Google Business ve yemek sitesi API bağlantıları birkaç dış entegrasyon demek; MVP "yorumu yapıştır, taslak al" ile başlar.
-  - rekabet boşluğu 4: yabancı reputation araçları pahalı ve Türkçe/yerel yemek sitesine uzak; TR yerel yanıt aracı boşluğu açık.
-  - TR uyumu 4: Türkçe yorum ve yanıt, yerel işletme ihtiyacı; tahsilat çözülebilir ama para dili henüz kanıtlanmadı.
-- **ilk MVP (bu hafta kurulacak en küçük sürüm):** İşletmenin yorumu yapıştırdığı, AI'nın marka tonunda Türkçe yanıt taslağı ürettiği basit form; entegrasyon sonra.
-- **risk / boşluk:** Para dili yok, ödeme isteği teyide muhtaç; ilk 3 işletmeye ücretsiz denetip "buna öder misin" diye ölç. Otomatik yayınlama için platform API onayları gecikebilir.
-- **para modeli fikri:** Aylık abonelik ya da yanıt paketi başına kullanım; önce ödeme niyetini doğrula, sonra fiyatla.
+### Fikir 3 · Yerel işletme yorum yanıt aracı · toplam 16/20 · sinyal orta
+- **fikir:** Google/harita yorumlarına yetişemeyen yerel işletme için, gelen yorumları toplayıp markanın tonunda AI taslak yanıt öneren araç (işletme onaylayıp gönderir).
+- **nereden çıktı:** Hacker News (Sinyal 7 "Every small business who cares about their Google Maps standing responds to bad reviews", Sinyal 8 herkese açık yanıt talebi). Birden çok yorum.
+- **puanlar:** pazar 4 · fizibilite 4 · rekabet boşluğu 4 · TR uyumu 4
+  - pazar 4: harita sıralamasını önemseyen çok yerel işletme, yorum yanıtı sürekli iş.
+  - fizibilite 4: yorumları çekmek + Türkçe AI taslak; Google Business bağlantısı tek zor parça.
+  - rekabet boşluğu 4: TR'de ucuz, Türkçe tonlu AI yanıt aracı az; net boşluk.
+  - TR uyumu 4: evrensel dert, Türkçe yanıt tonlaması yerel avantaj, tahsilat çözülebilir.
+- **ilk MVP:** işletmenin son yorumlarını listeleyip her birine Türkçe taslak yanıt üreten sayfa.
+- **risk / boşluk:** Google yorum verisine erişim kuralları; taslakların gerçekten işletme sesini tutması.
+- **para modeli fikri:** aylık abonelik, yorum hacmine göre katman.
 
-### Fikir 5 · Diyetisyen/koç danışan takip paneli · toplam 14/20 · sinyal orta (profil sınırına yakın)
-- **fikir:** Diyetisyen ve benzeri danışanlı meslek için danışanın randevu, ölçüm ve ödeme kaydını tek panelde tutan takip aracı.
-- **nereden çıktı:** Sinyal 8 (X, diyetisyen: "not defterinde tutuyorum, karışıyor"). İki diyetisyen benzer yazmış. Para dili var: "pratik bir program olsa öderim".
+### Fikir 4 · Apartman/site aidat takip + hatırlatma · toplam 15/20 · sinyal orta
+- **fikir:** apartman/site yöneticisi için, kim ödedi kim ödemedi karmaşasını Excel'den çıkarıp otomatik borç takibi ve hatırlatma yapan sade araç.
+- **nereden çıktı:** web/forum (Sinyal 5: "kim aidatını ödemedi?" sürekli soruluyor, ödeme/duyuru/borç ayrı yerlerde karışıyor). Forum + bloglar.
+- **puanlar:** pazar 4 · fizibilite 4 · rekabet boşluğu 2 · TR uyumu 5
+  - pazar 4: çok bina var ama yöneticiler çoğu gönüllü, ödeme isteği düşük olabilir.
+  - fizibilite 4: tablo + hatırlatma + ödeme takibi kurulabilir.
+  - rekabet boşluğu 2: pazar kalabalık, Komşum ÜCRETSİZ, AidatYönet/aidatpro/netyonetim yerleşik; ayrışma zor.
+  - TR uyumu 5: tamamen TR'ye özel bir dert.
+- **ilk MVP:** daire listesi + aylık ödeme işaretleme + ödemeyene otomatik hatırlatma.
+- **risk / boşluk:** ücretsiz güçlü rakip fiyat baskısı; ayrışma net değilse girme.
+- **para modeli fikri:** bina başı düşük aylık; ücretsiz rakip yüzünden fiyatlama hassas.
+
+### Fikir 5 · Mikro e-ticaret çok kanallı iade tek panel · toplam 14/20 · sinyal orta
+- **fikir:** birden çok kanaldan (pazar yeri, IG, mail) iade talebi gelen mikro satıcı için, iadeleri tek panelde durumuyla toplayan araç.
+- **nereden çıktı:** Hacker News (Sinyal 9: "Only if things like returns are automated can you actually scale"). Birden çok yorum.
 - **puanlar:** pazar 4 · fizibilite 3 · rekabet boşluğu 3 · TR uyumu 4
-  - pazar 4: çok sayıda diyetisyen/koç, düzenli dert, ödeme niyeti belirtilmiş.
-  - fizibilite 3: panel ve randevu senin rahat bölgende, ama danışan ölçümü kişisel/sağlık verisidir ve KVKK uyumu ister; bu, puanı düşürür.
-  - rekabet boşluğu 3: diyetisyen yazılımları (yerli ve yabancı) mevcut, boşluk sade ve ucuz TR aracında; kopya değil, sadeleştirilmiş açı.
-  - TR uyumu 4: TR diyetisyen kitlesi, Türkçe, iyzico tahsilat uygun.
-- **ilk MVP (bu hafta kurulacak en küçük sürüm):** Danışan listesi + randevu + ödeme durumu tutan basit panel; ölçüm alanı en aza indirilmiş.
-- **risk / boşluk:** RİSKLİ ALAN. Danışan ölçümü sağlık verisine yakın, profilindeki "tıbbi veri işine girmem" sınırına değiyor; KVKK uyumu ve veri güvenliği gerekir. Bu yüzden para dili olmasına rağmen ilk beşin en altına kondu. Bu alana girmeden önce uyum yükünü değerlendir ya da ölçüm kısmını dışarıda bırak.
-- **para modeli fikri:** Danışman başına aylık abonelik; veri sorumluluğunu netleştirmeden ölçeklemeye girme.
+  - pazar 4: çok satıcı, iade maliyetli ve sürekli.
+  - fizibilite 3: çok kanal entegrasyonu ağır parça; ilk sürüm elle giriş olabilir.
+  - rekabet boşluğu 3: büyük platform modülleri var, mikro satıcıya ağır; boşluk sade tek tablo.
+  - TR uyumu 4: TR pazar yerleri, ama entegrasyon sürtünmesi var.
+- **ilk MVP:** iade taleplerini elle/tek formla toplayıp durum takibi yapan panel.
+- **risk / boşluk:** çok kanal entegrasyonu olmadan değer sınırlı; hangi kanaldan başlanacağı netleşmeli.
+- **para modeli fikri:** aylık abonelik; iade hacmine göre katman.
 
 ## D) Bu hafta buradan başla
-Seçim: **Fikir 1 · Randevu no-show + kapora sistemi.** Neden bu: 18/20 ile en yüksek puanlı ve tek "güçlü" sinyalli fikir; iki ayrı kaynakta tekrar ediyor, açık aylık ödeme dili var ("300 TL veririm"), üstelik senin en iyi bildiğin alan (randevu alan işletmeler) ve elindeki dağıtım kanalıyla örtüşüyor. İlk adım: bir esnafın randevuları girdiği panel + randevudan önce otomatik SMS/WhatsApp hatırlatma; kapora akışını ikinci sürüme bırak. İlk 3 potansiyel müşteriyi 150 kişilik yerel esnaf WhatsApp grubundaki kuaför ve güzellik merkezlerinden bul, birine ücretsiz kurup gerçek no-show verisiyle test et.
+**Fikir 1 · Kaporalı randevu + no-show hatırlatma.** Neden bu: en güçlü ve en çok tekrar eden sinyal (üç ayrı kaynak), en net TR uyumu, kaybedilen ciro ölçülebilir olduğu için değer anlatımı kolay. İlk adım: tek bir kuaför/berber için randevu formu + randevudan 3 saat önce otomatik WhatsApp hatırlatma kur, kaporayı ikinci sürüme bırak. İlk 3 müşteriyi kendi çevrendeki randevulu esnaftan (mahalle kuaförü, tanıdık güzellik salonu) bul, bir hafta bedava kullandır, no-show sayısındaki düşüşü ölç.
 
 ## E) Elenenler / bekleyenler
-- **TR kripto vergi hesaplama (13):** para dili ve boşluk güçlü ama vergi/mali alan senin "girmem" dediğin, hatası pahalı sınırında; fizibilite 1, ele.
-- **Çok kanaldan iade toplama (13):** dert gerçek ama WhatsApp + mail + IG DM birleştirmek birden çok zor entegrasyon, para dili yok; fizibilite düşük, teyit gelene kadar beklet.
-- **Serbest çalışan teklif takibi (12):** tek kişi tek kaynak (zayıf sinyal), para dili yok, teklif/CRM araçları doymuş; önce teyit et.
-- **Tüketici kargo takibi (8):** işletme değil tüketici derdi, para dili yok, TR'de tüketici buna ödemez; senin B2B hedefinin dışında, ele.
+- Randevu sistemlerine "entegrasyon" isteği (Sinyal 3): tek yorum, zayıf; kendi başına ürün değil, Fikir 1'in özelliği olarak beklet.
+- HN "someone should build a blind-interview job site": profil dışı (SMB aracı değil), elendi.
+- HN "OSS için Kickstarter alternatifi": profil dışı, elendi.
+- HN "iyi görünen bir todo uygulaması": jenerik, niş ve para sinyali yok, elendi.
 
 ---
 karar senin; bu rapor sıralı bir pusula, kesin emir değil.

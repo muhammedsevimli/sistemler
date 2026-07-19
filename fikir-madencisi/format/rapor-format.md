@@ -10,7 +10,7 @@ D) Bu hafta buradan başla (tek seçim + gerekçe).
 E) Elenenler / bekleyenler (tek satır her biri).
 
 ## A) Tarama özeti
-Tek paragraf: kaç kaynaktan kaç sinyal geldi, bunlar kaç ayrı fikre indi, en güçlü dert hangisi. Örnek: "5 kaynaktan 14 talep sinyali, 9 ayrı fikre indi. En çok tekrar eden dert: <...>. Para dili en net görülen: <...>."
+Tek paragraf: hangi kaynaklardan (Hacker News, Reddit, web/forum) otomatik kaç sinyal çekildi, erişilemeyen kaynak var mı, bunlar kaç ayrı fikre indi, en güçlü dert hangisi. Örnek: "Hacker News'ten 6, web/forumdan 3 sinyal otomatik çekildi (Reddit bu ortamda erişilemedi). 9 sinyal 5 ayrı fikre indi. En çok tekrar eden dert: <...>. Para dili en net görülen: <...>."
 
 ## B) Puan tablosu (tüm fikirler)
 | # | Fikir (tek cümle) | Pazar | Fizibilite | Rekabet boşluğu | TR uyumu | Toplam | Sinyal |
@@ -40,7 +40,7 @@ En üstteki fikri (ya da en yüksek puanlı + sen kurabilecekken) tek seçimle i
 Puanlanan ama ilk 5'e girmeyen fikirler, her biri tek satır: fikir + neden bekliyor (zayıf sinyal / düşük fizibilite / doymuş pazar / senin sınırın).
 
 ## Kesin kurallar
-- Fikir uydurma; sadece yapıştırılmış sinyale dayan.
+- Sinyal ve fikir uydurma; sadece toplanan sinyale dayan.
 - Her puanın altında gerekçe var. Gerekçesiz puan yazma.
 - Kopya önerme; rekabet satırında ayrışma noktasını yaz.
 - Riskli alanı (lisans/regülasyon) işaretle, fizibiliteyi düşür.

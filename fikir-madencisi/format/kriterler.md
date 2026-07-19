@@ -54,6 +54,7 @@ Puan kadar önemli: fikri kaç bağımsız sinyal destekliyor.
 - **Zayıf:** tek kişi, tek yer. Rapora "zayıf sinyal, önce teyit et" notuyla girer, yüksek puan alsa bile başa konmaz.
 
 ## Dürüst sınır (bunu bilerek yazıyorum)
-- Bu sistem senin yerine internete girip tarama yapmaz. Sinyali sen açıp yapıştırırsın; sistem yapıştırdığını okur, fikre çevirir, puanlar. "Otomatik canlı tarama" yok; okuma, fikirleştirme, puanlama, sıralama otomatiktir.
-- Sistem talep UYDURMAZ. Elinde sinyal yoksa puanlayacak fikir de yoktur; "önce sinyal topla" der.
+- Bu sistem talebi KENDİSİ tarar (Claude Code'un web araçlarıyla). Sen yapıştırmıyorsun; ilgilendiğin alanı verirsin, sistem Hacker News + web/forum (tam otomatik) ve Reddit (tasarımda otomatik, public JSON) kaynaklarını tarayıp gerçek talep cümlelerini toplar. X login istediği için otomatik taranmaz, onun için tek tık arama linki üretilir (yarı otomatik). Toplama, fikirleştirme, puanlama, sıralama otomatiktir.
+- Sistem sinyal UYDURMAZ. Bir kaynağa erişemezse "erişilemedi" der, cümle yazmaz. Elinde sinyal yoksa puanlayacak fikir de yoktur; "önce tara" der.
+- Tarama kapsamı sonsuz değildir. Verdiğin arama sorguları kadar geniştir; iyi sorgu = isabetli tarama.
 - Puanlar bir pusuladır, kesin gerçek değil. Sinyal ne kadar bol ve para dili ne kadar netse puan o kadar güvenilir. Karar (ne kuracağın) hep sende kalır.

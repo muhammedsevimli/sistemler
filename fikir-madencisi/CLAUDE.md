@@ -1,48 +1,63 @@
-# Fikir Madencisi · SaaS Fikir Puanlayıcı · Otomatik Okuma Kuralı
+# Fikir Madencisi · SaaS Fikir Madeni · Otomatik Okuma Kuralı
 
 > Bu dosya, bu klasörde açtığın her Claude Code oturumunun BAŞINDA otomatik okunur.
 > Sen hiçbir şey ayarlamıyorsun. Claude Code bu klasörde çalışırken bu dosyayı kendiliğinden yükler.
-> Amaç: "ne kurayım" sorusunu her seferinde sıfırdan düşünmemek. İnsanların açıkça şikayet ettiği, para ödeyeceği boşlukları bir kere toplarsın, sistem dört kritere göre puanlar ve "bu hafta kurabileceğin en iyi 5 SaaS fikri" raporunu döndürür.
+> Amaç: "ne kurayım" sorusunu her seferinde sıfırdan düşünmemek. Sen sadece ilgilendiğin alanı yazarsın; sistem talebi kendisi tarar, para dili geçen gerçek dertleri toplar, dört kritere puanlar ve "bu hafta kurabileceğin en iyi 5 SaaS fikri" raporunu döndürür.
 
 ## Bu sistemin duruşu (değişmez)
-Bu sistem fikir BULMAYI sana devreder, fikir SEÇMEYİ sana bırakır. Yani sinyalleri okur, puanlar, sıralar; ama "bunu kur" emri vermez. Ne kuracağına sen karar verirsin. Sistem sana temiz, sıralı, gerekçeli bir kuyruk verir; karar senin.
+Bu sistem fikir BULMAYI sana devreder, fikir SEÇMEYİ sana bırakır. Yani talebi kendisi tarar, sinyalleri toplar, puanlar, sıralar; ama "bunu kur" emri vermez. Ne kuracağına sen karar verirsin. Sistem sana temiz, sıralı, gerekçeli bir kuyruk verir; karar senin.
 
 ## Sistem ne yapıyor (iki faz)
-1. **Kaynak listesi (otomatik):** `sen/02-kaynaklar.md` içindeki kaynaklardan (X şikayet aramaları, forum başlıkları, pazar yeri yorumları, "şunu arıyorum" postları) her biri için nereye bakacağını tek tek yazar. Sen o yerlere bakar, gerçekten gördüğün talep sinyallerini `sinyaller/` klasörüne yapıştırırsın.
-2. **Puanlama + rapor (otomatik):** `sinyaller/` klasörüne yapıştırdığın ham talep sinyallerini tek tek okur, her birini bir SaaS fikrine çevirir, dört kritere göre 1-5 puanlar, `sen/01-profil.md` üzerinden sana uygunluğunu süzer ve en yüksek toplam puanlı 5 fikri gerekçeleriyle raporlar.
+1. **Otomatik tarama (sen yapıştırmıyorsun):** `sen/01-profil.md`'deki ilgilendiğin alanı ve `sen/02-kaynaklar.md`'deki arama sorgularını okur. Claude Code'un WEB ARAÇLARIYLA (WebFetch + WebSearch) kaynakları kendisi tarar, insanların "keşke şu olsa / buna çözüm arıyorum / bunun için öderim / elle yapıyorum bıktım" gibi talep ve para dili geçen GERÇEK cümlelerini kendisi çeker, her sinyalin kaynağını ve linkini yazarak `sinyaller/toplanan-YYYY-AA-GG.md` dosyasına kaydeder. Sen bu adımda hiçbir şey yapıştırmıyorsun.
+2. **Puanlama + rapor (otomatik):** `sinyaller/` klasöründeki toplanmış talep sinyallerini tek tek okur, her birini bir SaaS fikrine çevirir, dört kritere göre 1-5 puanlar, `sen/01-profil.md` üzerinden sana uygunluğunu süzer ve en yüksek toplam puanlı 5 fikri gerekçeleriyle raporlar.
 
-> DÜRÜST SINIR: Bu sistem canlı internete girip senin yerine tarama YAPMAZ. Talep sinyalini görme adımı senin yaptığın tek tıklık bir "aç ve yapıştır" işidir (X araması aç, forum başlığı aç, yorumları kopyala). Sistemin işi: yapıştırdığın ham sinyalleri okunur fikirlere çevirmek, dört kritere göre puanlamak, sıralamak ve gerekçelendirmek. Fikir uydurmaz; sadece elindeki sinyalden çıkanı puanlar. Detay: `format/kriterler.md` en alt.
+## Hangi kaynak nasıl taranıyor (dürüst tablo)
+Sistem şu kaynakları KENDİSİ tarar. Her kaynağın otomasyon derecesi farklı; abartma yok.
 
-## FAZ 1 · Kaynak listesi istendiğinde
-`sen/02-kaynaklar.md` dosyasını oku. Her kaynak için nereye bakacağını tek tek yaz:
-- X araması için hazır arama linki üret. Şablon:
+| Kaynak | Nasıl | Otomasyon |
+|---|---|---|
+| Hacker News (yorumlar) | `WebFetch` ile `hn.algolia.com` public JSON | **Tam otomatik** (auth yok) |
+| Genel web + forumlar (Ekşi, sektör forumları, "X arıyorum" aramaları, pazar yeri/uygulama yorumları) | `WebSearch` | **Tam otomatik** |
+| Reddit (post + yorum) | `WebFetch` ile `reddit.com/search.json` public JSON | **Tasarımda otomatik** (public, auth yok). Bazı ortamlarda WebFetch reddit.com'a erişemeyebilir; erişemezse `WebSearch site:reddit.com <sorgu>` ile dolaylı tara ve bunu rapora yaz. |
+| X (Twitter) | login ister, WebFetch güvenilir değil | **Yarı otomatik.** Sistem otomatik çekmez; `sen/02-kaynaklar.md`'deki X aramaları için tek tık arama linki üretir, istersen elle bakarsın. Ana tarama X'siz yürür. |
 
-```text
-https://x.com/search?q=<ARAMA>&f=live
-```
+> Kural: sistem yalnızca GERÇEKTEN çektiği cümleyi sinyal olarak yazar, her birine kaynak + link koyar. Bir kaynağa erişemezse ("bu ortamda reddit.com kapalı" gibi) bunu açıkça yazar, cümle UYDURMAZ.
 
-- `<ARAMA>` yerine dosyadaki arama kalıbını koy (boşlukları %20 yap). Örnek talep kalıpları: `"keşke bir uygulama olsa"`, `"böyle bir araç var mı"`, `"buna çözüm arıyorum"`, `"nefret ediyorum" excel`, sektör + `"manuel yapıyorum"`.
-- Forum / pazar yeri / yorum kaynakları için sadece nereye bakacağını ve neyi arayacağını tek satırla söyle (örn. "Ekşi Sözlük'te <başlık>, Trendyol'da <ürün> düşük yıldızlı yorumlar, ilgili Discord/Telegram kanalı").
-- Linkleri ve yönleri verdikten sonra kullanıcıya tek satırla söyle: "bu yerlere bak, gördüğün gerçek talep/şikayet cümlelerini `sinyaller/<kaynak>.md` içine yapıştır, sonra puanla komutunu çalıştır."
+## FAZ 1 · Otomatik tarama istendiğinde
+`sen/01-profil.md` (ilgilendiğin alan) ve `sen/02-kaynaklar.md` (arama sorguları + talep dili kalıpları) dosyalarını oku. Sonra sırayla:
+
+1. **Hacker News:** her arama sorgusu için
+   `http://hn.algolia.com/api/v1/search?query=<SORGU>&tags=comment&hitsPerPage=30`
+   adresini `WebFetch` ile çek (boşlukları `+` yap). Dönen JSON'daki `comment_text` içinden talep/para dili geçen cümleleri AYNEN al, `story_title` ile birlikte kaydet.
+2. **Reddit:** her sorgu için
+   `https://www.reddit.com/search.json?q=<SORGU>&sort=relevance&limit=25`
+   ya da hedef subreddit için
+   `https://www.reddit.com/r/<sub>/search.json?q=<SORGU>&restrict_sr=1&sort=relevance&limit=25`
+   adresini `WebFetch` ile çek. Talep/para dili geçen post ve yorumları AYNEN al. WebFetch reddit.com'a erişemezse `WebSearch site:reddit.com <SORGU>` çalıştır, snippet'lerdeki gerçek cümleleri al.
+3. **Web + forum:** her sorgu için `WebSearch` çalıştır (Ekşi Sözlük, sektör forumları, pazar yeri/uygulama yorumları, "X arıyorum" aramaları). Snippet'lerde geçen gerçek dert/talep cümlelerini ve varsa mevcut çözüm/rakip isimlerini al (rakip = rekabet boşluğu puanı için değerli).
+4. **X (yarı otomatik):** `sen/02-kaynaklar.md`'deki her X araması için `https://x.com/search?q=<ARAMA>&f=live` linkini üret (boşluk `%20`, Türkçe karakter URL-kodlu). Bunları otomatik çekmez; "istersen elle bak" diye rapora ekler.
+
+Topladığın her sinyali `sinyaller/toplanan-YYYY-AA-GG.md` dosyasına şu formatta yaz: kaynak · link · kim söylüyor (biliniyorsa) · dert cümlesi (aynen, kısaltılmış) · para dili (var/yok/dolaylı kayıp) · kaç kaynakta tekrar ediyor. Sonda tek satır özet: hangi kaynaktan kaç sinyal çekildi, hangileri erişilemedi.
 
 ## FAZ 2 · Puanlama + 5 fikir raporu istendiğinde şu dosyaları SIRAYLA oku (zorunlu)
 1. `sen/01-profil.md` · kimsin, hangi alanları biliyorsun, ne kurabilirsin, sınırların ne.
-2. `sen/02-kaynaklar.md` · hangi kaynakları tarıyorsun.
+2. `sen/02-kaynaklar.md` · hangi sorgularla tarandı.
 3. `format/kriterler.md` · dört kriter ve 1-5 puanlama cetveli.
 4. `format/rapor-format.md` · 5 fikir raporunu hangi yapıda yazacağın.
-5. `sinyaller/` klasöründeki tüm dosyalar · puanlanacak ham talep sinyalleri.
+5. `sinyaller/` klasöründeki tüm dosyalar · puanlanacak toplanmış talep sinyalleri.
 
-Bu dosyaları okumadan üretme. İşe başlarken önce "profil + kaynaklar + kriterler + format + ham sinyaller okundu" de.
+Bu dosyaları okumadan üretme. İşe başlarken önce "profil + kaynaklar + kriterler + format + toplanan sinyaller okundu" de.
 
 ## Puanlama adımları (sistem içeride şunları yapar)
-1. **Sinyalden fikre:** `sinyaller/` içindeki her ham sinyali oku. Sinyalin altında yatan gerçek derdi çıkar ve tek cümlelik bir SaaS fikrine çevir ("kim için, hangi derdi çözen ne"). Aynı derdi anlatan birden çok sinyali TEK fikirde birleştir (tekrar eden dert = güçlü sinyal).
-2. **Sinyal gücü oku:** bir fikri kaç bağımsız sinyal destekliyor. Tek kişinin bir kez söylediği = zayıf sinyal (teyit et de). Farklı kişilerin farklı yerlerde tekrar ettiği = güçlü sinyal. Para dili geçen sinyal ("bunun için öderdim", "şu kadar veriyorum") en güçlüsü.
-3. **Dört kritere puanla:** her fikri `format/kriterler.md` cetveline göre 1-5 puanla: (1) pazar boyutu, (2) fizibilite / kurulabilirlik, (3) rekabet boşluğu, (4) Türkiye pazarı uyumu. Her puanın yanına tek satır gerekçe yaz. Toplamı 20 üzerinden hesapla.
+1. **Sinyalden fikre:** `sinyaller/` içindeki her sinyali oku. Sinyalin altında yatan gerçek derdi çıkar ve tek cümlelik bir SaaS fikrine çevir ("kim için, hangi derdi çözen ne"). Aynı derdi anlatan birden çok sinyali TEK fikirde birleştir (tekrar eden dert = güçlü sinyal).
+2. **Sinyal gücü oku:** bir fikri kaç bağımsız sinyal/kaynak destekliyor. Tek kaynakta bir kez = zayıf. Farklı kişilerin farklı kaynaklarda tekrar ettiği = güçlü. Açık para dili ("bunun için öderdim", "şu kadar veriyorum") en güçlüsü; dolaylı para (kaybedilen ciro, kaçan müşteri) da sayılır ama açık para kadar değil.
+3. **Dört kritere puanla:** her fikri `format/kriterler.md` cetveline göre 1-5 puanla: (1) pazar boyutu, (2) fizibilite / kurulabilirlik, (3) rekabet boşluğu, (4) Türkiye pazarı uyumu. Her puanın yanına tek satır gerekçe yaz. Toplamı 20 üzerinden hesapla. Taramada bir rakip/mevcut çözüm çıktıysa rekabet boşluğu satırında adını yaz.
 4. **Profilden süz:** `sen/01-profil.md`'yi oku. Kullanıcının bilmediği alandaki ya da sınır koyduğu (yapmam dediği) fikirleri ya ele, ya da "bu senin alanının dışında, ortak arar mısın" notuyla en alta düşür. Fizibilite puanı kullanıcının kendi kurabilme gücüne göre okunur.
 5. **Sırala ve ilk 5'i ver:** toplam puana göre sırala, en yüksek 5 fikri `format/rapor-format.md` yapısında yaz. En üstteki fikre "bu hafta buradan başla" işareti koy.
 
 ## Değişmez üretim kuralları
-- **Fikir UYDURMA.** Sadece `sinyaller/` içinde gerçekten yapıştırılmış talebe dayanan fikirleri puanla. Hiçbir sinyal yoksa "elimde sinyal yok, önce FAZ 1'deki yerlere bakıp sinyal yapıştır" de, boş rapor uydurma.
+- **Fikir UYDURMA.** Sadece `sinyaller/` içinde gerçekten TOPLANMIŞ talebe dayanan fikirleri puanla. Hiçbir sinyal yoksa "elimde sinyal yok, önce FAZ 1 taramasını çalıştır" de, boş rapor uydurma.
+- **Sinyal UYDURMA.** Bir kaynaktan gerçekten cümle çekemediysen o sinyali yazma. Erişilemeyen kaynağı "erişilemedi" diye işaretle. Her sinyalde kaynak + link zorunlu.
 - **Puanı ŞİŞİRME.** Sinyal zayıfsa pazar boyutu puanı düşüktür. Her puanın altında tek satır gerekçe zorunlu; gerekçesiz puan yazma.
 - **"Kopyala" DEME.** Bir fikir mevcut bir ürüne benziyorsa, o ürünün kopyasını önerme; rekabet boşluğu kriterinde "mevcut çözüm şu, boşluk şurada" diye AYRIŞMA noktasını yaz. Çıktı hep "senin kurabileceğin farklı açı"dır, "şunun aynısı" değil.
 - **Riskli alanı işaretle.** Bankacılık, sağlık, hukuk, kişisel veri gibi lisans/regülasyon gerektiren fikirlerde fizibilite puanını düşür ve "bu alan izin/uyum ister" notu koy. Sessizce yüksek puan verme.
@@ -51,7 +66,7 @@ Bu dosyaları okumadan üretme. İşe başlarken önce "profil + kaynaklar + kri
 
 ## Çıktı nereye yazılır
 Her puanlamayı `ciktilar/` klasörüne tek dosya olarak yaz: `ciktilar/YYYY-AA-GG-fikir-raporu.md`.
-Dosya içinde: (a) taranan sinyal özeti (kaç sinyal, kaç ayrı fikre indi), (b) tam puan tablosu (tüm fikirler, dört kriter + toplam), (c) en iyi 5 fikir detay kartı, (d) "bu hafta buradan başla" seçimi ve gerekçesi, (e) elenenler / bekleyenler tek satır.
+Dosya içinde: (a) taranan sinyal özeti (hangi kaynaktan kaç sinyal, kaç ayrı fikre indi), (b) tam puan tablosu (tüm fikirler, dört kriter + toplam), (c) en iyi 5 fikir detay kartı, (d) "bu hafta buradan başla" seçimi ve gerekçesi, (e) elenenler / bekleyenler tek satır.
 
 ## Kaynak listesi büyür, karar defteri birikir (kalıcı hafıza)
-Yeni bir iyi kaynak (talep sinyalinin bol olduğu bir yer) fark edince `sen/02-kaynaklar.md`'ye ekle. Bir fikri gerçekten kurmaya karar verdiğinde ya da denk gelip vazgeçtiğinde, `sen/02-kaynaklar.md` en altındaki "karar defteri" bölümüne tarih atarak yaz (hangi fikir, karar ne, neden). Sistem her hafta aynı kaynaklardan tekrar çalışır; kaynak listesi ve karar defteri senin pazar sezginin kalıcı hafızası olur, sonraki raporlar oradan da beslenir.
+Yeni bir iyi arama sorgusu ya da kaynak fark edince `sen/02-kaynaklar.md`'ye ekle. Bir fikri gerçekten kurmaya karar verdiğinde ya da denk gelip vazgeçtiğinde, `sen/02-kaynaklar.md` en altındaki "karar defteri" bölümüne tarih atarak yaz (hangi fikir, karar ne, neden). Sistem her hafta aynı sorgulardan tekrar tarar; sorgu listesi ve karar defteri senin pazar sezginin kalıcı hafızası olur, sonraki raporlar oradan da beslenir.

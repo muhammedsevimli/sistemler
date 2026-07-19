@@ -1,10 +1,17 @@
-# 01 · Profil (kim, ne kurabilirsin, sınırların)
+# 01 · Profil (ilgilendiğin alan, ne kurabilirsin, sınırların)
 
-> Bu dosya "fikri sana göre süzmek" içindir. Sistem her fikri buradaki alanlara ve sınırlara göre okur.
+> Sistemin senden istediği TEK şey bu dosya. İlgilendiğin alanı yazarsın, sistem talebi kendisi tarar.
+> Bu dosya ayrıca "fikri sana göre süzmek" içindir: sistem her fikri buradaki alanlara ve sınırlara göre okur.
 > Aşağıdaki örnek doldurulmuş haldedir (kurgusal bir operatör). Kendine göre değiştir.
 
+## İlgilendiğin alan / niş (taramanın başladığı yer)
+Sistem bu alanda talep tarar. Net yaz; bir ya da birkaç alan olabilir.
+- <ör. yerel randevulu işletmeler: kuaför, berber, güzellik salonu, klinik>
+- <ör. instagram'dan satış yapan küçük butik ve el yapımı ürün satıcıları>
+- <ör. küçük e-ticaret operasyonu: sipariş, iade, kargo>
+
 ## Kim / ne yapıyorsun
-Tek cümleyle: <ör. küçük işletmelere dijital işlerini kolaylaştıran araçlar kuran, kod yazmayan bir operatörüm.>
+Tek cümleyle: <ör. küçük işletmelere dijital işlerini kolaylaştıran araçlar kuran, AI ile geliştiren bir operatörüm.>
 
 ## Hangi alanları biliyorsun (fikir isabeti buradan gelir)
 Gerçekten içinde olduğun, jargonunu bildiğin, dertlerini yaşadığın alanlar. Sistem bu alanlardaki fikre daha yüksek "sana uygunluk" verir.
