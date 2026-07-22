@@ -17,6 +17,7 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | Müşteri Bulucu · Aday Bulma + İlk Mesaj | Nişini yaz, sistem Meta Reklam Kütüphanesi linklerini üretsin. O nişte reklam veren markaları yapıştır, sistem bütçe sinyaline ve reklamın zayıf noktasına göre adayları sıralasın ve her birine reklamından çıkardığı somut detayla özel bir ilk mesaj yazsın. | [musteri-bulucu/](musteri-bulucu/) |
 | Trend Radarı · Nişinde Patlayan İçerik Açıları | Nişini yaz, sistem o nişin Reddit topluluklarında son bir haftada en çok yükselen başlıkları herkese açık RSS'ten kendisi çeksin. Tekrar eden hook kalıplarını çıkarıp sıcaktan soğuğa sıralasın ve markanın sesiyle "bu hafta üret" brief'i yazsın (frekans + feed sırasıyla, oy sayısı uydurmadan). | [trend-radari/](trend-radari/) |
 | Google Ads Denetçisi · Boşa Giden Reklam Parası | Google Ads raporunu bir kere dışa aktar, sistem hangi aramaların para yiyip işine dönüşmediğini kendi verinden bulsun. Boşa giden toplam tutarı satır satır hesaplasın, eksik negatif kelimeleri çıkarsın, bütçeyi yanlış dağıtan kampanyayı işaretlesin ve "bu hafta düzelt" listesi versin (sadece veriden, uydurma çarpan yok). | [google-ads-denetci/](google-ads-denetci/) |
+| Fikir Madencisi · SaaS Fikir Puanlayıcı | İlgilendiğin alanı yaz, sistem Hacker News'i, web ve forumları kendisi tarasın; "keşke şu olsa", "buna öderim" diyen gerçek talebi fikre çevirsin, dört kritere göre (pazar, kurulabilirlik, rekabet boşluğu, Türkiye uyumu) puanlayıp bu hafta kurabileceğin en iyi 5 fikri gerekçesiyle sıralasın. | [fikir-madencisi/](fikir-madencisi/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 
@@ -26,6 +27,22 @@ Her sistemi tek başına çekebilirsin. Örneğin Marka Hafızası için:
 
 ```bash
 npx degit muhammedsevimli/sistemler/marka-hafizasi marka-hafizasi
+```
+
+Diğer sistemler için de kalıp aynı; istediğinin satırını kopyala:
+
+```bash
+npx degit muhammedsevimli/sistemler/satis-crm satis-crm
+npx degit muhammedsevimli/sistemler/rakip-takip rakip-takip
+npx degit muhammedsevimli/sistemler/ikinci-beyin ikinci-beyin
+npx degit muhammedsevimli/sistemler/carousel-uretici carousel-uretici
+npx degit muhammedsevimli/sistemler/ad-spy ad-spy
+npx degit muhammedsevimli/sistemler/review-madenci review-madenci
+npx degit muhammedsevimli/sistemler/konsept-fabrikasi konsept-fabrikasi
+npx degit muhammedsevimli/sistemler/musteri-bulucu musteri-bulucu
+npx degit muhammedsevimli/sistemler/trend-radari trend-radari
+npx degit muhammedsevimli/sistemler/google-ads-denetci google-ads-denetci
+npx degit muhammedsevimli/sistemler/fikir-madencisi fikir-madencisi
 ```
 
 Ya da tüm repoyu klonla, veya yeşil **Code → Download ZIP** ile indirip istediğin klasörü kullan.
