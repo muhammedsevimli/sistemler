@@ -12,8 +12,8 @@ ilgilendiğim alanın talebini tara.
 kurallar:
 - sen/01-profil.md'deki alanı ve sen/02-kaynaklar.md'deki arama sorgularını oku.
 - web araçlarınla (WebFetch + WebSearch) kaynakları kendin tara:
-  - hacker news için hn.algolia.com public json'unu WebFetch ile çek.
-  - reddit için reddit.com/search.json public json'unu WebFetch ile çek. erişemezsen WebSearch site:reddit.com ile dolaylı tara.
+  - hacker news için https://hn.algolia.com public json'unu WebFetch ile çek (adres https olacak, http 301 döner).
+  - reddit için reddit.com/search.rss public rss akışını Bash curl ile çek, açıklayıcı user-agent ver, çıktıyı sinyaller klasörüne xml olarak yaz. reddit'in search.json ucu 403 veriyor, search.rss ucu 200 veriyor; json'u deneme. 403/429 alırsan bir kez daha dene, yine olmazsa WebSearch site:reddit.com ile dolaylı tara ve bunu rapora yaz.
   - genel web ve forumlar (ekşi, sektör forumları, pazar yeri/uygulama yorumları) için WebSearch çalıştır.
 - insanların "keşke şu olsa", "buna çözüm arıyorum", "bunun için öderdim", "elle yapıyorum bıktım" dediği gerçek cümleleri aynen çek. her sinyale kaynak + link koy.
 - taramada gördüğün mevcut çözüm / rakip isimlerini de not et.

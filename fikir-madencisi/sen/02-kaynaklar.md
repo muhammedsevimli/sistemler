@@ -14,7 +14,7 @@ Hangi kaynakta olursa olsun sistemin aradığı cümle tipleri:
 - "Türkçe olanı yok", "TR'de çalışmıyor"
 
 ## Hacker News sorguları (tam otomatik · hn.algolia.com)
-Sistem her sorgu için `hn.algolia.com/api/v1/search?query=<SORGU>&tags=comment` çeker. Kendi alan kelimelerini ekle.
+Sistem her sorgu için `https://hn.algolia.com/api/v1/search?query=<SORGU>&tags=comment` çeker (adres `https` olmalı, `http` 301 döner). Kendi alan kelimelerini ekle.
 - `appointment scheduling small business`
 - `no-show appointments deposit`
 - `respond to reviews small business`
@@ -22,8 +22,8 @@ Sistem her sorgu için `hn.algolia.com/api/v1/search?query=<SORGU>&tags=comment`
 - `someone should build` (genel talep avı)
 - `I would pay for` (para dili avı)
 
-## Reddit sorguları (tasarımda otomatik · reddit.com/search.json)
-Sistem her sorgu için `reddit.com/search.json?q=<SORGU>` (ya da hedef subreddit'te `r/<sub>/search.json`) çeker. Erişilemezse `site:reddit.com <SORGU>` ile WebSearch'e düşer.
+## Reddit sorguları (tam otomatik · reddit.com/search.rss)
+Sistem her sorgu için `reddit.com/search.rss?q=<SORGU>` (ya da hedef subreddit'te `r/<sub>/search.rss`) akışını `curl` ile çeker. Reddit'in `search.json` ucu anahtarsız isteklere `403` verdiği için RSS kullanılır. `403`/`429` gelirse tekrar dener, yine olmazsa `site:reddit.com <SORGU>` ile WebSearch'e düşer ve bunu rapora yazar.
 - `r/smallbusiness` · `no show appointments`, `booking software frustration`
 - `r/ecommerce` · `returns manual spreadsheet`
 - genel · `"I wish there was an app" small business`

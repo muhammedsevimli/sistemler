@@ -1,25 +1,25 @@
-# Fikir Madencisi · SaaS Fikir Madeni · Otomatik Okuma Kuralı
+# Fikir Madencisi · SaaS Fikir Madeni · Otomatik Okuma Kuralı (AGENTS.md)
 
-> Bu dosya, bu klasörde açtığın her Claude Code oturumunun BAŞINDA otomatik okunur.
-> Sen hiçbir şey ayarlamıyorsun. Claude Code bu klasörde çalışırken bu dosyayı kendiliğinden yükler.
+> Bu dosya evrensel AGENTS.md açık standardıdır. Codex, Google Antigravity, Windsurf, Kilo ve 20+ AI aracı bu klasörde çalışırken bunu otomatik okur.
+> Claude Code için aynı kural `CLAUDE.md` dosyasında.
 > Amaç: "ne kurayım" sorusunu her seferinde sıfırdan düşünmemek. Sen sadece ilgilendiğin alanı yazarsın; sistem talebi kendisi tarar, para dili geçen gerçek dertleri toplar, dört kritere puanlar ve "bu hafta kurabileceğin en iyi 5 SaaS fikri" raporunu döndürür.
 
 ## Bu sistemin duruşu (değişmez)
 Bu sistem fikir BULMAYI sana devreder, fikir SEÇMEYİ sana bırakır. Yani talebi kendisi tarar, sinyalleri toplar, puanlar, sıralar; ama "bunu kur" emri vermez. Ne kuracağına sen karar verirsin. Sistem sana temiz, sıralı, gerekçeli bir kuyruk verir; karar senin.
 
 ## Sistem ne yapıyor (iki faz)
-1. **Otomatik tarama (sen yapıştırmıyorsun):** `sen/01-profil.md`'deki ilgilendiğin alanı ve `sen/02-kaynaklar.md`'deki arama sorgularını okur. Claude Code'un WEB ARAÇLARIYLA (WebFetch + WebSearch) kaynakları kendisi tarar, insanların "keşke şu olsa / buna çözüm arıyorum / bunun için öderim / elle yapıyorum bıktım" gibi talep ve para dili geçen GERÇEK cümlelerini kendisi çeker, her sinyalin kaynağını ve linkini yazarak `sinyaller/toplanan-YYYY-AA-GG.md` dosyasına kaydeder. Sen bu adımda hiçbir şey yapıştırmıyorsun.
-2. **Puanlama + rapor (otomatik):** `sinyaller/` klasöründeki toplanmış talep sinyallerini tek tek okur, her birini bir SaaS fikrine çevirir, dört kritere göre 1-5 puanlar, `sen/01-profil.md` üzerinden sana uygunluğunu süzer ve en yüksek toplam puanlı 5 fikri gerekçeleriyle raporlar.
+1. **Otomatik tarama (sen yapıştırmıyorsun):** `sen/01-profil.md`'deki ilgilendiğin alanı ve `sen/02-kaynaklar.md`'deki arama sorgularını okur. Web araçlarınla (web sayfası çekme + web araması) kaynakları kendin tarar, insanların "keşke şu olsa / buna çözüm arıyorum / bunun için öderim / elle yapıyorum bıktım" gibi talep ve para dili geçen GERÇEK cümlelerini kendisi çeker, her sinyalin kaynağını ve linkini yazarak `sinyaller/toplanan-YYYY-AA-GG.md` dosyasına kaydeder. Kullanıcı bu adımda hiçbir şey yapıştırmaz.
+2. **Puanlama + rapor (otomatik):** `sinyaller/` klasöründeki toplanmış talep sinyallerini tek tek okur, her birini bir SaaS fikrine çevirir, dört kritere göre 1-5 puanlar, `sen/01-profil.md` üzerinden uygunluğunu süzer ve en yüksek toplam puanlı 5 fikri gerekçeleriyle raporlar.
 
 ## Hangi kaynak nasıl taranıyor (dürüst tablo)
 Sistem şu kaynakları KENDİSİ tarar. Her kaynağın otomasyon derecesi farklı; abartma yok.
 
 | Kaynak | Nasıl | Otomasyon |
 |---|---|---|
-| Hacker News (yorumlar) | `WebFetch` ile `https://hn.algolia.com` public JSON | **Tam otomatik** (auth yok). Adres `https` olmak zorunda; `http` 301 döner. |
-| Genel web + forumlar (Ekşi, sektör forumları, "X arıyorum" aramaları, pazar yeri/uygulama yorumları) | `WebSearch` | **Tam otomatik** |
-| Reddit (post + yorum) | Bash `curl` ile `reddit.com/search.rss` public RSS akışı | **Tam otomatik** (public, auth yok). Reddit'in `search.json` ucu artık anahtarsız isteklere `403` veriyor, `search.rss` ucu `200` veriyor; bu yüzden RSS kullanılır. `WebFetch` de reddit.com'da bloklanabilir, o yüzden `curl` + açıklayıcı User-Agent. |
-| X (Twitter) | login ister, WebFetch güvenilir değil | **Yarı otomatik.** Sistem otomatik çekmez; `sen/02-kaynaklar.md`'deki X aramaları için tek tık arama linki üretir, istersen elle bakarsın. Ana tarama X'siz yürür. |
+| Hacker News (yorumlar) | web sayfası çekme aracıyla `https://hn.algolia.com` public JSON | **Tam otomatik** (auth yok). Adres `https` olmak zorunda; `http` 301 döner. |
+| Genel web + forumlar (Ekşi, sektör forumları, "X arıyorum" aramaları, pazar yeri/uygulama yorumları) | web araması | **Tam otomatik** |
+| Reddit (post + yorum) | `curl` ile `reddit.com/search.rss` public RSS akışı | **Tam otomatik** (public, auth yok). Reddit'in `search.json` ucu artık anahtarsız isteklere `403` veriyor, `search.rss` ucu `200` veriyor; bu yüzden RSS kullanılır. Web sayfası çekme araçları reddit.com'da bloklanabilir, o yüzden `curl` + açıklayıcı User-Agent. |
+| X (Twitter) | login ister, otomatik çekme güvenilir değil | **Yarı otomatik.** Sistem otomatik çekmez; `sen/02-kaynaklar.md`'deki X aramaları için tek tık arama linki üretir, istersen elle bakarsın. Ana tarama X'siz yürür. |
 
 > Kural: sistem yalnızca GERÇEKTEN çektiği cümleyi sinyal olarak yazar, her birine kaynak + link koyar. Bir kaynağa erişemezse ("bu ortamda reddit.com kapalı" gibi) bunu açıkça yazar, cümle UYDURMAZ.
 
@@ -28,8 +28,8 @@ Sistem şu kaynakları KENDİSİ tarar. Her kaynağın otomasyon derecesi farkl�
 
 1. **Hacker News:** her arama sorgusu için
    `https://hn.algolia.com/api/v1/search?query=<SORGU>&tags=comment&hitsPerPage=30`
-   adresini `WebFetch` ile çek (boşlukları `+` yap). Adresin `https` olması şart, `http` 301 döner. Dönen JSON'daki `comment_text` içinden talep/para dili geçen cümleleri AYNEN al, `story_title` ile birlikte kaydet.
-2. **Reddit:** her sorgu için RSS akışını Bash `curl` ile çek, açıklayıcı bir User-Agent ver ve çıktıyı dosyaya yaz (ekranı doldurmasın):
+   adresini çek (boşlukları `+` yap). Adresin `https` olması şart, `http` 301 döner. Dönen JSON'daki `comment_text` içinden talep/para dili geçen cümleleri AYNEN al, `story_title` ile birlikte kaydet.
+2. **Reddit:** her sorgu için RSS akışını `curl` ile çek, açıklayıcı bir User-Agent ver ve çıktıyı dosyaya yaz (ekranı doldurmasın):
    ```
    curl -sS -A "fikir-madencisi/1.0 (kisisel arastirma)" --retry 3 --retry-delay 5 \
      "https://www.reddit.com/search.rss?q=<SORGU>&sort=relevance&limit=25" \
@@ -37,9 +37,9 @@ Sistem şu kaynakları KENDİSİ tarar. Her kaynağın otomasyon derecesi farkl�
    ```
    Hedef bir topluluk varsa: `https://www.reddit.com/r/<sub>/search.rss?q=<SORGU>&restrict_sr=1&sort=relevance&limit=25`.
    İnen XML'i oku, `<title>` ve `<content>` içinden talep/para dili geçen gerçek cümleleri AYNEN al.
-   **Neden RSS:** Reddit'in `search.json` ucu anahtarsız isteklere `403` veriyor, `search.rss` ucu `200` veriyor. `403` ya da `429` alırsan bir kez daha dene, yine olmazsa `WebSearch site:reddit.com <SORGU>` ile dolaylı tara ve bunu rapora "reddit doğrudan çekilemedi, dolaylı tarandı" diye yaz.
-3. **Web + forum:** her sorgu için `WebSearch` çalıştır (Ekşi Sözlük, sektör forumları, pazar yeri/uygulama yorumları, "X arıyorum" aramaları). Snippet'lerde geçen gerçek dert/talep cümlelerini ve varsa mevcut çözüm/rakip isimlerini al (rakip = rekabet boşluğu puanı için değerli).
-4. **X (yarı otomatik):** `sen/02-kaynaklar.md`'deki her X araması için `https://x.com/search?q=<ARAMA>&f=live` linkini üret (boşluk `%20`, Türkçe karakter URL-kodlu). Bunları otomatik çekmez; "istersen elle bak" diye rapora ekler.
+   **Neden RSS:** Reddit'in `search.json` ucu anahtarsız isteklere `403` veriyor, `search.rss` ucu `200` veriyor. `403` ya da `429` alırsan bir kez daha dene, yine olmazsa `site:reddit.com <SORGU>` web aramasıyla dolaylı tara ve bunu rapora "reddit doğrudan çekilemedi, dolaylı tarandı" diye yaz.
+3. **Web + forum:** her sorgu için web araması çalıştır (Ekşi Sözlük, sektör forumları, pazar yeri/uygulama yorumları, "X arıyorum" aramaları). Snippet'lerde geçen gerçek dert/talep cümlelerini ve varsa mevcut çözüm/rakip isimlerini al (rakip = rekabet boşluğu puanı için değerli).
+4. **X (yarı otomatik):** `sen/02-kaynaklar.md`'deki her X araması için `https://x.com/search?q=<ARAMA>&f=live` linkini üret (boşluk `%20`, Türkçe karakter URL-kodlu). Bunları otomatik çekme; "istersen elle bak" diye rapora ekle.
 
 Topladığın her sinyali `sinyaller/toplanan-YYYY-AA-GG.md` dosyasına şu formatta yaz: kaynak · link · kim söylüyor (biliniyorsa) · dert cümlesi (aynen, kısaltılmış) · para dili (var/yok/dolaylı kayıp) · kaç kaynakta tekrar ediyor. Sonda tek satır özet: hangi kaynaktan kaç sinyal çekildi, hangileri erişilemedi.
 

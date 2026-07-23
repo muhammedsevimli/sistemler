@@ -31,7 +31,8 @@ Adım adım anlatım ve teknik olmayanlar için "klasör nasıl açılır" böl�
 
 ```text
 fikir-madencisi/
-  CLAUDE.md            sistemin beyni (otomatik okunur)
+  CLAUDE.md            sistemin beyni (Claude Code otomatik okur)
+  AGENTS.md            aynı kural, evrensel standart (Codex, Windsurf, Kilo ve 20+ araç okur)
   CALISTIR.md          iki komut: tara + puanla
   sen/
     01-profil.md       ilgilendiğin alan, ne kurabildiğin, sınırların
@@ -41,11 +42,21 @@ fikir-madencisi/
     rapor-format.md    5 fikir raporunun yapısı
   sinyaller/           sistemin taradığı gerçek talep cümleleri buraya YAZILIR
   ciktilar/            skorlu 5 fikir raporu buraya yazılır
+  ORNEK-CIKTI.md       gerçek taramadan çıkmış örnek rapor
 ```
+
+## Desteklenen araçlar
+
+Hangi aracı kullanırsan o kendi kural dosyasını okur, sistem aynı çalışır.
+
+| Araç | Okuduğu dosya |
+|---|---|
+| Claude Code | `CLAUDE.md` |
+| Codex, Google Antigravity, Windsurf, Kilo ve 20+ araç | `AGENTS.md` (evrensel açık standart) |
 
 ## Dürüst sınır
 
-- Sistem talebi kendisi tarar. Tam otomatik kaynaklar: Hacker News (public JSON) ve web/forum (arama). Reddit tasarımda otomatiktir (public JSON) ama bazı ortamlarda erişim kapalı olabilir; sistem dener, kapalıysa "erişilemedi" der ve uydurmaz. X login istediği için otomatik taranmaz; onun için tek tık arama linki üretilir.
+- Sistem talebi kendisi tarar. Tam otomatik kaynaklar: Hacker News (public JSON), Reddit (public RSS akışı) ve web/forum (arama). Reddit'in `search.json` ucu anahtarsız isteklere `403` verdiği için sistem `search.rss` akışını `curl` ile çeker; bu uç anahtar istemez. Yine de bloklanırsa sistem "erişilemedi" der ve uydurmaz. X login istediği için otomatik taranmaz; onun için tek tık arama linki üretilir.
 - Sistem sinyal ve fikir uydurmaz. Bir kaynağa erişemezse "erişilemedi" der. Elinde sinyal yoksa "önce tara" der.
 - Puanlar bir pusula, kesin gerçek değil. Bir fikrin gerçekten para edip etmediği ancak MVP'yi kurup ilk müşterilere sorunca belli olur.
 

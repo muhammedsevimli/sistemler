@@ -1,5 +1,10 @@
 # Test Sonucu · Fikir Madencisi (Otomatik SaaS Fikir Madeni)
 
+> **DÜZELTME (24 Tem 2026).** Aşağıdaki 20 Tem koşusunda Reddit'e erişilememesi "ortam engeli" diye yorumlanmıştı. Bu teşhis yanlıştı. Sebep ortam değil, ucun kendisi: Reddit'in `search.json` ucu anahtarsız isteklere `403` döndürüyor. Aynı arama `search.rss` ucundan `200` dönüyor.
+> Ölçüm (24 Tem 2026): `search.json` → `403` · `search.rss` → `200` · `http://hn.algolia.com` → `301` (bu yüzden `https` şart).
+> Sistem düzeltildi: Reddit artık `search.rss` akışından `curl` + açıklayıcı User-Agent ile çekiliyor, Hacker News adresi `https` oldu. Düzeltilmiş yol canlı doğrulandı: `r/smallbusiness` üzerinde `"would pay for"` araması `HTTP 200`, 30.947 bayt, gerçek talep başlıkları döndü (ör. "What is a software tool that you desperately wish existed... you would pay for instantly").
+> Yani Reddit artık **tam otomatik**; aşağıdaki tabloda "erişilemedi" satırı tarihsel kayıttır, güncel davranış değildir.
+
 > Sistemin FAZ 1 tarama talimatları, Claude Code'un web araçlarıyla (WebFetch + WebSearch) GERÇEKTEN çalıştırıldı.
 > Bu araçlar, teslim edilen sistemin kullanıcının kendi Claude Code'unda çağırdığı araçların birebir aynısıdır. Yani bu, sistemin çekirdek otomasyonunun gerçek koşusudur.
 > Alan: yerel randevulu işletmeler + küçük e-ticaret. Kullanıcı hiçbir sinyal yapıştırmadı; yalnız alan verildi, sinyalleri sistem topladı.
