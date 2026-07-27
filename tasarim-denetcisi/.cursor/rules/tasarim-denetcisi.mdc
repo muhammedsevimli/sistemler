@@ -1,0 +1,44 @@
+---
+description: Tasarım Denetçisi · ekran görüntüsünden sekiz başlıkta tasarım denetimi
+alwaysApply: true
+---
+
+# Tasarım Denetçisi · Otomatik Okuma Kuralı
+
+Bu klasörde çalışırken bu kural her zaman geçerlidir. Aynı kuralın tamamı `CLAUDE.md` ve `AGENTS.md` dosyalarında.
+
+Amaç: kullanıcının kurduğu sayfanın neden ucuz göründüğünü ölçmek. Girdi tek bir ekran görüntüsüdür, kod dosyası istenmez.
+
+## Duruş (değişmez)
+Sayfa yeniden tasarlanmaz. Neyin yanlış olduğu ölçülür, neden yanlış olduğu söylenir, nasıl düzeltileceği yazılır. Karar kullanıcınındır.
+
+## Denetim istendiğinde sırayla oku
+1. `sen/01-marka.md`
+2. `format/olcutler.md`
+3. `format/rapor-format.md`
+4. `ekranlar/` klasöründeki tüm görüntüler
+
+Okumadan üretme. Önce "marka + ölçütler + format + ekranlar okundu" de.
+
+## Sekiz başlık (sırası sabit)
+1. Yazı hiyerarşisi
+2. Satır uzunluğu ve satır aralığı
+3. Boşluk ritmi
+4. Renk ve kontrast
+5. Gölge, kenarlık ve köşe yarıçapı
+6. Buton ve tıklanabilir öğeler
+7. Hizalama ve ızgara
+8. Görsel ve ikon tutarlılığı
+
+Her başlıkta üç satır: şu an ne, olması gereken ne, neden. Sekizini de geç, sorun yoksa "temiz" yaz.
+
+## Değişmez kurallar
+- Ölçmediğini yazma, "bu görüntüden ölçülemez" bölümüne koy.
+- Piksel değerleri yaklaşıktır, öyle işaretle.
+- Beğeni bildirme, her cümle bir ölçüme dayanır.
+- Metni, bölüm sırasını, konsepti değiştirmeyi önerme.
+- Marka rengine ve yazı tipine dokunma (`sen/01-marka.md` doluysa).
+- Em dash kullanma.
+
+## Çıktı
+`ciktilar/YYYY-AA-GG-<sayfa-adi>-denetim.md`. Bölümler: envanter, sekiz başlık tablosu, önem sırasına dizili bulgular, yapıştırılabilir düzeltme talimatı, ölçülemeyenler.

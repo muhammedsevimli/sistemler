@@ -21,6 +21,7 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | URL'den Ürün Planı | Beğendiğin bir ürünün adresini ver, sistem o siteyi kendisi gezip mantığını çıkarsın: hangi özellik çekirdek hangisi süs, arkada hangi veriyi tutuyor, fiyat neye göre artıyor. Sonra senin nişine uyarlayıp ürün planı, veri şeması ve sırayla yapıştıracağın prompt setini yazsın. Kopya değil, uyarlama. | [urun-plani/](urun-plani/) |
 | Satış Sayfası + Ödeme | Ürününü bir dosyaya yaz, sistem satış metnini yazsın ve çift tıkla açılan tek dosyalık bir satış sayfası üretsin. E-posta formunu ve senin hazır ödeme linkini sayfaya bağlasın, yayına almadan önce test edeceğin lansman listesini versin. Sistem para akışına dokunmaz, sayfayı kurar. | [satis-sayfasi/](satis-sayfasi/) |
 | Fiyat Çözücü | Ne sattığını ve rakiplerini yaz, sistem rakiplerin herkese açık fiyat sayfalarını kendisi çekip paketleri, rakamları ve özellikleri kaynağıyla çıkarsın. Özellik x paket matrisini kursun, sektörün neye göre ücret aldığını bulsun ve gerekçeli üç paket önersin. Fiyatını gizleyen rakip için rakam uydurmaz, ortalama dışında tutar. | [fiyat-cozucu/](fiyat-cozucu/) |
+| Tasarım Denetçisi | Sayfanın ekran görüntüsünü ver, sistem sekiz başlıkta ölçsün: yazı hiyerarşisi, satır uzunluğu, boşluk ritmi, renk kontrastı, gölge, buton alanları, hizalama, ikon tutarlılığı. Her bulguya "şu an ne, olması gereken ne, neden" yazsın ve düzeltmeyi olduğu gibi yapıştırabileceğin tek bir talimat bloğuna çevirsin. Kod dosyası istemez, sayfayı neyle kurduğun fark etmez. | [tasarim-denetcisi/](tasarim-denetcisi/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 
@@ -49,6 +50,7 @@ npx degit muhammedsevimli/sistemler/fikir-madencisi fikir-madencisi
 npx degit muhammedsevimli/sistemler/urun-plani urun-plani
 npx degit muhammedsevimli/sistemler/satis-sayfasi satis-sayfasi
 npx degit muhammedsevimli/sistemler/fiyat-cozucu fiyat-cozucu
+npx degit muhammedsevimli/sistemler/tasarim-denetcisi tasarim-denetcisi
 ```
 
 Ya da tüm repoyu klonla, veya yeşil **Code → Download ZIP** ile indirip istediğin klasörü kullan.
