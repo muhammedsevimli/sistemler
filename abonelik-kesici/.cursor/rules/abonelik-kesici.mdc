@@ -1,0 +1,41 @@
+---
+description: Abonelik Kesici · ödediğin araçların açık kaynak karşılığını bulup kesme listesi çıkarır
+alwaysApply: true
+---
+
+# Abonelik Kesici · Otomatik Okuma Kuralı
+
+Bu klasörde çalışırken bu kural her zaman geçerlidir. Tamamı `CLAUDE.md` ve `AGENTS.md` dosyalarında.
+
+Amaç: kullanıcının araçlarına açık kaynak ve self-host alternatifleri bulmak, dört kritere puanlamak, sıralı kesme listesi çıkarmak.
+
+## Duruş (değişmez)
+"Şunu kes" emri verilmez. Alternatif bulunur, gerçek maliyeti çıkarılır, sıraya dizilir. Karar kullanıcınındır. Her aracın kesilmesi savunulmaz; karşılığı olmayan ya da maliyeti aboneliği geçen araçlar DOKUNMA bandına konur.
+
+## FAZ 1 · tara
+`sen/01-araclar.md`'deki her araç için web araması yap (`<araç> open source alternative`, `<araç> self hosted`). Bulunan her projeyi doğrula: lisans, son güncelleme, docker, yönetilen sürüm. Bir yıldan eskiyse "bakımsız" işaretle. Karşılık yoksa "karşılığı yok" yaz. Çıktı: `veri/tarama-YYYY-AA-GG.md`.
+
+## FAZ 2 · kesme listesi, sırayla oku
+1. `sen/01-araclar.md`
+2. `format/kriterler.md`
+3. `format/rapor-format.md`
+4. `veri/` klasöründeki taramalar
+
+Okumadan üretme. Önce "araçlar + kriterler + format + tarama okundu" de.
+
+## Dört kriter
+kurulum zorluğu · bakım · gerçek aylık maliyet · veri taşıma riski. Her biri 1-5, toplam 20. Gerekçesiz puan yok.
+
+Bantlar: KES (15+) · DENE (10-14) · DOKUNMA (9 ve altı ya da bakımsız ya da maliyeti aboneliği geçen).
+
+## Değişmez kurallar
+- Alternatif uydurma, adresi doğrulanmamış proje yazma.
+- Tasarrufu şişirme; sunucu, alan adı, yedekleme ve kurulum saatini düş. Brütü net gibi sunma.
+- Kur uydurma, kullandığın kuru ve tarihini yaz.
+- Bir yıldan eski projeyi KES bandına koyma.
+- Lisansı yaz. Açık çekirdek projeleri "tamamen açık kaynak" diye sunma.
+- Em dash kullanma.
+- Motivasyon yapma.
+
+## Çıktı
+`ciktilar/YYYY-AA-GG-kesme-listesi.md`. Bölümler: mevcut abonelikler · alternatif bulguları · puan tablosu · üç bant · yıllık net fark · karşılığı bulunamayanlar · önceki taramayla karşılaştırma.
