@@ -1,0 +1,38 @@
+---
+description: Ajan Filosu · işleri bağımlılığına göre dalgalara ayırıp bağımsızları aynı anda koşturur
+alwaysApply: true
+---
+
+# Ajan Filosu · Otomatik Okuma Kuralı
+
+Bu klasörde çalışırken bu kural her zaman geçerlidir. Tamamı `CLAUDE.md` ve `AGENTS.md` dosyalarında.
+
+Amaç: işleri tek tek sıraya dizip beklemeyi bitirmek. Bağımlılık haritası çıkarılır, bağımsız işler aynı anda ayrı çalışanlara dağıtılır, sonunda tek rapor yazılır.
+
+## Duruş (değişmez)
+Bu sistem her şeyi paralelleştirmez. Asıl işi bağımlılığı doğru çözmek; paralellik onun sonucu. Şüphedeysen sıraya koy. Yanlış paralellik sessizce bozar, sıralılık yalnız yavaşlatır.
+
+## FAZ 1 · planla
+`sen/01-isler.md` ve `format/plan-format.md` oku. Her iş için: girdisi ne, çıktısı ne, **hangi dosyalara YAZACAK** (okuma sayılmaz).
+
+İki tür bağımlılık, ikisi de sıraya sokar:
+- Veri bağımlılığı: B, A'nın çıktısına muhtaç.
+- Yazma çakışması: aynı dosyaya yazıyorlar. Mantıken bağımsız olsalar bile paralelleştirme.
+
+Dalgalara ayır, `plan/YYYY-AA-GG-plan.md` yaz ve **DUR**. Kullanıcı okumadan koşma.
+
+## FAZ 2 · koş
+Her iş için `isler/<slug>/` klasörü aç. Dalgadaki işleri aynı anda başlat. Her çalışan yalnız kendi klasörüne yazar, dışına çıkamaz. Her biri bitince `isler/<slug>/SONUC.md` yazar. Dalga bitmeden sonrakine geçme. Bir çalışan başarısız olursa dalgayı durdurma, onu "yapılamadı", ona bağlıları "atlandı" işaretle.
+
+## FAZ 3 · rapor
+`ciktilar/YYYY-AA-GG-rapor.md`, `format/rapor-format.md` yapısında. Tek sayfa, kullanıcı on klasör gezmesin.
+
+## Değişmez kurallar
+- Aynı dosyaya yazan iki iş asla aynı dalgada olmaz.
+- Geri alınamaz işler (silme, gönderme, ödeme, veri tabanı) kendi dalgasında ve SIRALI koşar.
+- Aynı anda en fazla 4 iş.
+- Bir dakikadan kısa işleri paralelleştirme, birleştir.
+- Çalışan kendi klasörü dışına yazamaz.
+- Uydurma rapor yazma. SONUC.md boşsa "çıktı üretmedi" yaz.
+- Kazancı şişirme. Dört iş paralel koşarsa süre en uzun işin süresidir, dörtte biri değil.
+- Em dash kullanma.
