@@ -1,6 +1,6 @@
 # Maliyet
 
-Beş ajan aynı anda koşuyor ve her biri kendi bağlamını taşıyor. Yani tek bir soruya beş kere cevap ürettiriyorsun, üstüne bir de ikinci tur var. Bu sistemin maliyeti tek ajana soru sormanın maliyeti değil.
+Beş ajan aynı anda koşuyor ve her biri kendi bağlamını taşıyor. Yani tek bir soruya beş kere cevap ürettiriyorsun, üstüne bir de ikinci tur var. Maliyet tek ajanın yaklaşık beş katına çıkıyor.
 
 ## Gerçek koşunun rakamı
 
