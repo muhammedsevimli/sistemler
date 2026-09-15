@@ -24,6 +24,7 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | Tasarım Denetçisi | Sayfanın ekran görüntüsünü ver, sistem sekiz başlıkta ölçsün: yazı hiyerarşisi, satır uzunluğu, boşluk ritmi, renk kontrastı, gölge, buton alanları, hizalama, ikon tutarlılığı. Her bulguya "şu an ne, olması gereken ne, neden" yazsın ve düzeltmeyi olduğu gibi yapıştırabileceğin tek bir talimat bloğuna çevirsin. Kod dosyası istemez, sayfayı neyle kurduğun fark etmez. | [tasarim-denetcisi/](tasarim-denetcisi/) |
 | Abonelik Kesici | Kullandığın araçları ve aylık ücretlerini yaz, sistem her biri için açık kaynak ve self-host alternatifleri kendisi tarasın. Bulduğu projeyi doğrulasın (lisans, son güncelleme, docker), dört kritere puanlasın (kurulum, bakım, gerçek maliyet, veri taşıma riski) ve üç bant halinde sıralı kesme listesi çıkarsın: KES, DENE, DOKUNMA. Yıllık farkı hesaplarken altyapı giderini düşer, brütü net gibi sunmaz. | [abonelik-kesici/](abonelik-kesici/) |
 | Ajan Filosu | Yapılacakları yaz, sistem hangisinin hangisini beklediğini çözsün. İki tür bağımlılığı ayırsın (veri bağımlılığı ve aynı dosyaya yazma çakışması), işleri dalgalara dizsin, bağımsızları aynı anda ayrı çalışanlara dağıtsın. Her çalışan kendi klasöründe kalır, sonunda tek rapor çıkar. Her şeyi paralelleştirmez: geri alınamaz işleri ve çakışanları bilerek sıraya koyar, kazancı da şişirmez. | [ajan-filosu/](ajan-filosu/) |
+| Ajan Takımı | Bir soruyu beş rollü bir ajan takımına tartıştır. Dört rol birer teori savunsun, Matematikçi hiçbir teori savunmasın ve elindeki veri dosyasındaki rakamla her teoriyi sınasın. Çürütülen rol ikinci turda çekilsin, ayakta kalan teori senin cevabın olsun. Hiçbir rol veri dosyasında olmayan bir sayıyı kullanamaz. | [ajan-takimi/](ajan-takimi/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 
@@ -55,6 +56,7 @@ npx degit muhammedsevimli/sistemler/fiyat-cozucu fiyat-cozucu
 npx degit muhammedsevimli/sistemler/tasarim-denetcisi tasarim-denetcisi
 npx degit muhammedsevimli/sistemler/abonelik-kesici abonelik-kesici
 npx degit muhammedsevimli/sistemler/ajan-filosu ajan-filosu
+npx degit muhammedsevimli/sistemler/ajan-takimi ajan-takimi
 ```
 
 Ya da tüm repoyu klonla, veya yeşil **Code → Download ZIP** ile indirip istediğin klasörü kullan.

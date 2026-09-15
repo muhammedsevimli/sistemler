@@ -1,0 +1,29 @@
+---
+description: Ajan Takımı · beş rollü tartışma, dört teori bir hakem, ayakta kalan teori cevap olur
+alwaysApply: true
+---
+
+# Ajan Takımı · Otomatik Okuma Kuralı
+
+Bu klasörde çalışırken bu kural her zaman geçerlidir. Tamamı `CLAUDE.md` ve `AGENTS.md` dosyalarında, rol tanımları `.claude/agents/` klasöründe.
+
+Amaç: bir sonucun sebebini tek bir cevapla geçiştirmemek. Dört rol birer teori savunur, Matematikçi yalnız veriyle çürütür, ayakta kalan teori cevap olur.
+
+## Duruş (değişmez)
+
+Yalnız `veri/` klasöründeki rakamla konuşulur. O klasörde olmayan sayı tartışmaya giremez. Sektör ortalaması, geçmiş deneyim, "genelde şöyle olur" kanıt değildir.
+
+Matematikçi'nin teorisi yoktur ve salt okunur çalışır. Veri bir teoriyi sınamaya yetmiyorsa "ayrıştırılamıyor" yazar, bunu zayıf kanıta çevirmez.
+
+## Akış
+
+1. **Tur 1:** beş rol aynı anda koşar. Her teori rolü `tartisma/round1_<rol>.md` yazar (en fazla 150 kelime, teori artı veriden iki üç kanıt, her kanıtta rakam ve kaynak dosya). Matematikçi kararını lidere döner, dosyayı lider yazar.
+2. **Kapı:** beş dosya oluşmadan tur 2 açılmaz.
+3. **Tur 2:** beş rol yine aynı anda koşar, her biri diğer dört dosyayı okur. `tartisma/round2_<rol>.md` yazılır, ilk satır tek kelime: **ELENDİ** ya da **AYAKTA**, sonra en fazla 80 kelime.
+4. **Rapor:** lider `tartisma/LIDER-RAPORU.md` yazar. Dürüstlük notu bölümü zorunludur.
+
+## Yapılmayanlar
+
+- Lider teori savunmaz, ayakta kalanı seçmez, hakem kararını yazar.
+- Hiçbir rol başka bir rolün dosyasına yazmaz.
+- İki tur sonunda karar netleşmediyse üçüncü tur açılmaz, eksik veri yazılır.

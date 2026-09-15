@@ -1,0 +1,28 @@
+# Sırlar / kimlik bilgileri, ASLA commit etme
+.env
+.env.*
+!.env.example
+.secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+*token*
+*secret*
+*credential*
+*apikey*
+*api_key*
+
+# Bağımlılıklar / build
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+
+# İşletim sistemi / editör
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
