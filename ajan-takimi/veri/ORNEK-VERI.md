@@ -1,6 +1,6 @@
 # Örnek veri
 
-> Bu dosya kurgusal. Gerçek bir hesaba ait değil. Amacı veri biçimini göstermek ve sistemi denemene izin vermek. Kendi verini koyarken bu dosyayı sil ya da yanına kendi dosyanı ekle.
+> Bu dosya kurgusal ve yalnız biçim örneği. Ana akışta veri dosyasını araç kendisi yazar, bu dosyaya dokunman gerekmez. Gerçek bir hesaba ait değil.
 >
 > Kurgusal senaryo: el yapımı mum satan küçük bir atölye, kısa video serisi yayınlıyor. Hesabın takipçi sayısı **8.400**. Aşağıdaki üç bölüm aynı seriye ait ve aynı hesapta yayınlandı.
 

@@ -17,10 +17,11 @@ Matematikçi'nin teorisi yoktur ve salt okunur çalışır. Veri bir teoriyi sı
 
 ## Akış
 
+0. **Karşılama:** `veri/` klasöründe `ORNEK-VERI.md` dışında dosya yoksa kullanıcıya klasör kurdurma. Soruyu ve rakamları sohbette sen sor, `veri/VERI.md` dosyasını sen yaz, yazdığını teyit ettir, dört teoriyi sen öner.
 1. **Tur 1:** beş rol aynı anda koşar. Her teori rolü `tartisma/round1_<rol>.md` yazar (en fazla 150 kelime, teori artı veriden iki üç kanıt, her kanıtta rakam ve kaynak dosya). Matematikçi kararını lidere döner, dosyayı lider yazar.
 2. **Kapı:** beş dosya oluşmadan tur 2 açılmaz.
 3. **Tur 2:** beş rol yine aynı anda koşar, her biri diğer dört dosyayı okur. `tartisma/round2_<rol>.md` yazılır, ilk satır tek kelime: **ELENDİ** ya da **AYAKTA**, sonra en fazla 80 kelime.
-4. **Rapor:** lider `tartisma/LIDER-RAPORU.md` yazar. Dürüstlük notu bölümü zorunludur.
+4. **Rapor:** lider `tartisma/LIDER-RAPORU.md` yazar ve sonra raporu sohbette özetler. Dürüstlük notu bölümü zorunludur.
 
 ## Yapılmayanlar
 

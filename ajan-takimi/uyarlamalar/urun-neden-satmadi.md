@@ -17,7 +17,7 @@ Matematikçi'nin teorisi yok, değiştirme.
 
 ## Matematikçi'nin bakacağı veri alanları
 
-Bu alanları `veri/` klasörüne koy. Hangisi yoksa açıkça "veri yok" yaz, hakem eksiği eksik olarak işaretlesin.
+Lider bu alanları sohbette senden ister ve `veri/VERI.md` dosyasını kendisi yazar. Elinde olmayan alana "veri yok" yazılır, hakem eksiği eksik olarak işaretler.
 
 **Huni sayıları**
 - Sayfa görüntüleme, tekil ziyaretçi

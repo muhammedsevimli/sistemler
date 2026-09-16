@@ -1,47 +1,52 @@
 # Tartışma promptu
 
-Bu dosya lideri kurar. Lider senin oturumun: soruyu sorar, beş rolü koşturur, sonucu raporlar.
+Bu dosya koşunun yapısını tanımlar. Ana akışta bunu sen okumuyorsun, araç okuyor: `CLAUDE.md` ve `AGENTS.md` lideri buraya yönlendiriyor.
 
-Aşağıda iki çalışma yolu var. **Yol B her kurulumda çalışır**, önce onu dene. Yol A deneysel bir özelliğe bağlı ve açık değilse hiçbir şey olmaz.
-
----
-
-## Önce doldur
-
-Promptu yapıştırmadan önce şu üç yeri kendi işine göre değiştir.
-
-**1. Soru.** Tek cümle, tek sonuç. "Neden böyle oldu" biçiminde kur. Örnek: "12. gün videosu neden bir günde 85 bin izlendi."
-
-**2. Veri.** `veri/` klasörüne ne koyduğunu ve her dosyanın ne içerdiğini yaz. Rakamlar yalnız burada olacak.
-
-**3. Dört teori.** Her role bir teori. Hazır senaryo istersen `uyarlamalar/` klasöründeki üç dosyadan birini al, teorileri oradan kopyala.
+Kendi oturumuna elle yapıştırmak istersen aşağıdaki blok hazır. Elle kurulumun tamamı `ILERI.md` içinde.
 
 ---
 
-## Yol B · paralel alt-ajan sürümü (her kurulumda çalışır)
-
-Claude Code'u bu klasörde aç ve şunu yapıştır:
+## Lider promptu
 
 ```text
 Rolün: bu tartışmanın lideri. Sen teori savunmuyorsun, koşuyu yönetip raporluyorsun.
+Karşındaki kişi terminal bilmeyebilir. Klasör kurdurma, dosya yazdırma, komut
+çalıştırtma. Her şeyi sen yaparsın, o yalnız sohbette cevap verir.
 
-SORU: <buraya tek cümlelik soru>
+ADIM 0 · KARŞILAMA
+veri/ klasörüne bak. ORNEK-VERI.md dışında dosya yoksa sohbette şunları yap:
+- Neyin sebebini merak ettiğini sor. Tek sonuç, tek soru olsun. Genel bir şey
+  söylerse belirli bir olaya indir (hangi lansman, hangi tarih, hangi kampanya).
+- Hangi rakamlara ihtiyacın olduğunu madde madde yaz ve iste. Soru
+  uyarlamalar/ klasöründeki dört senaryodan birine benziyorsa listeyi oradan al.
+  Benzemiyorsa listeyi kendin kur: performans, içerik bilgisi, yapım ölçüleri,
+  dış etken, karşılaştırma. Karşılaştırma bölümü her soruda zorunlu.
+- Rakamları sohbete yazabilir, ekran görüntüsü atabilir ya da dışa aktardığı
+  raporu verebilir. Görüntüden okuduğun rakamları teyit ettir.
+- Karşılaştırma verisi iste: aynı kalıpla kurulmuş ama farklı sonuç almış bir örnek.
+- veri/VERI.md dosyasını SEN yaz. Rakamlar tablo halinde, kaynağıyla. Olmayan
+  alana "veri yok" yaz, uydurma.
+- Yazdığını göster ve teyit ettir.
+- Dört teoriyi sen öner, onayını al.
 
-VERİ: veri/ klasöründeki dosyalar. Rakamlar yalnız orada. Hiçbir ajan o klasörde
-olmayan bir sayı kullanamaz.
+VERİ
+Rakamlar yalnız veri/ klasöründe. Hiçbir ajan o klasörde olmayan bir sayı
+kullanamaz. Sektör ortalaması, geçmiş deneyim, "genelde şöyle olur" kanıt değil.
 
-ROLLER VE TEORİLER:
-- Pazarlamacı: <teori 1>
-- Editör: <teori 2>
-- Şüpheci: <teori 3>
-- Psikolog: <teori 4>
-- Matematikçi: teorisi yok. Veriyi okur, her teoriyi rakamla sınar, hangisinin
-  veriyle çeliştiğini yazar. Salt okunur çalışır, dosya yazmaz, kararını sana döner.
+ROLLER
+- Pazarlamacı: paketleme (başlık, ilk saniye, kapak, vaat)
+- Editör: işçilik (kurgu, ritim, ses, görsel hijyen)
+- Şüpheci: dış etken (mevcut kitle, zamanlama, tesadüf)
+- Psikolog: niyet (ne yapmak istedi, hangi davranışı seçti)
+- Matematikçi: teorisi yok. Veriyi okur, her teoriyi rakamla sınar. Salt okunur
+  çalışır, dosya yazmaz, kararını sana döner.
+Rol tanımları .claude/agents/ klasöründe. Dört teori rolünü soruya göre uyarla,
+Matematikçi'ye dokunma.
 
 TUR 1
-Beş alt-ajanı AYNI ANDA başlat. Her birine .claude/agents/ altındaki kendi rol
-dosyasını, soruyu ve veri klasörünün yolunu ver. Her rol kendi dosyasını yazar:
-tartisma/round1_<rol>.md, en fazla 150 kelime, teori + veriden 2-3 kanıt
+Beş ajanı AYNI ANDA başlat. Her birine kendi rol dosyasını, soruyu ve veri
+klasörünün yolunu ver. Her teori rolü kendi dosyasını yazar:
+tartisma/round1_<rol>.md, en fazla 150 kelime, teori artı veriden 2-3 kanıt
 (rakam ve kaynak dosya adı). Matematikçi yazmaz, sana döner, dosyayı sen yaz:
 tartisma/round1_matematikci.md.
 
@@ -50,14 +55,17 @@ Beş dosya da oluşmadan tur 2'ye geçme. Bir rol veri klasöründe olmayan bir 
 kullandıysa o kanıtı işaretle ve rolü tek seferlik düzeltmeye gönder.
 
 TUR 2
-Beş alt-ajanı yine AYNI ANDA başlat. Her biri diğer dört tur 1 dosyasını okur.
-Her rol tartisma/round2_<rol>.md yazar: ilk satır tek kelime, ELENDİ ya da AYAKTA,
-sonra en fazla 80 kelime gerekçe. ELENDİ yazan neden ikna olduğunu bir cümleyle
-söyler. AYAKTA yazan karşı kanıtı rakamla getirir. Matematikçi hakem kararını
-döner, tartisma/round2_matematikci.md dosyasını sen yaz.
+Beş ajanı yine AYNI ANDA başlat. Her biri diğer dört tur 1 dosyasını okur.
+Her rol tartisma/round2_<rol>.md yazar: ilk satır tek kelime, ELENDİ ya da
+AYAKTA, sonra en fazla 80 kelime gerekçe. ELENDİ yazan neden ikna olduğunu bir
+cümleyle söyler. AYAKTA yazan karşı kanıtı rakamla getirir. Matematikçi hakem
+kararını döner, tartisma/round2_matematikci.md dosyasını sen yaz.
 
 RAPOR
-tartisma/LIDER-RAPORU.md dosyasını aşağıdaki şablonla yaz.
+tartisma/LIDER-RAPORU.md dosyasını aşağıdaki şablonla yaz. SONRA raporu sohbette
+özetle: ayakta kalan teori ve onu ayakta tutan rakam, elenen teoriler ve her
+birini kesen rakam, verinin yetmediği yerler. Kullanıcı hiçbir klasöre bakmak
+zorunda kalmasın.
 
 KURALLAR
 - Hiçbir rakam uydurulmaz. Veri klasöründe yoksa iddia kurulmaz.
@@ -65,38 +73,11 @@ KURALLAR
 - Hakem bir rolü "veriyle ayrıştırılamıyor" diye işaretlediyse onu "elendi" yazma.
   Ayrımı olduğu gibi raporla.
 - Hiçbir rol başka bir rolün dosyasına yazmaz.
+- Rol dosya adları sabit: round1_pazarlamaci.md, round1_editor.md,
+  round1_supheci.md, round1_psikolog.md, round1_matematikci.md ve tur 2 için
+  aynısı. Teoriyi uyarlasan da dosya adını değiştirme.
+- İki tur sonunda karar netleşmediyse üçüncü tur açma, eksik veriyi yaz.
 ```
-
-Bu yol beş ayrı alt-ajan açar. Her ajan kendi bağlamında çalışır, birbirinin içini görmez, yalnız `tartisma/` klasöründeki dosyalar üstünden haberleşir. Gerçek koşu bu yolla yapıldı (`TEST-SONUCU.md`).
-
----
-
-## Yol A · ajan takımı modu (deneysel)
-
-Claude Code'un ajan takımı özelliği, alt-ajan açmak yerine bir lider ve birkaç takım arkadaşını ortak bir görev listesi üstünden çalıştırır. **Bu özellik deneysel.** Açık değilse, adı değiştiyse ya da sürümünde yoksa hiçbir hata almazsın, komut sessizce normal oturum gibi davranır. O durumda Yol B'ye dön.
-
-Açmak için proje kökünde `.claude/settings.json` dosyasına şunu koy:
-
-```json
-{
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-  }
-}
-```
-
-Claude Code'u kapatıp bu klasörde yeniden aç. Sonra Yol B'deki promptun aynısını yapıştır, yalnız **TUR 1** ve **TUR 2** bloklarının başındaki "Beş alt-ajanı aynı anda başlat" cümlesini şununla değiştir:
-
-```text
-Beş takım arkadaşını ortak görev listesi üstünden çalıştır. Her role
-.claude/agents/ altındaki kendi dosyasını ver. Ortak görev listesine tur 1 için
-beş görev, tur 2 için beş görev koy. Tur 1'in beş görevi kapanmadan tur 2
-görevleri açılmaz.
-```
-
-**Windows notu:** ajan takımı modunda takım arkadaşları aynı süreç içinde koşuyor ve canlı panel bazı terminallerde açılmıyor. Panel açılmazsa koşu yine de yürür, ilerlemeyi `tartisma/` klasöründe dosyalar düştükçe görürsün. Panel için Windows Terminal ya da WSL daha rahat.
-
-İki yolun çıktısı aynı: on dosya artı lider raporu.
 
 ---
 
@@ -108,7 +89,7 @@ görevleri açılmaz.
 # Lider raporu · <konu> · <tarih>
 
 Soru: <tek cümle>
-Koşu: 5 ajan, 2 tur, <hangi yol>. Girdi: <veri dosyaları>. <süre> ve <token>.
+Koşu: 5 ajan, 2 tur. Girdi: <veri dosyaları>. <süre> ve <token>.
 
 | Rol | Teori | Tur 1 kanıtı | Tur 2 kararı |
 |---|---|---|---|
