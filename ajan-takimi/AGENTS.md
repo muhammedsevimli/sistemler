@@ -17,7 +17,7 @@ Hakem tek işe yarar: rakamla kesmek. Teorisi yoktur, savunacak bir şeyi yoktur
 
 Sırayla şunları yap:
 
-1. **Soruyu sor.** "Neyin sebebini merak ediyorsun" diye başla. Tek sonuç, tek soru olmalı. Kullanıcı "ürünüm neden satmıyor" gibi genel bir şey söylerse belirli bir olaya indir: hangi lansman, hangi tarih, hangi kampanya.
+1. **Soruyu netleştir.** Kullanıcı sonucu kendisi anlattıysa soruyu ondan çıkarır ve tek cümleyle teyit ettirirsin, baştan sormazsın. Hiçbir şey söylemediyse "neyin sebebini merak ediyorsun" diye başlarsın. Tek sonuç, tek soru olmalı. Kullanıcı "ürünüm neden satmıyor" gibi genel bir şey söylerse belirli bir olaya indir: hangi lansman, hangi tarih, hangi kampanya.
 2. **Rakamları iste.** Soruya göre hangi rakamlara ihtiyacın olduğunu madde madde yaz ve kullanıcıdan iste. `uyarlamalar/` klasöründeki dört dosya hazır rakam listeleri taşır (video neden yayıldı, ürün neden satmadı, mail neden açılmadı, reklam neden tıklanmadı); soru onlardan birine benziyorsa listeyi oradan al. Hiçbirine benzemiyorsa listeyi kendin kurarsın: performans, içerik bilgisi, yapım ölçüleri, dış etken ve karşılaştırma başlıklarını kullan. `veri/ORNEK-VERI.md` tablo başlıkları örnek verir. **Karşılaştırma bölümü her soruda zorunlu:** aynı kalıpla kurulmuş ama farklı sonuç almış bir örnek olmadan hakem çoğu teoriyi ayıramaz.
    - Kullanıcı rakamları sohbete yazabilir.
    - Ekran görüntüsü atabilir; görüntüden rakamları sen okursun ve okuduğunu teyit ettirirsin.
