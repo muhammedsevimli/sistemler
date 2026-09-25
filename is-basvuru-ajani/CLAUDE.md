@@ -9,8 +9,8 @@ Sahibin sohbette şunlardan birini yazar (ya da `araclar/gunluk_kosu.py` zamanla
 | Komut | Ne yapar |
 |---|---|
 | `günlük koşu` | Aşağıdaki günlük akışı baştan sona koşar. |
-| `tara` | Yalnız 1-3. adımlar: ilan bul, puanla, tabloya yaz. Başvuru hazırlamaz. |
-| `hazırla <ilan linki>` | Tek ilan için 4. adım: eşleşme, uyarlanmış CV, ön yazı, cevaplar. Göndermez. |
+| `tara` | Yalnız 1-2. adımlar: ilan bul, puanla, tabloya yaz. Başvuru hazırlamaz. |
+| `hazırla <ilan linki>` | Tek ilan için 3. adım: eşleşme, uyarlanmış CV, ön yazı, cevaplar. Göndermez. |
 | `gönder <klasör adı>` | Hazır bir başvuru klasörünü LinkedIn'de doldurur ve `gonder: evet` ise gönderir. |
 | `prova <klasör adı>` | O ilan ve CV'den 10 mülakat sorusu ve cevap iskeleti üretir (`prova.md`). |
 | `durum` | `basvurular.csv` özetini sohbette verir: bekleyen, gönderilen, dönüş gelen. |
