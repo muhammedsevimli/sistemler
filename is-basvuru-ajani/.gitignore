@@ -1,0 +1,13 @@
+.env
+.env.*
+.secrets/
+*.key
+*.pem
+*token*
+*secret*
+*credential*
+node_modules/
+.DS_Store
+.chrome-pdf/
+raporlar/log-*.txt
+basvurular/*/cv-uyarlanmis.html
