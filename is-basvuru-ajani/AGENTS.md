@@ -11,24 +11,36 @@ Sahibin sohbette şunlardan birini yazar (ya da `araclar/gunluk_kosu.py` zamanla
 | `günlük koşu` | Aşağıdaki günlük akışı baştan sona koşar. |
 | `tara` | Yalnız 1-2. adımlar: ilan bul, puanla, tabloya yaz. Başvuru hazırlamaz. |
 | `hazırla <ilan linki>` | Tek ilan için 3. adım: eşleşme, uyarlanmış CV, ön yazı, cevaplar. Göndermez. |
+| `kur` | İlk kurulum. Sahibinden CV'sini ister, `sen/CV.md`'ye çevirir, hedef sorularını sohbette sorup `sen/HEDEF.md`'yi yazar, zamanlayıcıyı kurar. Sahibi hiçbir dosyayı elle doldurmaz. |
 | `gönder <klasör adı>` | Hazır bir başvuru klasörünü LinkedIn'de doldurur ve `gonder: evet` ise gönderir. |
 | `prova <klasör adı>` | O ilan ve CV'den 10 mülakat sorusu ve cevap iskeleti üretir (`prova.md`). |
 | `durum` | `basvurular.csv` özetini sohbette verir: bekleyen, gönderilen, dönüş gelen. |
 
 ## Dosyalar
 
-- `sen/CV.md` sahibinin CV'si. Tek doğru kaynak. Buradaki deneyim, tarih, unvan ve rakamlar DEĞİŞTİRİLMEZ, yalnız sıralanır ve vurgulanır.
-- `sen/HEDEF.md` aranan roller, konum, çalışma biçimi, maaş tabanı, kırmızı çizgiler, eşik puanı, günlük tavan, `gonder` anahtarı ve form sorularına standart cevaplar.
+- `sen/CV.md` sahibinin CV'si (`kur` sırasında sen yazarsın). Tek doğru kaynak. Buradaki deneyim, tarih, unvan ve rakamlar DEĞİŞTİRİLMEZ, yalnız sıralanır ve vurgulanır.
+- `sen/HEDEF.md` (`kur` sırasında sohbetteki cevaplardan sen yazarsın) aranan roller, konum, çalışma biçimi, maaş tabanı, kırmızı çizgiler, eşik puanı, günlük tavan, `gonder` anahtarı ve form sorularına standart cevaplar.
 - `basvurular.csv` takip tablosu. Sütunlar: `tarih,ilan_id,sirket,rol,konum,puan,durum,klasor,link,not`. Durum değerleri: `elendi`, `hazir`, `onizleme`, `gonderildi`, `harici`, `soru-bekliyor`, `donus`, `mulakat`, `red`.
 - `basvurular/<YYYY-MM-DD>-<sirket>-<rol>/` her başvurunun klasörü.
 - `raporlar/<YYYY-MM-DD>.md` günün raporu. `raporlar/log-*.txt` ham koşu kaydı.
 - `araclar/cv_pdf.py` uyarlanmış CV'yi PDF'e çevirir. `araclar/kur.py` günlük zamanlayıcıyı kurar. `araclar/gunluk_kosu.py` zamanlayıcının çağırdığı koşucu.
 
+## İlk kurulum (`kur`)
+
+Sahibi bu klasörü GitHub'dan çektirdiğinde `sen/CV.md` kurgusal Elif Aydın'dır ve `sen/HEDEF.md` içinde `demo: evet` yazar. Sahibi dosya açmaz, dosya doldurmaz; her şeyi sohbette sen alırsın. Sahibi klasörde ilk kez konuştuğunda (ne yazarsa yazsın) CV hâlâ demo kişisiyse önce `kur` akışını öner.
+
+1. CV'sini iste: PDF, Word, düz metin ya da LinkedIn "PDF olarak kaydet" çıktısı olabilir. Dosya yolu verirse oku; metin yapıştırırsa onu al. Okuduğunu `sen/CV.md` biçimine çevir (ad, iletişim, özet, deneyim maddeleri tarih ve şirketle, eğitim, araçlar, diller). Hiçbir şey ekleme, hiçbir şey çıkarma; belirsiz yeri sor.
+2. Hedef sorularını TEK TEK sor, cevaplarla `sen/HEDEF.md`'yi yaz: aradığı roller (2-4 unvan), konum, çalışma biçimi (uzaktan / hibrit / ofis), maaş tabanı, kırmızı çizgiler (istemediği sektör, şirket türü, staj/freelance), zamanlayıcı saati, gönder anahtarı (varsayılan `gonder: hayir`, `demo: hayir`). Form standart cevaplarını (deneyim yılı, bildirim süresi, çalışma izni, dil seviyeleri, ikamet) CV'den türet, türetemediğini sor. Cevapları yazdıktan sonra dosyayı özetle ve onayını al.
+3. `py araclar/kur.py` ile zamanlayıcıyı kur, sonucu söyle (hangi saatte, hangi mekanizmayla). Bilgisayarın o saatte açık olması gerektiğini bir cümleyle hatırlat.
+4. İlk koşuyu `tara` ile öner: yalnız arar ve puanlar, klasör açmaz. Sahibi tabloyu beğenirse `günlük koşu` yazar.
+
+Sahibi sonradan "CV'mi güncelle", "maaşı değiştir", "şu sektörü ekle" derse aynı yolla dosyayı sen değiştirirsin; ona dosya adı, satır ya da biçim söylemezsin.
+
 ## Günlük akış
 
 ### 0. Hazırlık
 1. `sen/CV.md`, `sen/HEDEF.md` ve `basvurular.csv` dosyalarını oku. Bugünün tarihini al.
-2. Demo kontrolü. `sen/CV.md` kurulumla gelen kurgusal kişiyse (Elif Aydın, `example.com` adresleri) ve `sen/HEDEF.md` içinde `demo: evet` YOKSA koşuyu burada bitir; rapora "CV demo kişisi, önce sen/CV.md ve sen/HEDEF.md doldurulmalı" yaz. `demo: evet` varsa DEMO MODU: her adım koşar, 4. adımda form "Gözden geçir" ekranına kadar dolar, sonra taslak SİLİNİR; `gonder` ne yazarsa yazsın gönderilmez. Raporun başlığına "DEMO" ekle. İletişim adımında hesabın kendi bilgisi görünür, demo kişisiyle uyuşmaması normaldir. DEMO MODUNDA CV YÜKLENMEZ: LinkedIn'e yüklenen özgeçmiş hesabın kütüphanesinde kalıcı kalır, kurgusal CV gerçek hesapta birikmemeli; formda seçili duran hesabın kendi CV'si olduğu gibi bırakılır, uyarlanmış PDF klasörde kalır.
+2. Demo kontrolü. `sen/CV.md` kurulumla gelen kurgusal kişiyse (Elif Aydın, `example.com` adresleri) ve `sen/HEDEF.md` içinde `demo: evet` YOKSA koşuyu burada bitir; rapora "CV demo kişisi, önce `kur` çalıştırılmalı" yaz. `demo: evet` varsa DEMO MODU: her adım koşar, 4. adımda form "Gözden geçir" ekranına kadar dolar, sonra taslak SİLİNİR; `gonder` ne yazarsa yazsın gönderilmez. Raporun başlığına "DEMO" ekle. İletişim adımında hesabın kendi bilgisi görünür, demo kişisiyle uyuşmaması normaldir. DEMO MODUNDA CV YÜKLENMEZ: LinkedIn'e yüklenen özgeçmiş hesabın kütüphanesinde kalıcı kalır, kurgusal CV gerçek hesapta birikmemeli; formda seçili duran hesabın kendi CV'si olduğu gibi bırakılır, uyarlanmış PDF klasörde kalır.
 3. `basvurular.csv` içindeki `ilan_id` listesini çıkar. Bu ilanlara bir daha bakılmaz.
 4. Chrome araçlarını yükle (`ToolSearch` ile `mcp__claude-in-chrome__*`: tabs_context_mcp, navigate, get_page_text, read_page, find, computer, form_input, file_upload, tabs_close_mcp). `tabs_context_mcp {createIfEmpty:true}` ile bir sekme al.
 5. `https://www.linkedin.com/jobs/` adresini aç. Sayfada profil menüsü yoksa oturum kapalı demektir: DUR, rapora "oturum kapalı, tarayıcıda LinkedIn'e giriş yap" yaz, hiçbir şey deneme. Şifre isteme, şifre yazma.

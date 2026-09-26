@@ -6,6 +6,7 @@ Claude Code'u bu klasörde açıp yaz:
 
 | Komut | Ne yapar |
 |---|---|
+| `kur` | İlk kurulum: CV'ni ver, soruları sohbette cevapla; `sen/CV.md`, `sen/HEDEF.md` ve zamanlayıcıyı Claude yazar. |
 | `günlük koşu` | Tam akış: ara, puanla, hazırla, formu doldur, raporla. Zamanlayıcı da bunu çağırır. |
 | `tara` | Yalnız ara ve puanla. Tabloyu doldurur, klasör açmaz. İlk gün bunu dene. |
 | `hazırla https://www.linkedin.com/jobs/view/123456/` | Tek ilan için klasör, eşleşme, uyarlanmış CV, ön yazı, cevaplar. |
@@ -64,12 +65,12 @@ Koşucu `claude -p --chrome --permission-mode bypassPermissions` ile çalışır
 
 ## Demo modu
 
-Kurulumla gelen `sen/CV.md` kurgusal Elif Aydın'dır ve `sen/HEDEF.md` içinde `demo: evet` yazar. Bu ayarla ajan gerçek ilanları tarar, puanlar, CV'yi uyarlar, formu "Gözden geçir" adımına kadar doldurur ve taslağı siler. Hiçbir şey gönderilmez. Sistemi görmek için bir kez koştur, sonra kendi CV'ni gir ve `demo: hayir` yap. CV demo kişisiyken `demo: evet` yoksa ajan hiç koşmaz.
+Kurulumla gelen `sen/CV.md` kurgusal Elif Aydın'dır ve `sen/HEDEF.md` içinde `demo: evet` yazar. Bu ayarla ajan gerçek ilanları tarar, puanlar, CV'yi uyarlar, formu "Gözden geçir" adımına kadar doldurur ve taslağı siler. Hiçbir şey gönderilmez. Sistemi görmek için bir kez koştur, sonra `kur` yaz: CV'ni verirsin, Claude dosyaları yazar ve `demo: hayir` yapar. CV demo kişisiyken `demo: evet` yoksa ajan hiç koşmaz.
 
 ## Sık takılınan yerler
 
 - **"oturum kapalı" raporu:** Chrome'da linkedin.com'a giriş yap, koşuyu tekrar başlat. Ajan şifre istemez ve yazmaz.
 - **PDF çıkmadı:** Chrome ya da Edge yolu bulunamamıştır. `CHROME_PATH` ortam değişkenine tarayıcının tam yolunu ver.
-- **Form "soru-bekliyor" kaldı:** klasördeki `cevaplar.md` içinde "SAHİBE SOR" satırını bul, cevabı `sen/HEDEF.md` standart cevaplarına ekle, `gönder <klasör>` yaz.
+- **Form "soru-bekliyor" kaldı:** klasördeki `cevaplar.md` içinde "SAHİBE SOR" satırını bul, cevabı sohbette söyle (Claude standart cevaplara ekler), sonra `gönder <klasör>` yaz.
 - **Aynı ilan tekrar geliyor:** `basvurular.csv` içinde `ilan_id` var mı bak. Tabloyu elle silersen ajan ilanı yeni sanır.
 - **LinkedIn güvenlik uyarısı:** ajan koşuyu keser. Bir iki gün ara ver, tavanı düşür.

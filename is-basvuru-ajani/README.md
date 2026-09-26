@@ -19,27 +19,23 @@ Her sabah senin yerine LinkedIn'e giren, uygun ilanları bulup puanlayan, CV'ni 
 
 ## Kurulum
 
-Gerekenler: [Claude Code](https://claude.com/claude-code), Chrome ve [Claude in Chrome](https://claude.com/chrome) eklentisi, Python 3.10+. LinkedIn'e Chrome'da bir kez giriş yapmış olman yeterli.
+Gerekenler: [Claude Code](https://claude.com/claude-code), Chrome ve [Claude in Chrome](https://claude.com/chrome) eklentisi, Python 3.10+. LinkedIn'e Chrome'da bir kez giriş yapmış olman yeterli. Dosya açman, dosya doldurman gerekmiyor; hepsini sohbette Claude yapıyor.
 
-```bash
-npx degit muhammedsevimli/sistemler/is-basvuru-ajani is-basvuru-ajani
-```
-
-Ya da yeşil **Code → Download ZIP**. Komut satırıyla uğraşmak istemiyorsan Claude Code'u aç ve şu adresi ver, "bunu benim için kur" de:
+1. Claude Code'u aç, şu adresi ver ve "bunu benim için kur" de:
 
 ```text
 github.com/muhammedsevimli/sistemler/tree/main/is-basvuru-ajani
 ```
 
-## Çalıştırma
+   Claude klasörü indirir (`npx degit` ile; komut satırını seven kendisi de çalıştırabilir: `npx degit muhammedsevimli/sistemler/is-basvuru-ajani is-basvuru-ajani`).
 
-1. `sen/CV.md` dosyasına kendi CV'ni yaz. PDF'in varsa Claude Code'a ver, "bunu sen/CV.md biçimine çevir" de. İçindeki Elif Aydın kurgusal demo kişisidir.
-2. `sen/HEDEF.md` dosyasını doldur: roller, konum, maaş tabanı, kırmızı çizgiler, standart form cevapları. `gonder: hayir` bırak.
-3. Claude Code'u bu klasörde aç ve `günlük koşu` yaz. İlk koşuyu izle. Klasörleri ve raporu oku.
-4. Beğendiysen `py araclar/kur.py` çalıştır. `sen/HEDEF.md` içindeki `saat:` değerine göre her gün kendi kendine koşar (Windows Görev Zamanlayıcı, macOS launchd, Linux cron).
-5. Birkaç gün raporları oku. Sisteme güvenince `gonder: evet` yap.
+2. Klasörde `kur` yaz. Claude CV'ni ister (PDF, Word ya da metin), `sen/CV.md`'ye çevirir; aradığın rolleri, konumu, maaş tabanını, kırmızı çizgilerini ve saati sohbette sorar, `sen/HEDEF.md`'yi yazar, zamanlayıcıyı kurar. Gönder anahtarı kapalı başlar.
 
-Diğer komutlar (`tara`, `hazırla <link>`, `gönder <klasör>`, `prova <klasör>`, `durum`) ve ayrıntılar `CALISTIR.md` içinde.
+3. `tara` yaz, ilk taramayı ve puan tablosunu izle. Beğendiysen `günlük koşu` yaz ya da sabahı bekle; `kur` sırasında verdiğin saatte kendi kendine koşar.
+
+4. Birkaç gün raporları oku. Sisteme güvenince "gönderi aç" de, anahtarı Claude çevirir.
+
+Diğer komutlar (`tara`, `hazırla <link>`, `gönder <klasör>`, `prova <klasör>`, `durum`) ve ayrıntılar `CALISTIR.md` içinde. Kurulumla gelen `sen/CV.md` kurgusal Elif Aydın'dır; `kur` onu seninkiyle değiştirir.
 
 ## Gerçekten çalışıyor mu
 
