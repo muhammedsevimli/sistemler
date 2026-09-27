@@ -1,0 +1,24 @@
+.env
+.env.*
+.secrets/
+*.key
+*.pem
+*token*
+*secret*
+*credential*
+node_modules/
+__pycache__/
+.DS_Store
+
+# Adayların kişisel verisi (KVKK): repoya ASLA girmez
+adaylar.csv
+adaylar/gelen/*
+!adaylar/gelen/.gitkeep
+raporlar/*
+!raporlar/.gitkeep
+davetler/*
+!davetler/.gitkeep
+retler/*
+!retler/.gitkeep
+beni-ele/*
+!beni-ele/.gitkeep

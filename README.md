@@ -25,6 +25,8 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | Abonelik Kesici | Kullandığın araçları ve aylık ücretlerini yaz, sistem her biri için açık kaynak ve self-host alternatifleri kendisi tarasın. Bulduğu projeyi doğrulasın (lisans, son güncelleme, docker), dört kritere puanlasın (kurulum, bakım, gerçek maliyet, veri taşıma riski) ve üç bant halinde sıralı kesme listesi çıkarsın: KES, DENE, DOKUNMA. Yıllık farkı hesaplarken altyapı giderini düşer, brütü net gibi sunmaz. | [abonelik-kesici/](abonelik-kesici/) |
 | Ajan Filosu | Yapılacakları yaz, sistem hangisinin hangisini beklediğini çözsün. İki tür bağımlılığı ayırsın (veri bağımlılığı ve aynı dosyaya yazma çakışması), işleri dalgalara dizsin, bağımsızları aynı anda ayrı çalışanlara dağıtsın. Her çalışan kendi klasöründe kalır, sonunda tek rapor çıkar. Her şeyi paralelleştirmez: geri alınamaz işleri ve çakışanları bilerek sıraya koyar, kazancı da şişirmez. | [ajan-filosu/](ajan-filosu/) |
 | Ajan Takımı | Bir soruyu beş rollü bir ajan takımına tartıştır. Dört rol birer teori savunsun, Matematikçi hiçbir teori savunmasın ve elindeki veri dosyasındaki rakamla her teoriyi sınasın. Çürütülen rol ikinci turda çekilsin, ayakta kalan teori senin cevabın olsun. Hiçbir rol veri dosyasında olmayan bir sayıyı kullanamaz. | [ajan-takimi/](ajan-takimi/) |
+| İş Başvuru Ajanı | Her sabah LinkedIn'de uygun ilanları bulup puanlasın, CV'ni ilana göre yeniden sıralasın, ön yazıyı ve form cevaplarını yazsın, Kolay Başvuru formunu son adıma kadar doldursun. Gönder düğmesine basıp basmayacağını tek satırla sen seçersin. CV'nde olmayan deneyimi, aracı ya da tarihi asla eklemez. | [is-basvuru-ajani/](is-basvuru-ajani/) |
+| CV Eleme Ajanı | İlanına gelen CV'leri okusun, her birini ilanla karşılaştırıp 100 üzerinden puanlasın, kırmızı çizgine takılanı gerekçesiyle elesin ve kısa listeyi çıkarsın. Mülakat daveti ve nazik ret maillerini taslak olarak yazsın. Yaş, cinsiyet, medeni durum, fotoğraf gibi bilgileri puanlamaz; CV'ler bilgisayarından çıkmaz. İş arayan için `beni ele` modu da var: başvurmadan önce işe alanın göreceği puanı gösterir. | [cv-eleme-ajani/](cv-eleme-ajani/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 
@@ -57,6 +59,8 @@ npx degit muhammedsevimli/sistemler/tasarim-denetcisi tasarim-denetcisi
 npx degit muhammedsevimli/sistemler/abonelik-kesici abonelik-kesici
 npx degit muhammedsevimli/sistemler/ajan-filosu ajan-filosu
 npx degit muhammedsevimli/sistemler/ajan-takimi ajan-takimi
+npx degit muhammedsevimli/sistemler/is-basvuru-ajani is-basvuru-ajani
+npx degit muhammedsevimli/sistemler/cv-eleme-ajani cv-eleme-ajani
 ```
 
 Ya da tüm repoyu klonla, veya yeşil **Code → Download ZIP** ile indirip istediğin klasörü kullan.
