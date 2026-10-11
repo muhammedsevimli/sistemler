@@ -71,6 +71,30 @@ işe al çevirmen
 
 Claude üç soru sorar (ne üretecek, hangi araçlara ihtiyacı var, ne zaman yardımcı alabilir), çalışanın görev tanımını `.claude/agents/cevirmen.md` olarak yazar ve sana gösterir. Claude Code bu klasöre yazmak için izin isterse onayla. Yeni çalışan bazen ancak bir sonraki oturumda kadroda görünür. O oturumda görünmezse CEO onu görev tanımını okutarak genel bir çalışan olarak açar, iş yine yapılır.
 
+## 6. Rakiplerini izlet
+
+```text
+rakiplerimi izle
+```
+
+CEO gözcüyü işe alır ve en çok beş soru sorar:
+
+1. Kimleri izleyelim? Her rakibin adı, varsa YouTube kanalı, sitesi ya da blogu.
+2. Haberlerde hangi kelimeleri arayalım? (örnek: "Urla restoran") Şehrinin Reddit topluluğu varsa onu da yaz.
+3. Elle eklemek istediğin gönderi linkleri var mı?
+4. Kaç günü tarayalım? (varsayılan 4)
+5. Fırsat taslakları hangi kanal için yazılsın?
+
+YouTube kanal adresinden kanalın beslemesini kendisi bulur, listeyi `sirket/radar/kaynaklar.md` olarak yazar ve ilk taramayı yapar. Rapor `sirket/onay/radar-<tarih>.md` dosyasına düşer: ne yaptılar, bize hangi açıyla uyar, bugün ne üretmeliyiz. Taze ve hızla izlenen bir içerik varsa altında yanıt ya da gönderi taslağı olur; taslak denetçiden geçer, gönderimi sen yaparsın.
+
+Sonraki her rapor için:
+
+```text
+radar
+```
+
+Listeye kaynak eklemek ya da çıkarmak için sohbette söylemen yeterli ("şu kanalı da ekle"). Haftada iki sabah kendiliğinden çalışsın istersen "vardiyayı kur" yaz; CEO Windows'ta Görev Zamanlayıcı'ya, Mac'te cron'a ekler. Kaldırmak için "vardiyayı kaldır" yaz.
+
 ## Günlük nasıl okunur
 
 `sirket/gunluk.jsonl` her satırda bir olay tutar:

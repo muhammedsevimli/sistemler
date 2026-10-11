@@ -13,6 +13,8 @@ Her işten önce `sirket/SIRKET.md` dosyasını oku. Şirketin adı, sesi, kırm
 | `vardiya` | Son işin vardiya panosunu sohbete yazar: kim işe alındı, kim hangi masada, kim bitirdi, onayda ne bekliyor. Günlükten okur. |
 | `onayla <dosya>` | Onay klasöründeki bir işi onaylar. Günlüğe `onay` yazar. |
 | `reddet <dosya> <not>` | İşi notla geri çevirir. Günlüğe `ret` yazar, notu ilgili çalışana iletip düzelttirir. |
+| `rakiplerimi izle` | Rakip radarının ilk kurulumu. Gözcüyü işe alır, sahibinden izlenecek listeyi en çok beş soruyla alır, `sirket/radar/kaynaklar.md`'yi yazar, ilk taramayı yapar. Aşağıda `rakiplerimi izle` akışı. |
+| `radar` | Yeni tarama ve rapor. Gözcü listeyi tarar, raporu `sirket/onay/radar-<tarih>.md` olarak bırakır. Aşağıda `radar` akışı. |
 | Düz cümleyle iş | "Urla Sofrası için haftalık bülten çıkar" gibi. Aşağıdaki iş akışını baştan sona koşar. |
 
 Sahibi klasörde ilk kez konuştuğunda `sirket/SIRKET.md` içinde `demo: evet` yazıyorsa önce `kur` akışını öner. Sahibi demo şirketle denemek isterse ("önce dene") işi demo şirketle koşabilirsin.
@@ -25,6 +27,7 @@ Sahibi klasörde ilk kez konuştuğunda `sirket/SIRKET.md` içinde `demo: evet` 
 | Çizer | `.claude/agents/cizer.md` | Görsel gerekiyorsa: sahne planı, kapak, afiş, diyagram. | Evet |
 | Besteci | `.claude/agents/besteci.md` | Ses ya da müzik gerekiyorsa: müzik planı, ses efekti listesi, müzik üretici için tarif. | Evet |
 | Araştırmacı | `.claude/agents/arastirmaci.md` | Dışarıdan bilgi gerekiyorsa: rakip, fiyat, trend, kaynaklı bilgi. | Evet |
+| Gözcü | `.claude/agents/gozcu.md` | Rakip radarı: `rakiplerimi izle` ve `radar` işlerinde. Listedeki kaynakları tarar, üç parçalı rapor ve fırsat taslağı yazar. | Hayır |
 | Denetçi | `.claude/agents/denetci.md` | Her işin sonunda. Dışarı gidecek her çıktı denetçiden geçer. | Hayır |
 
 Kadroda uyan rol yoksa `işe al` akışıyla yeni bir rol yazarsın.
@@ -40,7 +43,7 @@ Kadroda uyan rol yoksa `işe al` akışıyla yeni bir rol yazarsın.
 Her ihtiyaç için kadrodan bir çalışan seç. Sınırlar:
 - Bir işte en çok `en_cok_calisan` (varsayılan 5) çalışan.
 - Bütün iş boyunca toplam en çok `en_cok_yardimci` (varsayılan 2) yardımcı. Yardımcıyı çalışan kendisi alır, sen saymaya dahil edersin.
-- Denetçi her işte vardır.
+- Denetçi her işte vardır. Tek istisna `radar` işi: rapor iç belgedir, denetçi yalnız fırsat taslağı varsa girer.
 
 Her işe alım için günlüğe yaz:
 ```bash
@@ -153,6 +156,60 @@ Kayıt dışı çalışma olmaz: günlüğe düşmeyen işe alım, masa ya da ya
 3. `.claude/agents/<rol>.md` dosyasını şablondaki yapıyla yaz (rol adı küçük harf, Türkçe karakter yok). Sahibine göster. Claude Code `.claude/` klasörüne yazmak için sahibinden izin isteyebilir; sahibine "izin penceresi gelirse onayla" de. İzin verilmezse dosyayı `sirket/kadro-taslak/<rol>.md` olarak yaz, sahibine bunu söyle ve aşağıdaki 5. adımdaki yolu kullan (görev tanımı olarak bu taslağı okut).
 4. Kadro tablosuna bir satır ekle (bu dosyada), `bash sirket/gunluk.sh ceo ise_alim "<rol>: kadroya eklendi"`, commit.
 5. Yeni çalışan bu oturumda Agent aracında görünmeyebilir. Görünmezse iş akışının 4. adımındaki (Vardiya) `general-purpose` yolunu kullan: çalışana önce görev tanımı dosyasını okut. Bir sonraki oturumda kadroda olur.
+
+## `rakiplerimi izle` akışı
+
+Yönetim kurulunun "rakiplerimi izle" işi. CEO bir gözcü işe alır, ona izleyeceği listeyi verir ve ilk taramayı yaptırır.
+
+1. **Hazırlık.** Klasör depo değilse `kur` akışının 1. adımını yap. Python'u bul: sırayla `python3 --version`, `python --version`, `py -3 --version` dene ve sürüm basan ilk komutu kullan. Windows'ta `python3` "Python was not found" diyebilir; o komutu sayma. Hiçbiri çalışmıyorsa sahibine sade dille söyle: python.org'dan Python 3'ü kursun (Windows'ta kurulumun ilk ekranındaki "Add python.exe to PATH" kutusunu işaretlesin), sonra yine `rakiplerimi izle` yazsın.
+2. **İşe alım.** `bash sirket/gunluk.sh ceo ise_alim "gozcu: rakip radari"`.
+3. **Liste.** Sahibine sırayla en çok beş soru sor. Sahibi cevapları mesajında verdiyse sorma, cevaplardan devam et.
+   1. Kimleri izleyelim? Her rakip için adı ve varsa YouTube kanalı, sitesi ya da blogu.
+   2. Haberlerde hangi kelimeleri arayalım? Şehrinin ya da sektörünün bir Reddit topluluğu varsa onu da yaz.
+   3. Elle eklemek istediğin gönderi linkleri var mı? X ve TikTok gönderisinin metnini gözcü okur. Instagram giriş istediği için okunmaz; linkin yanına kısa bir not yazarsan o not kullanılır.
+   4. Kaç günü tarayalım? Varsayılan 4 gün: haftada iki vardiya arası.
+   5. Fırsat taslakları hangi kanal için yazılsın? (`SIRKET.md`'deki kanallardan biri.)
+
+   Sahibi X ya da Instagram hesabı verirse açıkça söyle: bu sürüm bu hesapları düzenli okuyamaz, çünkü bu siteler anahtarsız liste vermiyor; gördüğü gönderinin linkini eklerse gözcü onu okur.
+4. **Listeyi yaz.** Her YouTube kanalı için `<python> bin/gozcu_tara.py --kanal-bul <kanal adresi>` çalıştır. Betik kanal sayfasının kaynağındaki `channelId` değerini bulur ve besleme adresini basar; satıra bu besleme adresini yaz. Bulamazsa kanal adresini olduğu gibi yaz, tarayıcı her taramada yeniden dener. Site ve haber satırlarından emin değilsen `<python> bin/gozcu_tara.py --dene <tür> <adres>` ile tek tek dene. Sonra `sirket/radar/kaynaklar.md` dosyasını `sirket/radar/kaynaklar.ornek.md` biçiminde yaz: en üstte `gun: <n>`, altında `python: <komut>` ve `firsat_kanali: <kanal>` satırları, sonra tablo (Ad, Tür, Adres, Not). Sahibi demo şirketle denemek isterse ("önce dene") örnek dosyayı `kaynaklar.md` adıyla kopyala. Listeyi sahibine kısa bir tablo olarak göster.
+5. **Commit.** `git add -A && git commit -m "radar: kaynak listesi"`.
+6. **İlk tarama.** `radar` akışını 2. adımdan koş. Gözcü 2. adımda işe alındı; `radar` akışındaki `ise_alim` satırını bu ilk taramada yazma.
+7. **Vardiya teklifi.** Sahibine sor: "Gözcü haftada iki sabah kendiliğinden tarasın mı?" Evet derse aşağıdaki "Gözcünün vardiyası" bölümündeki komutu sen çalıştır. Sahibi istemedikçe zamanlanmış görev kurmazsın.
+
+## `radar` akışı
+
+Yeni tarama ve rapor. Sahibi yazar ya da vardiya kendiliğinden çalıştırır (`claude -p "radar"`).
+
+1. `sirket/radar/kaynaklar.md` yoksa dur: sahibine `rakiplerimi izle` yazmasını söyle.
+2. **İş tanımı.** İşin adı `radar-<YYYY-MM-DD>`. `sirket/isler/<is>.md` dosyasına yaz: bitmiş hal ("son <gun> günün radar raporu ve varsa fırsat taslakları onay klasöründe"), ihtiyaçlar (tarama, üç parçalı rapor, fırsat taslağı), kim (gözcü; taslak çıkarsa denetçi), Python komutu ve fırsat kanalı (`kaynaklar.md`'deki `python:` ve `firsat_kanali:` satırları). Günlük: `bash sirket/gunluk.sh ceo ise_alim "gozcu: <is>"` (ilk tarama `rakiplerimi izle` içinden açıldıysa gözcü orada işe alındı, bu satırı yazma).
+3. **Masa.** Commit, sonra `git worktree add sirket/masalar/gozcu -b masa/<is>-gozcu` ve günlüğe `masa`. İş akışının 3. adımıyla aynıdır.
+4. **Vardiya.** Gözcüyü Agent aracıyla aç (`subagent_type` = `gozcu`). Prompt'a iş akışının 4. adımındaki beş maddeyi yaz; yardımcı hakkı yerine "yardımcı almazsın" de, Python komutunu da ekle.
+5. **Birleşme.** İş akışının 5. adımı. Gözcünün `bitis` satırını kontrol et. Gözcü "tarama boş" dediyse birleştir, günlüğe `durdu` yaz, sahibine hatayı söyle ve dur.
+6. **Denetim.** `sirket/onay/radar-<tarih>.md` dosyasının "Fırsat taslakları" bölümünde taslak varsa denetçiyi işe al, masasını aç ve yalnız taslakları denetlet (raporun geri kalanı dışarı gitmez). Denetçinin masasını birleştir, kararı onay dosyasındaki "Denetçi kararı" satırına yaz. `DÜZELT` ise iş akışının 6. adımı: gözcüyü yeni masada notla bir kez daha çalıştır, bu kez yalnız taslakları yeniden yazar, tarama yapmaz. Taslak yoksa satıra "taslak yok, denetim gerekmedi" yaz.
+7. **Onay kapısı.** `bash sirket/gunluk.sh ceo onay_istegi "sirket/onay/radar-<tarih>.md"`, commit. Sahibine kısa özet: okunan ve atlanan kaynak, madde sayısı, en çok tutan madde, taslak sayısı, süre, görünen token, dosya yolu.
+
+Ham tarama dosyaları (`sirket/radar/ham-<tarih>.json`) ana dalda kalır. Gözcü bir sonraki taramada izlenme artışını bunlardan hesaplar; silme.
+
+## Gözcünün vardiyası (isteğe bağlı)
+
+Sahibi isterse kurarsın. Vardiya `bin/radar_vardiya.cmd` (Windows) ya da `bin/radar_vardiya.sh` (Mac, Linux) dosyasını çalıştırır. Bu dosya klasöre geçer ve `claude -p "radar"` komutunu yalnız şu izinlerle açar: dosya düzenleme, git, günlük betiği, Python. Çıktı `sirket/radar/vardiya.log` dosyasına eklenir. Örnek düzen: pazartesi ve perşembe 08:30.
+
+Windows (Görev Zamanlayıcı):
+```text
+schtasks /create /tn "AjanSirketi-Radar" /sc weekly /d MON,THU /st 08:30 /tr "\"<klasörün tam yolu>\bin\radar_vardiya.cmd\""
+schtasks /query /tn "AjanSirketi-Radar"
+schtasks /delete /tn "AjanSirketi-Radar" /f
+```
+Bilgisayar o saatte açık ve kullanıcı oturumu açık olmalı. Vardiya saatinde bir komut penceresi açılır ve iş bitince kapanır; pencereyi kapatma.
+
+Mac ve Linux (cron):
+```bash
+chmod +x bin/radar_vardiya.sh
+(crontab -l 2>/dev/null; echo '30 8 * * 1,4 /bin/bash "<klasörün tam yolu>/bin/radar_vardiya.sh"') | crontab -
+```
+Mac cron'a klasör erişimi vermeyebilir; o zaman Sistem Ayarları > Gizlilik ve Güvenlik > Tam Disk Erişimi'nde `cron` açılır. Sahibi launchd isterse aynı betiği `StartCalendarInterval` ile çalıştıran bir `~/Library/LaunchAgents/` dosyası yazarsın.
+
+Vardiyayı kaldırmak istenirse Windows'ta `schtasks /delete`, Mac'te `crontab -e` ile o satır silinir.
 
 ## `vardiya` akışı
 

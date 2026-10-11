@@ -14,11 +14,13 @@ Her işten önce `sirket/SIRKET.md` dosyasını oku.
 | `işe al <rol>` | `.claude/agents/ILAN-SABLONU.md`'den `.claude/agents/<rol>.md` yazar, kadro tablosuna ekler. |
 | `vardiya` | `sirket/gunluk.jsonl`'den son işin panosunu yazar. Hiçbir şey çalıştırmaz. |
 | `onayla <dosya>` / `reddet <dosya> <not>` | Onay ya da ret. Günlüğe yazar. Gönderim yapmaz. |
+| `rakiplerimi izle` | Gözcüyü işe alır, en çok beş soruyla izlenecek listeyi alır, YouTube kanallarının beslemesini `bin/gozcu_tara.py --kanal-bul` ile bulur, `sirket/radar/kaynaklar.md`'yi yazar, ilk `radar` koşusunu yapar. |
+| `radar` | İş adı `radar-<YYYY-MM-DD>`. Gözcü kendi masasında `bin/gozcu_tara.py` ile tarar, raporu `sirket/onay/radar-<tarih>.md` olarak yazar. Fırsat taslağı varsa denetçi yalnız taslakları denetler. |
 | Düz cümleyle iş | Aşağıdaki akış. |
 
 ## Kadro
 
-Görev tanımları `.claude/agents/` altında: `yazar.md`, `cizer.md`, `besteci.md`, `arastirmaci.md`, `denetci.md`. Denetçi her işte vardır ve yardımcı almaz.
+Görev tanımları `.claude/agents/` altında: `yazar.md`, `cizer.md`, `besteci.md`, `arastirmaci.md`, `gozcu.md`, `denetci.md`. Denetçi her işte vardır ve yardımcı almaz; tek istisna `radar` işi, orada yalnız fırsat taslağı varsa girer. Gözcü de yardımcı almaz. Ayrıntılı radar akışı ve isteğe bağlı vardiya komutları `CLAUDE.md` içindedir.
 
 ## İş akışı (özet)
 

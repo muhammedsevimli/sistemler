@@ -24,6 +24,7 @@ Tek bir sohbete "bu haftanın bültenini çıkar, Instagram duyurusunu da yaz, s
 | Çizer | Kapak, afiş, sahne planı, diyagram. Her görsel için tarif ve tarayıcıda açılan bir çizim. | Evet |
 | Besteci | Video ya da reklam için müzik ve ses planı, müzik üretici araçlara verilecek tarif. | Evet |
 | Araştırmacı | Rakip, fiyat, trend araştırması. Her bilgi kaynak bağlantısıyla. | Evet |
+| Gözcü | Rakip radarı. Verdiğin listeyi haftada iki sabah tarar, kim ne paylaşmış ve hangisi tutmuş yazar, bugün ne üretmen gerektiğini söyler. | Hayır |
 | Denetçi | Dışarı gidecek her çıktıyı şirket kartına ve kırmızı çizgilere karşı kontrol eder. GEÇTİ ya da DÜZELT der. | Hayır |
 
 Kadroya istediğin rolü eklersin: `işe al çevirmen` yazman yeterli.
@@ -73,6 +74,44 @@ Urla Sofrası için bu haftanın e-posta bültenini çıkar, Instagram duyurusun
 
 Onay klasöründeki işi okuyunca `onayla <dosya>` ya da `reddet <dosya> <notun>` yazarsın. Reddedersen CEO notunu ilgili çalışana iletir ve düzelttirir.
 
+## Rakip radarı: gözcü
+
+Şirkete verebileceğin ikinci iş: rakiplerini izlemek. CEO bunun için bir gözcü işe alır, ona izleyeceği listeyi verir. Gözcü listeyi tarar ve her vardiyada sana üç parçalı bir rapor bırakır:
+
+1. **Ne yaptılar:** son günlerde kim ne paylaşmış, hangisi tutmuş.
+2. **Bize hangi açıyla uyar:** o içeriğin senin şirketine bağlandığı yer.
+3. **Bugün ne üretmeliyiz:** üç somut fikir, her biri hangi kanal için.
+
+Gözcü taze ve hızla izlenen bir içerik görürse bir yanıt ya da gönderi taslağı da yazar. Taslak denetçiden geçer ve onay klasörüne düşer. Sen onaylamadan hiçbir şey gönderilmez.
+
+**Kurulum.** Claude Code'a bu sistemin GitHub adresini ver, klasörde `kur` yaz, sonra şunu yaz:
+
+```text
+rakiplerimi izle
+```
+
+CEO en çok beş soru sorar: kimleri izleyelim (YouTube kanalı, site, blog), haberlerde hangi kelimeler aransın, elle eklemek istediğin link var mı, kaç günü tarayalım, fırsat taslakları hangi kanal için yazılsın. Listeyi kendisi yazar, ilk taramayı yapar. Sonra her yeni rapor için:
+
+```text
+radar
+```
+
+**Ne okur.** Her şey ücretsiz ve anahtarsız:
+
+| Kaynak | Nasıl | Tutma bilgisi |
+|---|---|---|
+| YouTube kanalı | Kanalın herkese açık beslemesi | İzlenme ve beğeni var |
+| Site ya da blog | Sitenin beslemesi, yoksa site haritası | Yok |
+| Haberler | Google Haberler araması | Yok |
+| Reddit | Topluluk ya da arama beslemesi | Yok |
+| Elle eklediğin link | X ve TikTok gönderisinin metni, diğer sayfaların başlığı | Yok |
+
+X ve Instagram hesaplarını düzenli takip etmek bu sürümde yok: bu siteler anahtarsız liste vermiyor. Gördüğün bir gönderinin linkini listeye eklersen gözcü onu da okur. Instagram linki giriş istediği için okunmaz, yanına yazdığın not kullanılır. İzlenme bilgisi olmayan kaynakta gözcü sayı uydurmaz, "izlenme bilgisi yok" yazar.
+
+**Vardiya.** İstersen gözcü haftada iki sabah (örnek: pazartesi ve perşembe 08:30) kendiliğinden çalışır. "Vardiyayı kur" demen yeterli; CEO Windows'ta Görev Zamanlayıcı'ya, Mac'te cron'a bir satır ekler. Bilgisayarın o saatte açık olmalı. Zorunlu değil, `radar` yazarak da çalıştırırsın.
+
+**Gerekenler.** Bilgisayarında Python 3. Mac'te çoğunlukla hazır gelir; Windows'ta yoksa CEO sana python.org'dan nasıl kuracağını söyler. Taramayı CEO çalıştırır, senin terminal açman gerekmez.
+
 ## Sınırlar
 
 - Bir işte en çok 5 çalışan ve toplam en çok 2 yardımcı. Yardımcı başka yardımcı alamaz.
@@ -86,7 +125,8 @@ Evet, gerçek koşularla. Tamamı `TEST-SONUCU.md` içinde.
 
 - **1. tur, haftalık bülten:** CEO yazarı ve denetçiyi işe aldı, yazar Instagram gönderisi için kendine bir yardımcı aldı. İki masa açıldı, ikisi de çakışmasız birleşti, iş onay klasörüne düştü. Günlük 16 satır, süre 3 dakika 50 saniye.
 - **2. tur, bülten ve kara tahta afişi:** yazar ve çizer aynı anda kendi masalarında çalıştı, denetçi ikisi birleştikten sonra başladı. 3 çalışan, 1 yardımcı, 3 birleşme, günlük 22 satır, süre 5 dakika.
-- **Dışarı giden:** iki turda da sıfır.
+- **Gözcü, rakip radarı:** gerçek ve herkese açık kaynaklarla dört koşu (3 yemek kanalı, bir yemek sitesi, Google Haberler, Reddit). `rakiplerimi izle` 3 dakika 32 saniye: 7 kaynağın 7'si okundu, son 4 günden 30 madde, 63 satırlık rapor. Gözcü taze ama şirkete uymayan bir videoyu fırsat saymadı; sahibinin "fırsat" notuyla eklediği haberden bir Instagram taslağı yazdı, denetçi GEÇTİ dedi. Vardiya betiği Windows'ta elle çalıştırıldı ve baştan sona koştu.
+- **Dışarı giden:** bütün koşularda sıfır.
 
 Testte çıkan aksaklıklar ve test edilmeyen komutlar da aynı dosyada yazıyor. Çıktının kendisi `ORNEK-CIKTI.md` içinde.
 
