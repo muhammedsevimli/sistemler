@@ -26,47 +26,46 @@ Akış şöyle:
 
 ## Kurulum
 
-Gerekenler: [Claude Code](https://claude.com/claude-code) ve canlı izleme sayfası için bilgisayarında Python (çoğu bilgisayarda zaten var).
+Gereken tek şey Claude masaüstü uygulaması. ChatGPT kullanıyorsan aynı adımları Codex'te yaparsın.
 
-1. Claude Code'u aç, şu adresi ver ve "bunu benim için indir" de:
+1. Claude masaüstü uygulamasını aç, Code sekmesinde yeni bir sohbet başlat. Şu adresi yapıştır ve "bunu benim için indir ve bu klasörde çalış" de:
 
 ```text
 github.com/muhammedsevimli/sistemler/tree/main/kurul
 ```
 
-2. İnen `kurul` klasörünü Claude Code'da aç (klasörün içinde başlat).
-3. Sohbete kararını yaz:
+Gerisini Claude halleder. Bir şey kurması gerekirse sana sorar, sen onaylarsın.
+
+2. Kararını yaz:
 
 ```text
 kurulu topla: ikinci şubeyi açayım mı?
 ```
 
-Eksik bilgi varsa Claude en fazla üç soru sorar. Tam kurul birkaç dakika sürer, sonunda sohbette kısa kararı, klasörde tam raporu görürsün.
+Eksik bilgi varsa Claude en fazla üç soru sorar, sonra kurulu toplar. Birkaç dakika sürer. Sonunda kısa kararı sohbette görürsün, tam rapor klasörde kalır.
 
-Elle indirmek istersen: `npx degit muhammedsevimli/sistemler/kurul kurul`
-
-## Odayı canlı izle
-
-Kurul çalışırken ikinci bir pencerede:
+3. Odayı canlı izlemek istersen aynı sohbete yaz:
 
 ```text
-python oda/sunucu.py
+odayı aç
 ```
 
-Sonra tarayıcıda http://localhost:4731 adresini aç. Kart geldikçe o koltuk konuşur, baloncukta yazdığı akar, ikinci turda itiraz ve kabul okları çizilir, en sonda karar bandı açılır. Farenle bir koltuğun üstüne gelirsen son sözünü tekrar söyler.
+Claude sayfayı başlatır ve sana tıklayacağın adresi verir. Kart geldikçe o koltuk konuşur, baloncukta yazdığı akar, ikinci turda itiraz ve kabul okları çizilir, en sonda karar bandı açılır. Farenle bir koltuğun üstüne gelirsen son sözünü tekrar söyler.
 
-Bitmiş bir oturumu baştan kart kart oynatmak için (ekran kaydı almak istersen): http://localhost:4731/?oynat=1&adim=4 (her kart 4 saniye; klavyede R baştan başlatır, C canlıya döner).
+Bitmiş bir oturumu baştan kart kart izlemek istersen (ekran kaydı almak için) "odayı baştan oynat" yaz. Her kart 4 saniye ekranda kalır; klavyede R baştan başlatır, C canlıya döner.
 
-Sayfa yalnız oturum klasörünü okur, hiçbir yere bağlanmaz. İlk açtığında hazır gelen kurgusal örnek oturumu (`oturumlar/ornek-urla-sofrasi/`) gösterir; sen bir kurul topladığında otomatik olarak seninkine geçer.
+Sayfa yalnız oturum klasörünü okur, hiçbir yere bağlanmaz. İlk açtığında hazır gelen kurgusal örnek oturumu gösterir; sen bir kurul topladığında kendiliğinden seninkine geçer.
 
 ## Modlar
 
-| Komut | Ne olur |
+Hepsi sohbete yazdığın düz cümleler:
+
+| Ne yazarsın | Ne olur |
 |---|---|
-| `kurulu topla: <karar>` ya da `/kurul <karar>` | Tam kurul: 5 koltuk, 2 tur (10 ajan çalışması) |
-| `kurulu topla: <karar> --hizli` | Hızlı kurul: karara göre seçilen 3 koltuk, 1 tur |
-| `kurulu topla: <karar> --koltuk buffett,jobs,hormozi` | Koltukları sen seçersin |
-| `kurul sor hormozi <soru>` | Tek koltuğa kısa soru, puan yok. Cevap `oturumlar/sorular/` içine düşer |
+| `kurulu topla: <karar>` | Tam kurul: 5 koltuk, 2 tur |
+| `hızlı kurul topla: <karar>` | Hızlı kurul: karara göre seçilen 3 koltuk, 1 tur |
+| `kurulu topla: <karar>, koltuklar Buffett, Jobs, Hormozi olsun` | Koltukları sen seçersin |
+| `kurul sor hormozi: <soru>` | Tek koltuğa kısa soru, puan yok. Cevap `oturumlar/sorular/` içine düşer |
 
 ## Örnek
 
@@ -76,15 +75,13 @@ Sayfa yalnız oturum klasörünü okur, hiçbir yere bağlanmaz. İlk açtığı
 
 ```text
 kurul/
-  .claude/skills/kurul/SKILL.md     Başkan'ın akışı ve puan kuralları
-  .claude/agents/kurul-<koltuk>.md  beş koltuk
-  beyinler/<koltuk>/                sicak, cerceveler, ses, hikayeler, kaynaklar
-  beyinler/BEYIN-SABLON.md          yeni koltuk eklemek için şablon
-  oturumlar/                        her kurul burada bir klasör açar
-  oda/                              canlı izleme sayfası (sunucu.py)
+  beyinler/<koltuk>/         her koltuğun kaynakları, çerçeveleri, sesi ve hikâyeleri
+  beyinler/BEYIN-SABLON.md   yeni koltuk eklemek için şablon
+  oturumlar/                 her kurul burada bir klasör açar
+  oda/                       canlı izleme sayfası
 ```
 
-Yeni bir koltuk eklemek istersen: `beyinler/BEYIN-SABLON.md` şablonuyla bir beyin klasörü yazdır, bir koltuk dosyasını kopyalayıp adını ve sorusunu değiştir, `SKILL.md` içindeki koltuk listesine ekle.
+Yeni bir koltuk eklemek istersen sohbete "kurula yeni koltuk ekle: <kişi>, sorusu <soru>" yaz. Claude şablonla beyin klasörünü yazar, koltuğu kurar ve listeye ekler; kaynakları sana gösterip onay ister.
 
 ## Dürüstlük
 
@@ -96,10 +93,16 @@ Yeni bir koltuk eklemek istersen: `beyinler/BEYIN-SABLON.md` şablonuyla bir bey
 
 ## Desteklenen araçlar
 
-| Araç | Okuduğu dosya |
-|---|---|
-| Claude Code | `CLAUDE.md`, `.claude/skills/` ve `.claude/agents/` |
-| Codex, Google Antigravity, Windsurf, Kilo ve 20+ araç | `AGENTS.md` (alt ajan açamayan araçta Başkan koltukları sırayla kendisi oynar) |
+Claude masaüstü uygulaması (Code sekmesi) kurulu en iyi hâliyle çalıştırır: beş koltuk aynı anda yazar. ChatGPT'deki Codex, Google Antigravity, Windsurf, Kilo ve 20+ araç da aynı klasörü anlar; koltukları aynı anda çalıştıramayan araçta asistan koltukları sırayla kendisi oynar.
+
+## İleri düzey
+
+Bu bölüm yalnız elle kurmak isteyenler için; yukarıdaki akışta hiçbirine gerek yok.
+
+- ZIP ile indirme: [depo sayfasında](https://github.com/muhammedsevimli/sistemler) yeşil Code düğmesi → Download ZIP. Arşivi aç, içindeki `kurul` klasörünü Claude'un Code sekmesinde seç.
+- Komut satırı bilenler için: `npx degit muhammedsevimli/sistemler/kurul kurul`
+- Odayı elle başlatma: klasörde `python oda/sunucu.py`, sonra http://localhost:4731 (baştan oynatma: http://localhost:4731/?oynat=1&adim=4).
+- Asistanın okuduğu talimatlar: `CLAUDE.md` (Claude), `AGENTS.md` (Codex ve diğerleri), akış ve koltuklar `.claude/skills/kurul/` ile `.claude/agents/` içinde.
 
 ---
 
