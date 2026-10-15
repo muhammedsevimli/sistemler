@@ -28,6 +28,7 @@ Muhammed Sevimli'nin AI ile kurduğu gerçek sistemlerin açık koleksiyonu. Her
 | İş Başvuru Ajanı | Her sabah LinkedIn'de uygun ilanları bulup puanlasın, CV'ni ilana göre yeniden sıralasın, ön yazıyı ve form cevaplarını yazsın, Kolay Başvuru formunu son adıma kadar doldursun. Gönder düğmesine basıp basmayacağını tek satırla sen seçersin. CV'nde olmayan deneyimi, aracı ya da tarihi asla eklemez. | [is-basvuru-ajani/](is-basvuru-ajani/) |
 | CV Eleme Ajanı | İlanına gelen CV'leri okusun, her birini ilanla karşılaştırıp 100 üzerinden puanlasın, kırmızı çizgine takılanı gerekçesiyle elesin ve kısa listeyi çıkarsın. Mülakat daveti ve nazik ret maillerini taslak olarak yazsın. Yaş, cinsiyet, medeni durum, fotoğraf gibi bilgileri puanlamaz; CV'ler bilgisayarından çıkmaz. İş arayan için `beni ele` modu da var: başvurmadan önce işe alanın göreceği puanı gösterir. | [cv-eleme-ajani/](cv-eleme-ajani/) |
 | Ajan Şirketi | Claude Code'u bir şirket gibi çalıştır. Claude CEO olur: işi verirsin, ihtiyaçları çıkarıp her ihtiyaç için kadrodan bir çalışan işe alır (yazar, çizer, besteci, araştırmacı, denetçi ya da ilan şablonundan yazdığı yeni bir rol). Her çalışan dosyaların kendi kopyasında çalışır, bitince kopyalar birleşir; çalışan gerekirse kendine yardımcı alır. Her olay günlüğe yazılır, bitmiş iş onay klasörüne düşer ve sen onaylamadan hiçbir şey dışarı gitmez. | [ajan-sirketi/](ajan-sirketi/) |
+| Kurul | Bir iş kararını beş koltuklu danışma kuruluna sun: Buffett, Bezos, Musk, Jobs ve Hormozi'nin herkese açık kaynaklarından derlenmiş simülasyonlar. Claude önce kendi görüşünü mühürler, koltuklar iki turda kart yazıp birbirine itiraz eder, sonunda puan tablosu ve YAP / ŞARTLI YAP / YAPMA etiketli karar taslağı çıkar. Canlı izleme sayfasında koltuklar konuşur. Son karar senindir. | [kurul/](kurul/) |
 
 Zamanla yeni sistemler eklenecek. Her sistemin kendi README'si kurulumu anlatır.
 
@@ -63,6 +64,7 @@ npx degit muhammedsevimli/sistemler/ajan-takimi ajan-takimi
 npx degit muhammedsevimli/sistemler/is-basvuru-ajani is-basvuru-ajani
 npx degit muhammedsevimli/sistemler/cv-eleme-ajani cv-eleme-ajani
 npx degit muhammedsevimli/sistemler/ajan-sirketi ajan-sirketi
+npx degit muhammedsevimli/sistemler/kurul kurul
 ```
 
 Ya da tüm repoyu klonla, veya yeşil **Code → Download ZIP** ile indirip istediğin klasörü kullan.

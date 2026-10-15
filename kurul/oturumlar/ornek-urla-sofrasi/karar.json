@@ -1,0 +1,15 @@
+{
+  "karar": "Yan dükkânı kiralayıp kapasiteyi 40'tan 65 kişiye çıkar; imzadan önce 3 hafta sonu kuyruk sayımı ve mutfak kapasitesi ölçümü şart.",
+  "etiket": "ŞARTLI YAP",
+  "secenek": "B",
+  "puanlar": {
+    "buffett": {"A": 2, "B": 6, "C": 6, "D": 4},
+    "bezos": {"A": 2, "B": 7, "C": 6, "D": 3},
+    "musk": {"A": 2, "B": 7, "C": 4, "D": 3},
+    "jobs": {"A": 2, "B": 8, "C": 4, "D": 3},
+    "hormozi": {"A": 2, "B": 6, "C": 5, "D": 3}
+  },
+  "ortalama": {"A": 2.0, "B": 6.8, "C": 5.0, "D": 3.2},
+  "tavan": ["A"],
+  "mod": "tam"
+}
